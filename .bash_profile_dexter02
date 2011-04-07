@@ -1,3 +1,4 @@
+##
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
 xterm-color)
@@ -9,177 +10,23 @@ xterm-color)
 esac
 
 ##
-# Your previous /Users/smenzer/.bash_profile file was backed up as /Users/smenzer/.bash_profile.macports-saved_2010-10-07_at_16:46:08
-# MacPorts Installer addition on 2010-10-07_at_16:46:08: adding an appropriate PATH variable for use with MacPorts.
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-
-
-##
 # include .bash_aliases 
 if [ -f ~/.bash_aliases ]; then
   source ~/.bash_aliases
 fi
 
 ##
+# include eric's API wrapper
+if [ -f ~/.api_wrapper ]; then
+	AUTHDIR="/Users/smenzer/AppNexus/api/auth/"
+	source ~/.api_wrapper
+fi
+
+##
 # start agent and add identity
 ssh-agent && ssh-add
 
-
 ##
-# eric's API wrapper
-#----------
-AUTHDIR="/Users/smenzer/AppNexus/api/auth/"
-VERBOSE=1
-API_SAND="api-sand"
-DW_SAND="dw-sand"
-API_PROD="api-prod"
-DW_PROD="dw-prod"
-API="api"
-DW="dw"
-SAND="sand"
-PROD="prod"
-API_SAND_COOKIE="apisandcookie"
-API_PROD_COOKIE="apiprodcookie"
-DW_SAND_COOKIE="dwsandcookie"
-DW_PROD_COOKIE="dwprodcookie"
-CURR_COOKIE=""
-CURR_URL=""
-CURR_CONN=""
-API_SAND_URL="http://api.sand-08.adnxs.net/"
-DW_SAND_URL="http://hb.sand-08.adnxs.net/"
-API_PROD_URL="http://api.adnxs.com/"
-DW_PROD_URL="http://api.displaywords.com/"
-AUTH_ERROR="ERROR: You must authentic first with \"auth\". Please use chelp for more information"
-JSON_PRINT=""
-
-function chelp() {
-    echo ""
-    echo "The available commands are:"
-    echo "    auth(service-type)"
-    echo "    switchto(user)"
-    echo "    curlget(target)"
-    echo "    meta(service)"
-    echo "    curlput(target, json)"
-    echo "    curlputfile(target, json filename)"
-    echo "    curlpost(target, json)"
-    echo "    curlpostfile(target, json filename)"
-    echo ""
-    echo "The service-types are:"
-    echo "    api-prod"
-    echo "    dw-prod"
-    echo "    api-sand"
-    echo "    dw-sand"    
-    echo ""
-}
-function auth() {
-    if [ "$1" == "$API_SAND" ]; then
-        curl -b $API_SAND_COOKIE -c $API_SAND_COOKIE -X POST --data-binary @${AUTHDIR}s_auth.json "${API_SAND_URL}auth"
-        CURR_COOKIE=$API_SAND_COOKIE
-        CURR_URL=$API_SAND_URL
-        CURR_CONN="${API}-${SAND}"
-    elif [ "$1" == "$DW_SAND" ]; then
-        curl -b $DW_SAND_COOKIE -c $DW_SAND_COOKIE -X POST --data-binary @${AUTHDIR}s_auth.json "${DW_SAND_URL}auth"
-        CURR_COOKIE=$DW_SAND_COOKIE
-        CURR_URL=$DW_SAND_URL
-        CURR_CONN="${DW}-${SAND}"
-    elif [ "$1" ==  "$API_PROD" ]; then
-        curl -b $API_PROD_COOKIE -c $API_PROD_COOKIE -X POST --data-binary @${AUTHDIR}p_auth.json "${API_PROD_URL}auth"
-        CURR_COOKIE=$API_PROD_COOKIE
-        CURR_URL=$API_PROD_URL
-        CURR_CONN="${API}-${PROD}"
-    elif [ "$1" == "$DW_PROD" ]; then
-        curl -b $DW_PROD_COOKIE -c $DW_PROD_COOKIE -X POST --data-binary @${AUTHDIR}p_auth.json "${DW_PROD_URL}auth"
-        CURR_COOKIE=$DW_PROD_COOKIE
-        CURR_URL=$DW_PROD_URL
-        CURR_CONN="${DW}-${PROD}"
-    else
-        echo "The proper usage is auth [api-prod/dw-prod/api-sand/dw-sand]"
-    fi
-    
-    if which json_reformat >/dev/null; then
-        JSON_PRINT=" | json_reformat"
-    fi
-}
-
-
-function switchto() {
-    SWVAL="'{\"auth\":{\"switch_to_user\":${1} }}'"
-    if [ $VERBOSE -gt 0 ]; then  
-        echo "using ${CURR_CONN} ${SWVAL}"
-    fi
-    eval "curl -b $CURR_COOKIE -c $CURR_COOKIE -X POST -d ${SWVAL} ${CURR_URL}auth $JSON_PRINT"
-}
-
-function curlget() {
-    if [ -z $CURR_CONN ]; then
-        echo $AUTH_ERROR
-    else
-        CMD="curl -b $CURR_COOKIE -c $CURR_COOKIE \"${CURR_URL}${1}\" $JSON_PRINT"
-        if [ $VERBOSE -gt 0 ]; then
-            echo "Using: ${CMD}"
-        fi
-        eval "${CMD}"
-    fi
-}
-
-function meta() {
-        if [ -z $CURR_CONN ]; then
-                echo $AUTH_ERROR
-        else
-        CMD="curl -b $CURR_COOKIE -c $CURR_COOKIE \"${CURR_URL}${1}/meta\" $JSON_PRINT"
-        if [ $VERBOSE -gt 0 ]; then
-           echo "Using: ${CMD}"
-        fi
-        eval "${CMD}"
-    fi
-}
-
-
-function curlput() {    
-        if [ -z $CURR_CONN ]; then
-                echo $AUTH_ERROR
-        else
-        CMD="curl -b $CURR_COOKIE -c $CURR_COOKIE -X PUT -d '${2}' \"${CURR_URL}${1}\" $JSON_PRINT"
-        if [ $VERBOSE -gt 0 ]; then
-           echo "Using: ${CMD}"
-        fi
-        eval "${CMD}"
-    fi
-}
-
-function curlputfile() {
-        if [ -z $CURR_CONN ]; then
-                echo $AUTH_ERROR
-        else
-        CMD="curl -b $CURR_COOKIE -c $CURR_COOKIE -X PUT --data-binary @${2} \"${CURR_URL}${1}\" $JSON_PRINT"    
-        if [ $VERBOSE -gt 0 ]; then
-           echo "Using: ${CMD}"
-        fi
-        eval "${CMD}"
-    fi
-}
-
-function curlpost() {
-        if [ -z $CURR_CONN ]; then
-                echo $AUTH_ERROR
-        else
-        CMD="curl -b $CURR_COOKIE -c $CURR_COOKIE -X POST -d '${2}' \"${CURR_URL}${1}\" $JSON_PRINT"
-        if [ $VERBOSE -gt 0 ]; then
-           echo "Using: ${CMD}"
-        fi
-        eval "${CMD}"
-
-    fi
-}
-
-function curlpostfile() {
-        if [ -z $CURR_CONN ]; then
-                echo $AUTH_ERROR
-        else
-        CMD="curl -b $CURR_COOKIE -c $CURR_COOKIE -X POST --data-binary @${2} \"${CURR_URL}${1}\" $JSON_PRINT"
-        if [ $VERBOSE -gt 0 ]; then
-           echo "Using: ${CMD}"
-        fi
-        eval "${CMD}"
-    fi
-}
+# Your previous /Users/smenzer/.bash_profile file was backed up as /Users/smenzer/.bash_profile.macports-saved_2010-10-07_at_16:46:08
+# MacPorts Installer addition on 2010-10-07_at_16:46:08: adding an appropriate PATH variable for use with MacPorts.
+export PATH=/opt/local/bin:/opt/local/sbin:$PATH

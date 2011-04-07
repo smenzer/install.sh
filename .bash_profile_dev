@@ -1,9 +1,27 @@
-alias nz="nzsql -h vip1.npsc.lax1 -uu_smenzer -pwdia8mond adnexus_rpt_prod"
-alias i="cd public_html/internal-ui"
-alias ll="ls -al"
+##
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+xterm-color)
+    PS1='[\[\033[01;32m\]\h\[\033[00m\]] \[\033[01;34m\]\w\[\033[00m\]\$ '
+    ;;
+*)
+    PS1='[\h] \w\$ '
+    ;;
+esac
 
-alias api='mysql --i-am-a-dummy --prompt '\''api_ro PROD> '\'' -udev_ro -pr3p0rtNxs -h mysql-slave.prod.nym1.adnxs.net api'
+##
+# include .bash_aliases 
+if [ -f ~/.bash_aliases ]; then
+  source ~/.bash_aliases
+fi
 
-alias nz-sand-08='nzsql -h 01.npsb.lax1 -uADNEXUS_RPT_SAND_RO -pw fpdjmuOh ADNEXUS_RPT_SAND_08'
+##
+# include eric's API wrapper
+if [ -f ~/.api_wrapper ]; then
+	AUTHDIR="/home/smenzer/api_auth/"
+	source ~/.api_wrapper
+fi
 
-alias cache='psql -h 02.sync.prod.nym1 -U postgres reporting'
+##
+# add git dir to path
+export PATH=$PATH:/usr/libexec/git-core

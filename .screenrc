@@ -1,0 +1,19 @@
+vbell on
+nethack on 
+vbell_msg ""
+autodetach on
+startup_message off
+pow_detach_msg "Screen session of \$LOGNAME \$:cr:\$:nl:ended."
+shell -$SHELL
+msgminwait 3
+
+#bindkey -k F1 prev
+#bindkey -k F2 next
+
+hardstatus alwayslastline "%{.cb}%-W%{.rW}%50L> %n %t%{-}%+W%L<%-37=%{+b}%{.bc} %D %Y-%m-%d %{.bY}%c%{-b} %{.bc}%l "
+
+#escape ^Zz #will change your control character so you hit control z instead control c (you can change the letter to whatever you want)
+
+
+defscrollback 30000 #will increase the size of the scroll back buffer
+termcapinfo xterm ti@:te@ #fixes scrolling in xterm (OS X terminal)
