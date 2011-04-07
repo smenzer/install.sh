@@ -1,0 +1,9 @@
+alias nz="nzsql -h vip1.npsc.lax1 -uu_smenzer -pwdia8mond adnexus_rpt_prod"
+alias i="cd public_html/internal-ui"
+alias ll="ls -al"
+
+alias api='mysql --i-am-a-dummy --prompt '\''api_ro PROD> '\'' -udev_ro -pr3p0rtNxs -h mysql-slave.prod.nym1.adnxs.net api'
+
+alias nz-sand-08='nzsql -h 01.npsb.lax1 -uADNEXUS_RPT_SAND_RO -pw fpdjmuOh ADNEXUS_RPT_SAND_08'
+
+alias cache='psql -h 02.sync.prod.nym1 -U postgres reporting'
