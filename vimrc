@@ -24,7 +24,7 @@ set laststatus=4
 set tabstop=4  
 set softtabstop=4  
 set shiftwidth=4  
-"set noexpandtab  
+set noexpandtab  
 set incsearch  
 set ignorecase  
 set autoread  
