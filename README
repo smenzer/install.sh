@@ -1,1 +1,4 @@
 configuration for terminal including vim, screen, and tmux settings
+
+git submodule add https://github.com/PATH/name.git bundle/name
+git submodule update --init

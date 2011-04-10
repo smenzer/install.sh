@@ -19,7 +19,8 @@ set smartindent
 set showmatch  
 set number  
 set ruler
-set statusline=%<\ %n:%f\ %m%r%y%=%-35.(line:\ %l\ of\ %L,\ col:\ %c%V\ (%P)%)
+set cursorline
+set statusline=%<\ %n:%f\ %m%r%y%=%-35.(line:\ %l\ of\ L,\ col:\ %c%V\ (%P)%)
 set laststatus=4
 set tabstop=4  
 set softtabstop=4  
