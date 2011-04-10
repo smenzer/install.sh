@@ -18,9 +18,9 @@ fi
 
 ##
 # include eric's API wrapper
-if [ -f ~/.api_wrapper ]; then
+if [ -f ~/.terminal/.api_wrapper ]; then
 	AUTHDIR="/Users/smenzer/AppNexus/api/auth/"
-	source ~/.api_wrapper
+	source ~/.terminal/.api_wrapper
 fi
 
 ##
