@@ -156,6 +156,3 @@ function curlpostfile() {
     fi
 }
 
-function memberid() {
-	  mysql -usmenzer -pkeTRpGbhVtsk -hmysql-slave.prod.nym1.adnxs.net api -e "select id, billing_name, bidder_id from member where billing_name like '%$1%';"
-}
