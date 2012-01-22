@@ -20,8 +20,8 @@ set showmatch
 set number  
 set ruler
 set cursorline
-set statusline=%<\ %n:%f\ %m%r%y%=%-35.(line:\ %l\ of\ L,\ col:\ %c%V\ (%P)%)
-set laststatus=4
+"set statusline=%<\ %n:%f\ %m%r%y%=%-35.(line:\ %l\ of\ L,\ col:\ %c%V\ (%P)%)
+"set laststatus=4
 set tabstop=4  
 set softtabstop=4  
 set shiftwidth=4  
@@ -37,6 +37,19 @@ set wildmenu
 set wildmode=list:longest
 set wildignore+=*Zend*,.git,*bundles*
 set shortmess+=I
+
+set statusline=   " clear the statusline for when vimrc is reloaded
+set statusline+=%-3.3n\                      " buffer number
+set statusline+=%f\                          " file name
+set statusline+=%h%m%r%w                     " flags
+set statusline+=[%{strlen(&ft)?&ft:'none'}]  " filetype
+"set statusline+=%{strlen(&fenc)?&fenc:&enc}, " encoding
+"set statusline+=%{&fileformat}]              " file format
+set statusline+=%=                           " right align
+"set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\  " highlight
+"set statusline+=%b,0x%-8B\                   " current char
+set statusline+=%-14.(%l,%c%)\ %<%P        " offset
+set laststatus=2
 
 let NERDTreeQuitOnOpen=1  
 map <C-c> :NERDTreeToggle<CR>  
@@ -60,6 +73,7 @@ map <leader>w :w<CR>
 map <leader>y y :PBCopy<CR>
 map <leader>= <c-w>=
 map <leader>/ /<C-p>
+" noremap <silent> <leader>/ :call CommentLineToEnd('// ')<CR>+
 lnoremap <leader>, <ESC>
 noremap <leader>, <ESC>
 "map <leader>| <c-w>|
