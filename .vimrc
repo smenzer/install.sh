@@ -1,6 +1,14 @@
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
+"Reload vimrc file: 
+":so %
+":so $MYVIMRC
+",l
+
+" move backup and swap files from working directory
+set backupdir=/tmp/vim_backup/
+set directory=/tmp/vim_swap/
 
 syntax on
 filetype on  
@@ -68,15 +76,22 @@ map <leader>o :only<CR>
 map <leader>p :set paste!<CR>
 map <leader>q :wqa<CR>
 map <leader>s :setlocal spell!<CR>
-map <leader>v :e ~/.vimrc<CR>
+map <leader>V :e ~/.vimrc<CR>
 map <leader>w :w<CR>
 map <leader>y y :PBCopy<CR>
-map <leader>= <c-w>=
-map <leader>/ /<C-p>
+"map <leader>/ /<C-p>
+
+
 " noremap <silent> <leader>/ :call CommentLineToEnd('// ')<CR>+
 lnoremap <leader>, <ESC>
 noremap <leader>, <ESC>
 "map <leader>| <c-w>|
+
+" smarter splitting
+nmap <leader>s<left> :leftabove vnew<CR>
+nmap <leader>s<right> :rightbelow vnew<CR>
+nmap <leader>s<up> :leftabove new<CR>
+nmap <leader>s<down> :rightbelow new<CR>
 
 "Easier splits navigation - Remapped Caps Lock to Control    
 nnoremap <C-h> <C-w>h
@@ -84,12 +99,27 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+"Open a vertically-split window, and focus on it.
+nnoremap <leader>v <C-w>v<C-w>l
+
+" set all panes equal size
+map <leader>= <c-w>=
+
+" easier splits sizing
+noremap <C-w><left> 10<C-w><  
+noremap <C-w><right> 10<C-w>> 
+noremap <C-w><up> 10<C-w>+
+noremap <C-w><down> 10<C-w>-
+
+"PBCopy the selected text
+noremap <leader>y y :PBCopy<CR>
+
 " highlight text after it has been pasted
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]''`]`'
 
 let g:sparkupExecuteMapping='<c-g>'
 
-:vmap // y/<C-R>"<CR> "search for visually highlighted text
+":vmap // y/<C-R>"<CR> "search for visually highlighted text
 
 "SyntasticEnable php
 let g:syntastic_auto_loc_list=1

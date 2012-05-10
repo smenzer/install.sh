@@ -13,6 +13,7 @@
 'NERDSpaceDelims'	NERD_commenter.txt	/*'NERDSpaceDelims'*
 'NERDUsePlaceHolders'	NERD_commenter.txt	/*'NERDUsePlaceHolders'*
 'loaded_nerd_comments'	NERD_commenter.txt	/*'loaded_nerd_comments'*
+:PBCopy	pbcopy.txt	/*:PBCopy*
 NERDComAbout	NERD_commenter.txt	/*NERDComAbout*
 NERDComAlignedComment	NERD_commenter.txt	/*NERDComAlignedComment*
 NERDComAltDelim	NERD_commenter.txt	/*NERDComAltDelim*
@@ -47,3 +48,4 @@ NERDComYankComment	NERD_commenter.txt	/*NERDComYankComment*
 NERDCommenter	NERD_commenter.txt	/*NERDCommenter*
 NERDCommenterContents	NERD_commenter.txt	/*NERDCommenterContents*
 NERD_commenter.txt	NERD_commenter.txt	/*NERD_commenter.txt*
+pbcopy-commands	pbcopy.txt	/*pbcopy-commands*
