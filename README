@@ -1,4 +1,7 @@
 configuration for terminal including vim, screen, and tmux settings
 
-git submodule add https://github.com/PATH/name.git bundle/name
-git submodule update --init
+some files will need to be setup as symbolic links in the user's root (~username)
+
+  - .bash_profile -> .terminal/.bash_profile_<computer name>
+  - .vim -> .terminal/
+  - .vimrc -> .terminal/.vimrc
