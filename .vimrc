@@ -127,4 +127,5 @@ let g:syntastic_auto_loc_list=1
 let g:gist_open_browser_after_post = 1
 let g:gist_browser_command = 'ssh local open %URL%'
 
-
+"make javascript use jQuery code style
+"au FileType javascript set tabstop=4
