@@ -20,9 +20,9 @@ fi
 
 ##
 # include eric's API wrapper
-if [ -f ~/.terminal/.api_wrapper ]; then
+if [ -f ~/terminal/.api_wrapper ]; then
 	AUTHDIR="./auth/"
-	source ~/.terminal/.api_wrapper
+	source ~/terminal/.api_wrapper
 fi
 
 ##
