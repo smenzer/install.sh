@@ -19,6 +19,13 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 ##
+# include .bash_common 
+if [ -f ~/.bash_common ]; then
+  source ~/.bash_common
+fi
+
+
+##
 # include eric's API wrapper
 if [ -f ~/.api_wrapper ]; then
 	AUTHDIR="/home/smenzer/api_auth/"
