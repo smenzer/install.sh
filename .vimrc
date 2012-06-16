@@ -7,8 +7,8 @@ call pathogen#helptags()
 ",l
 
 " move backup and swap files from working directory
-set backupdir=/tmp/vim_backup/
-set directory=/tmp/vim_swap/
+set backupdir=~/.vim_backup/
+set directory=~/.vim_swap/
 
 syntax on
 filetype on  
@@ -37,7 +37,6 @@ set noexpandtab
 set incsearch  
 set ignorecase  
 set autoread  
-set nowrap  
 set ttyfast
 set textwidth=0
 set bs=2
@@ -45,6 +44,9 @@ set wildmenu
 set wildmode=list:longest
 set wildignore+=*Zend*,.git,*bundles*
 set shortmess+=I
+
+set wrap
+set linebreak
 
 set statusline=   " clear the statusline for when vimrc is reloaded
 set statusline+=%-3.3n\                      " buffer number
