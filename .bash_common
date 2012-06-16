@@ -1,3 +1,12 @@
+##
+# include .bash_aliases 
+if [ -f ~/.bash_aliases ]; then
+  source ~/.bash_aliases
+fi
+
+# make sure svn uses vim
+export SVN_EDITOR=vim
+
 # terminal commands
 alias ll='ls -laG'
 alias vi='vim'

@@ -10,14 +10,6 @@
 #esac
 export PS1='[\[\033[01;32m\]\h\[\033[00m\]] \[\033[00;36m\]\w\[\033[00m\]\$ ' 
 
-export SVN_EDITOR=vim
-
-##
-# include .bash_aliases 
-if [ -f ~/.bash_aliases ]; then
-  source ~/.bash_aliases
-fi
-
 ##
 # include .bash_common 
 if [ -f ~/.bash_common ]; then

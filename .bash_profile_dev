@@ -13,12 +13,6 @@ export PS1='[\[\033[01;32m\]\u@\H\[\033[00m\]] \[\033[00;36m\]\w\[\033[00m\]\$ '
 #esac
 
 ##
-# include .bash_aliases 
-if [ -f ~/.bash_aliases ]; then
-  source ~/.bash_aliases
-fi
-
-##
 # include .bash_common 
 if [ -f ~/.bash_common ]; then
   source ~/.bash_common
