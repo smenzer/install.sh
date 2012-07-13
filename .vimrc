@@ -4,7 +4,6 @@ call pathogen#helptags()
 "Reload vimrc file: 
 ":so %
 ":so $MYVIMRC
-",l
 
 " move backup and swap files from working directory
 set backupdir=~/terminal/.vim_backup/
