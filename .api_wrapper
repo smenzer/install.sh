@@ -35,6 +35,7 @@ function chelp() {
     echo "    curlputfile(target, json filename)"
     echo "    curlpost(target, json)"
     echo "    curlpostfile(target, json filename)"
+	echo "    curldelete(target)"
     echo ""
     echo "The service-types are:"
     echo "    api-prod"
@@ -156,3 +157,14 @@ function curlpostfile() {
     fi
 }
 
+function curldelete() {
+	if [ -z $CURR_CONN ]; then
+		echo $AUTH_ERROR
+	else
+		CMD="curl -b $CURR_COOKIE -c $CURR_COOKIE -X DELETE -d '${2}' "${CURR_URL}${1}" $JSON_PRINT"
+		if [ $VERBOSE -gt 0 ]; then
+			echo "Using: ${CMD}"
+		fi
+		eval "${CMD}"
+	fi
+}
