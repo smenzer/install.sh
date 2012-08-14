@@ -47,7 +47,7 @@ fi
 
 ##
 # start agent and add identity
-ssh-agent > /tmp/ssh #&& ssh-add
+ssh-agent > /tmp/ssh && ssh-add
 
 ##
 # Your previous /Users/smenzer/.bash_profile file was backed up as /Users/smenzer/.bash_profile.macports-saved_2010-10-07_at_16:46:08

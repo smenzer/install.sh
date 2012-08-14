@@ -18,6 +18,3 @@ alias kl='killall ssh-agent; killall ssh'
 # ssh
 alias gator='ssh -p 2222 smenzer@gator.menzer.org'
 
-# git
-alias push="git push origin master"
-alias pull="git pull origin master"
