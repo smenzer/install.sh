@@ -52,4 +52,4 @@ ssh-agent > /tmp/ssh && ssh-add
 ##
 # Your previous /Users/smenzer/.bash_profile file was backed up as /Users/smenzer/.bash_profile.macports-saved_2010-10-07_at_16:46:08
 # MacPorts Installer addition on 2010-10-07_at_16:46:08: adding an appropriate PATH variable for use with MacPorts.
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+export PATH=$HOME/bin:/opt/local/bin:/opt/local/sbin:$PATH
