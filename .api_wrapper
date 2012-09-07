@@ -95,6 +95,18 @@ function curlget() {
     fi
 }
 
+function curlgetraw() {
+    if [ -z $CURR_CONN ]; then
+        echo $AUTH_ERROR
+    else
+        CMD="curl -b $CURR_COOKIE -c $CURR_COOKIE \"${CURR_URL}${1}\""
+        if [ $VERBOSE -gt 0 ]; then
+            echo "Using: ${CMD}"
+        fi
+        eval "${CMD}"
+    fi
+}
+
 function meta() {
         if [ -z $CURR_CONN ]; then
                 echo $AUTH_ERROR
