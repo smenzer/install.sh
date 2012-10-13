@@ -4,6 +4,9 @@ if [ -f /usr/local/git/contrib/completion/git-completion.bash ]; then
 	. /usr/local/git/contrib/completion/git-completion.bash
 fi
 GIT_PS1_SHOWDIRTYSTATE=true
+GIT_PS1_SHOWSTASHSTATE=true
+GIT_PS1_SHOWUNTRACKEDFILES=true
+GIT_PS1_SHOWUPSTREAM="auto"
 
 if [ -f /opt/local/etc/bash_completion ]; then
 	. /opt/local/etc/bash_completion
@@ -26,3 +29,4 @@ if [ -f ~/.bash_common ]; then
   source ~/.bash_common
 fi
 
+export PATH=/usr/local/bin:$PATH
