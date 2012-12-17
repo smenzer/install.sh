@@ -17,8 +17,21 @@ filetype plugin indent on
 set nocompatible
 set modelines=0
 
+"set syntax highlighting for filetypes
 autocmd BufRead,BufNewFile *.phtml set ft=html
 autocmd BufRead,BufNewFile markdown set ft=markdown
+autocmd BufRead,BufNewFile *.json set ft=json
+
+"make javascript use jQuery code style
+au FileType javascript set tabstop=4
+
+"set json syntax options
+au FileType json set foldmethod=syntax
+au FileType json set formatoptions=tcq2l
+au FileType json set autoindent
+au FileType json set textwidth=78 shiftwidth=2
+au FileType json set softtabstop=4 tabstop=8 
+au FileType json set expandtab
 
 set autoindent  
 set hlsearch
@@ -127,6 +140,3 @@ let g:syntastic_auto_loc_list=1
 
 let g:gist_open_browser_after_post = 1
 let g:gist_browser_command = 'ssh local open %URL%'
-
-"make javascript use jQuery code style
-"au FileType javascript set tabstop=4
