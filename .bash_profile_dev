@@ -1,6 +1,5 @@
 ##
 # Set git autocompletion and PS1 integration
-GIT="null"
 if [ -f /usr/local/git/contrib/completion/git-completion.bash ]; then
 	. /usr/local/git/contrib/completion/git-completion.bash
 fi
@@ -14,7 +13,7 @@ if [ -f /opt/local/etc/bash_completion ]; then
 fi
 
 if [ type -t __git_ps1 &>/dev/null ]; then
-#    echo "no alias"
+	echo ""	
 else 
 	alias __git_ps1="git branch 2>/dev/null | grep '*' | sed 's/* \(.*\)/(\1)/'"
 fi
