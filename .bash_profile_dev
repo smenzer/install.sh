@@ -11,7 +11,7 @@ GIT=""
 
 if [ -f /opt/local/etc/bash_completion ]; then
 	. /opt/local/etc/bash_completion
-	GIT="(__git_ps1)"
+	GIT="\$(__git_ps1)"
 fi
 
 ##
@@ -22,7 +22,7 @@ WHITE="\[\033[00m\]"
 RED="\[\033[0;31m\]"
 YELLOW="\[\033[0;33m\]"
 
-export PS1="$WHITE[$GREEN\H$WHITE] $TEAL\w$YELLOW\$$GIT$WHITE\$ "
+export PS1="$WHITE[$GREEN\H$WHITE] $TEAL\w$YELLOW$GIT$WHITE\$ "
 
 ##
 # include .bash_common 
