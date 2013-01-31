@@ -1,11 +1,26 @@
 ##
+# Set git autocompletion and PS1 integration
+if [ -f /usr/local/git/contrib/completion/git-completion.bash ]; then
+	. /usr/local/git/contrib/completion/git-completion.bash
+fi
+GIT_PS1_SHOWDIRTYSTATE=true
+GIT_PS1_SHOWSTASHSTATE=true
+GIT_PS1_SHOWUNTRACKEDFILES=true
+GIT_PS1_SHOWUPSTREAM="auto"
+
+if [ -f /opt/local/etc/bash_completion ]; then
+	. /opt/local/etc/bash_completion
+fi
+
+##
 # set prompt
 GREEN="\[\033[0;32m\]"
 TEAL="\[\033[00;36m\]"
 WHITE="\[\033[00m\]"
 RED="\[\033[0;31m\]"
 YELLOW="\[\033[0;33m\]"
-export PS1="$WHITE[$GREEN\H$WHITE] $TEAL\w$WHITE\$ "
+
+export PS1="$WHITE[$GREEN\H$WHITE] $TEAL\w$YELLOW\$(__git_ps1)$WHITE\$ "
 
 ##
 # include .bash_common 
