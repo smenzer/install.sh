@@ -8,7 +8,7 @@ fi
 export SVN_EDITOR=vim
 
 # terminal commands
-alias ll='ls -laG'
+alias ll='ls -laG --color'
 alias vi='vim'
 alias md5sum='md5 -r'
 alias rm="rm -i"
