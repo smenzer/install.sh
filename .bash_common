@@ -1,9 +1,4 @@
 ##
-# include .bash_aliases 
-if [ -f ~/.bash_aliases ]; then
-  source ~/.bash_aliases
-fi
-
 # make sure svn uses vim
 export SVN_EDITOR=vim
 
@@ -20,3 +15,7 @@ alias kl='killall ssh-agent; killall ssh'
 # ssh
 alias gator='ssh -p 2222 smenzer@gator.menzer.org'
 
+# include .bash_aliases 
+if [ -f ~/.bash_aliases ]; then
+  source ~/.bash_aliases
+fi
