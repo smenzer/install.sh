@@ -81,7 +81,7 @@ map <C-c> :NERDTreeToggle<CR>
 
 let mapleader = ","
 
-inoremap jj <ESC>
+noremap jj <ESC>
 map <leader>a :set wrap!<CR>
 map <leader>k :nohlsearch<CR>  
 map <leader>l :source ~/.vimrc<CR>
