@@ -2,11 +2,20 @@
 # make sure svn uses vim
 export SVN_EDITOR=vim
 
+# recycle bin to prevent unwanted deletes
+function re(){
+    if [ "$1" != "" ]; then
+        mv $* /tmp
+    else
+        echo "Usage: re FILE..."
+    fi
+}
+
 # terminal commands
 alias ll='ls -laG --color'
 alias vi='vim'
 alias md5sum='md5 -r'
-alias rm="rm -i"
+alias rm="re"
 alias mv="mv -i"
 
 # kill failed ssh sessions
@@ -19,3 +28,4 @@ alias gator='ssh -p 2222 smenzer@gator.menzer.org'
 if [ -f ~/.bash_aliases ]; then
   source ~/.bash_aliases
 fi
+

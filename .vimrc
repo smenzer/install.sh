@@ -18,7 +18,7 @@ set nocompatible
 set modelines=0
 
 "set syntax highlighting for filetypes
-autocmd BufRead,BufNewFile *.phtml set ft=html
+autocmd BufRead,BufNewFile *.phtml set ft=php
 autocmd BufRead,BufNewFile markdown set ft=markdown
 autocmd BufRead,BufNewFile *.json set ft=json
 
