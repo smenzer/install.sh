@@ -41,6 +41,7 @@ function chelp() {
     echo "    curlgetraw(target)"
     echo "    meta(service)"
     echo "    curlput(target, json)"
+    echo "    curlputraw(target, json)"
     echo "    curlputfile(target, json filename)"
     echo "    curlpost(target, json)"
     echo "    curlpostfile(target, json filename)"
@@ -140,12 +141,23 @@ function meta() {
     fi
 }
 
-
 function curlput() {    
         if [ -z $CURR_CONN ]; then
                 echo $AUTH_ERROR
         else
         CMD="curl -b $CURR_COOKIE -c $CURR_COOKIE -X PUT -d '${2}' \"${CURR_URL}${1}\" $JSON_PRINT"
+        if [ $VERBOSE -gt 0 ]; then
+           echo "Using: ${CMD}"
+        fi
+        eval "${CMD}"
+    fi
+}
+
+function curlputraw() {    
+        if [ -z $CURR_CONN ]; then
+                echo $AUTH_ERROR
+        else
+        CMD="curl -b $CURR_COOKIE -c $CURR_COOKIE -X PUT -d '${2}' \"${CURR_URL}${1}\""
         if [ $VERBOSE -gt 0 ]; then
            echo "Using: ${CMD}"
         fi

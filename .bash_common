@@ -28,3 +28,13 @@ if [ -f ~/.bash_aliases ]; then
   source ~/.bash_aliases
 fi
 
+function cycle_wifi() {
+	device="$(networksetup -listallhardwareports | grep -E '(Wi-Fi|AirPort)' -A 1 | grep -o "en.")"
+	[[ "$(networksetup -getairportpower $device)" == *On ]] && val=off || val=on
+	networksetup -setairportpower $device $val
+}
+function fix_wifi() {
+	device="$(networksetup -listallnetworkservices | grep -Eo '(Wi-Fi|AirPort)')"
+	networksetup -setnetworkserviceenabled $device off
+	networksetup -setnetworkserviceenabled $device on
+}
