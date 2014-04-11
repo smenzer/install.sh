@@ -28,6 +28,11 @@ if [ -f ~/.bash_aliases ]; then
   source ~/.bash_aliases
 fi
 
+# include __git_ps1
+if [ -f ~/terminal/git-prompt.sh ]; then
+  source ~/terminal/git-prompt.sh
+fi
+
 function cycle_wifi() {
 	device="$(networksetup -listallhardwareports | grep -E '(Wi-Fi|AirPort)' -A 1 | grep -o "en.")"
 	[[ "$(networksetup -getairportpower $device)" == *On ]] && val=off || val=on
