@@ -213,3 +213,7 @@ function curldelete() {
 		eval "${CMD}"
 	fi
 }
+
+function cr() {
+	eval "curlget 'creative?id=${1}'"
+}
