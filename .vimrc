@@ -140,3 +140,8 @@ let g:syntastic_auto_loc_list=1
 
 let g:gist_open_browser_after_post = 1
 let g:gist_browser_command = 'ssh local open %URL%'
+
+"use your mouse to scroll
+set mouse=a
+set ttymouse=xterm2
+
