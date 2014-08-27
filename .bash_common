@@ -11,6 +11,10 @@ function re(){
     fi
 }
 
+# quick access to bash files
+alias bp='vi ~/.bash_profile'
+alias ba='vi ~/.bash_aliases'
+
 # terminal commands
 alias ll='ls -laG --color'
 alias vi='vim'
