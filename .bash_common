@@ -15,7 +15,7 @@ function re(){
 alias ll='ls -laG --color'
 alias vi='vim'
 alias md5sum='md5 -r'
-alias rm="re"
+#alias rm="re"
 alias mv="mv -i"
 
 # kill failed ssh sessions
