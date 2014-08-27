@@ -11,21 +11,41 @@ function re(){
     fi
 }
 
+# quick access to bash files
+alias bp='vi ~/.bash_profile'
+alias ba='vi ~/.bash_aliases'
+
 # terminal commands
 alias ll='ls -laG --color'
 alias vi='vim'
 alias md5sum='md5 -r'
 #alias rm="re"
-alias mv="mv -i"
+#alias mv="mv -i"
 
 # kill failed ssh sessions
 alias kl='killall ssh-agent; killall ssh'
 
 # ssh
 alias gator='ssh -p 2222 smenzer@gator.menzer.org'
+alias os='ssh 536039ad4382ec2f2600029b@car-cartracker.rhcloud.com'
 
 # include .bash_aliases 
 if [ -f ~/.bash_aliases ]; then
   source ~/.bash_aliases
 fi
 
+# include __git_ps1
+if [ -f ~/terminal/git-prompt.sh ]; then
+  source ~/terminal/git-prompt.sh
+fi
+
+function cycle_wifi() {
+	device="$(networksetup -listallhardwareports | grep -E '(Wi-Fi|AirPort)' -A 1 | grep -o "en.")"
+	[[ "$(networksetup -getairportpower $device)" == *On ]] && val=off || val=on
+	networksetup -setairportpower $device $val
+}
+function fix_wifi() {
+	device="$(networksetup -listallnetworkservices | grep -Eo '(Wi-Fi|AirPort)')"
+	networksetup -setnetworkserviceenabled $device off
+	networksetup -setnetworkserviceenabled $device on
+}
