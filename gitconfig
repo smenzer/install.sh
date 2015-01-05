@@ -1,0 +1,14 @@
+[pack]
+	windowMemory = 100m
+	SizeLimit = 100m
+	threads = 1
+[user]
+	email = smenzer@gmail.com
+	name = Scott Menzer
+[core]
+	excludesfile = .gitignore
+[color]
+	ui = true
+[alias]
+	st = status
+	ci = commit
