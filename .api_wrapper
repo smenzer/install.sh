@@ -23,8 +23,8 @@ CURR_COOKIE=""
 CURR_URL=""
 CURR_CONN=""
 API_SAND_URL="http://api.sand-08.adnxs.net/"
-#DW_SAND_URL="http://sand.api.appnexus.com/"
-DW_SAND_URL="http://hb.sand-08.adnxs.net/"
+DW_SAND_URL="http://sand.api.appnexus.com/"
+#DW_SAND_URL="http://hb.sand-08.adnxs.net/"
 API_PROD_URL="http://api.adnxs.com/"
 DW_PROD_URL="http://api.appnexus.com/"
 API_TEST_URL="http://api-impbus.client-testing.adnxs.net/"
@@ -63,7 +63,11 @@ function auth() {
         CURR_URL=$API_SAND_URL
         CURR_CONN="${API}-${SAND}"
     elif [ "$1" == "$DW_SAND" ]; then
-        curl -b $DW_SAND_COOKIE -c $DW_SAND_COOKIE -X POST --data-binary @${AUTHDIR}s_auth.json "${DW_SAND_URL}auth"
+        CMD="curl -b $DW_SAND_COOKIE -c $DW_SAND_COOKIE -X POST --data-binary @${AUTHDIR}s_auth.json \"${DW_SAND_URL}auth\""
+        if [ $VERBOSE -gt 0 ]; then
+            echo "Using: ${CMD}"
+        fi
+        eval "${CMD}"
         CURR_COOKIE=$DW_SAND_COOKIE
         CURR_URL=$DW_SAND_URL
         CURR_CONN="${DW}-${SAND}"
@@ -73,7 +77,11 @@ function auth() {
         CURR_URL=$API_PROD_URL
         CURR_CONN="${API}-${PROD}"
     elif [ "$1" == "$DW_PROD" ]; then
-        curl -b $DW_PROD_COOKIE -c $DW_PROD_COOKIE -X POST --data-binary @${AUTHDIR}p_auth.json "${DW_PROD_URL}auth"
+        CMD="curl -b $DW_PROD_COOKIE -c $DW_PROD_COOKIE -X POST --data-binary @${AUTHDIR}p_auth.json \"${DW_PROD_URL}auth\""
+        if [ $VERBOSE -gt 0 ]; then
+            echo "Using: ${CMD}"
+        fi
+        eval "${CMD}"
         CURR_COOKIE=$DW_PROD_COOKIE
         CURR_URL=$DW_PROD_URL
         CURR_CONN="${DW}-${PROD}"

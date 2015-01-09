@@ -39,3 +39,8 @@ ssh-agent > /tmp/ssh && ssh-add
 # MACPORTS PATH stuff
 export PATH=$HOME/bin:/opt/local/bin:/opt/local/sbin:$HOME/.rvm/bin:/usr/bin/mongodb/bin:/usr/bin/pear:~/.composer/vendor/bin/:$PATH
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+## 
+# use latest java
+export JAVA_HOME="/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home"
+

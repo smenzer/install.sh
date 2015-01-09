@@ -21,6 +21,8 @@ set modelines=0
 autocmd BufRead,BufNewFile *.phtml set ft=php
 autocmd BufRead,BufNewFile markdown set ft=markdown
 autocmd BufRead,BufNewFile *.json set ft=json
+autocmd BufNewFile,BufRead *.blade.php set ft=html 
+
 
 "make javascript use jQuery code style
 au FileType javascript set tabstop=4
