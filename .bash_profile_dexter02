@@ -33,7 +33,7 @@ fi
 
 ##
 # start agent and add identity
-ssh-agent > /tmp/ssh && ssh-add
+#ssh-agent > /tmp/ssh && ssh-add
 
 ##
 # MACPORTS PATH stuff
