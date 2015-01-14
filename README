@@ -1,8 +1,6 @@
 configuration for terminal including vim, screen, and tmux settings
 
-some files will need to be setup as symbolic links in the user's root (~username)
+to install:
+	- in this directory, create a bash profile for the server you're on, call it .bash_profile_[SERVER_NAME]
+	- from this same directory, run: bash setup [SERVER_NAME]
 
-  - .bash_profile -> terminal/.bash_profile_<computer name>
-  - .vim -> terminal/
-  - .vimrc -> terminal/.vimrc
-  - .tmux.conf -> terminal/.tmux.conf
