@@ -39,6 +39,18 @@ if [ "$1" ]; then
 		eval "${CMD}"
 	fi
 
+	# create vim swap directories if they don't exist
+	if [ ! -d $(pwd)/.vim_backup ]; then
+		CMD="mkdir $(pwd)/.vim_backup"
+		echo "${CMD}"
+		eval "${CMD}"
+	fi
+	if [ ! -d $(pwd)/.vim_swap ]; then
+		CMD="mkdir $(pwd)/.vim_swap"
+		echo "${CMD}"
+		eval "${CMD}"
+	fi
+
 else
 	echo "You must pass the name of the machine so I can setup the bash profile.  This will create a file called .bash_profile_[INPUT]"
 fi
