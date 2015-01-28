@@ -103,6 +103,9 @@ function auth() {
         JSON_PRINT=" | json_reformat"
     fi
 }
+function adw() {
+	eval "auth dw-prod"
+}
 
 
 function switchto() {
@@ -123,6 +126,9 @@ function curlget() {
         fi
         eval "${CMD}"
     fi
+}
+function cg() {
+	eval "curlget \"${1}\""
 }
 
 function curlgetraw() {

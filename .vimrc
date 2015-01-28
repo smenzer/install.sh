@@ -23,7 +23,6 @@ autocmd BufRead,BufNewFile markdown set ft=markdown
 autocmd BufRead,BufNewFile *.json set ft=json
 autocmd BufNewFile,BufRead *.blade.php set ft=html 
 
-
 "make javascript use jQuery code style
 au FileType javascript set tabstop=4
 
@@ -62,17 +61,17 @@ set shortmess+=I
 set wrap
 set linebreak
 
-set statusline=   " clear the statusline for when vimrc is reloaded
-set statusline+=%-3.3n\                      " buffer number
-set statusline+=%f\                          " file name
-set statusline+=%h%m%r%w                     " flags
-set statusline+=[%{strlen(&ft)?&ft:'none'}]  " filetype
-"set statusline+=%{strlen(&fenc)?&fenc:&enc}, " encoding
-"set statusline+=%{&fileformat}]              " file format
-set statusline+=%=                           " right align
-"set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\  " highlight
-"set statusline+=%b,0x%-8B\                   " current char
-set statusline+=%-14.(%l,%c%)\ %<%P        " offset
+"set statusline=   " clear the statusline for when vimrc is reloaded
+"set statusline+=%-3.3n\                      " buffer number
+"set statusline+=%f\                          " file name
+"set statusline+=%h%m%r%w                     " flags
+"set statusline+=[%{strlen(&ft)?&ft:'none'}]  " filetype
+""set statusline+=%{strlen(&fenc)?&fenc:&enc}, " encoding
+""set statusline+=%{&fileformat}]              " file format
+"set statusline+=%=                           " right align
+""set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\  " highlight
+""set statusline+=%b,0x%-8B\                   " current char
+"set statusline+=%-14.(%l,%c%)\ %<%P        " offset
 set laststatus=2
 
 let NERDTreeQuitOnOpen=1  
@@ -116,7 +115,7 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 "Open a vertically-split window, and focus on it.
-nnoremap <leader>v <C-w>v<C-w>l
+"nnoremap <leader>v <C-w>v<C-w>l
 
 " set all panes equal size
 map <leader>= <c-w>=
@@ -144,6 +143,50 @@ let g:gist_open_browser_after_post = 1
 let g:gist_browser_command = 'ssh local open %URL%'
 
 "use your mouse to scroll
-set mouse=a
-set ttymouse=xterm2
+"set mouse=a
+"set ttymouse=xterm2
 
+
+"""""""""""""""""""""""""""""""""""
+" airline status line configuration
+"""""""""""""""""""""""""""""""""""
+
+if !exists('g:airline_symbols')
+	let g:airline_symbols = {}
+endif
+
+"* the separator used on the left side 
+"default >
+"  let g:airline_left_sep='»'
+let g:airline_left_sep='▶'
+
+"* the separator used on the right side
+"default <
+"  let g:airline_right_sep='«'
+let g:airline_right_sep='◀'
+
+"* enable modified detection 
+"default 1
+let g:airline_detect_modified=1
+
+"* enable paste detection 
+"default 1
+let g:airline_detect_paste=1
+
+"* enable iminsert detection 
+"default 0
+let g:airline_detect_iminsert=0
+
+"* determine whether inactive windows should have the left section collapsed to only the filename of that buffer.
+"default 1
+let g:airline_inactive_collapse=1
+
+"* enable/disable automatic population of the `g:airline_symbols` dictionary with powerline symbols. 
+"default 0
+let g:airline_powerline_fonts=0
+
+" here is an example of how you could replace the branch indicator with
+" the current working directory, followed by the filename.
+let g:airline_section_b = '%f %h%m%r%w' "path/filename, help flag, modified flag, readonly flag, preview flag
+let g:airline_section_c = '%t' "filename 
+let g:airline_section_y = ''
