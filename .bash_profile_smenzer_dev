@@ -1,0 +1,32 @@
+##
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+##
+# include .bash_common 
+if [ -f ~/.bash_common ]; then
+  source ~/.bash_common
+fi
+
+##
+# Set git autocompletion and PS1 integration
+GIT_PS1_SHOWDIRTYSTATE=true
+GIT_PS1_SHOWSTASHSTATE=true
+GIT_PS1_SHOWUNTRACKEDFILES=true
+GIT_PS1_SHOWUPSTREAM="auto"
+
+##
+# set prompt
+GREEN="\[\033[0;32m\]"
+TEAL="\[\033[00;36m\]"
+WHITE="\[\033[00m\]"
+RED="\[\033[0;31m\]"
+YELLOW="\[\033[0;33m\]"
+
+export PS1="$WHITE[$GREEN\H$WHITE] $TEAL\w$YELLOW\$(__git_ps1)$WHITE\$ "
+
+##
+# add git dir to path
+export PATH=$PATH:$HOME/bin
