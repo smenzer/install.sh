@@ -191,3 +191,23 @@ let g:airline_powerline_fonts=0
 let g:airline_section_b = '%f %h%m%r%w' "path/filename, help flag, modified flag, readonly flag, preview flag
 let g:airline_section_c = '%t' "filename 
 let g:airline_section_y = ''
+let g:airline_section_warning = '%#warningmsg# %{SyntasticStatuslineFlag()} %*'
+
+
+
+" syntastic settings
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+let g:syntastic_aggregate_errors = 1
+
+let g:syntastic_php_checkers = ["php", "phpcs", "phpmd", "phplint"]
+"let g:syntastic_html_checkers = ["w3"]
+
+
+map <leader>E :SyntasticCheck<CR>
+map <leader>e :Errors<CR>
+map <leader>r :lclose<CR>
+
+
