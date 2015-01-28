@@ -137,9 +137,6 @@ let g:sparkupExecuteMapping='<c-g>'
 
 ":vmap // y/<C-R>"<CR> "search for visually highlighted text
 
-"SyntasticEnable php
-let g:syntastic_auto_loc_list=1
-
 let g:gist_open_browser_after_post = 1
 let g:gist_browser_command = 'ssh local open %URL%'
 
