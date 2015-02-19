@@ -11,6 +11,10 @@ set backupdir=~/terminal/.vim_backup/
 set directory=~/terminal/.vim_swap/
 
 syntax on
+
+"https://github.com/cdmedia/itg_flat_vim
+colorscheme itg_flat
+
 filetype on  
 filetype plugin on  
 filetype plugin indent on
@@ -198,6 +202,10 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_aggregate_errors = 1
+let g:syntastic_mode_map = {
+	\ "mode": "active",
+	\ "passive_filetypes": ["html"]
+	\ }
 
 let g:syntastic_php_checkers = ["php", "phpcs", "phpmd", "phplint"]
 "let g:syntastic_html_checkers = ["w3"]
