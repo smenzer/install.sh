@@ -13,10 +13,10 @@ set directory=~/terminal/.vim_swap/
 syntax on
 
 "https://github.com/cdmedia/itg_flat_vim
-"colorscheme itg_flat
-let g:solarized_termcolors=256
-set background=dark
-colorscheme solarized
+colorscheme itg_flat
+"let g:solarized_termcolors=256
+"set background=dark
+"colorscheme solarized
 
 filetype on  
 filetype plugin on  
