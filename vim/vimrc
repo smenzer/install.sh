@@ -7,8 +7,8 @@ call pathogen#helptags()
 ":so $MYVIMRC
 
 " move backup and swap files from working directory
-set backupdir=~/terminal/.vim_backup/
-set directory=~/terminal/.vim_swap/
+set backupdir=~/terminal/vim/.vim_backup/
+set directory=~/terminal/vim/.vim_swap/
 
 syntax on
 
