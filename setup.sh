@@ -5,23 +5,24 @@
 if [ "$1" ]; then
 	machine=$1
 else
-	read -p "Name the machine; leave blank for default ($(hostname)): " machine
-	if [ -z "$machine" ]; then 
-		machine=$(hostname)
-	fi
+#    read -p "Name the machine; leave blank for default ($(hostname)): " machine
+#    if [ -z "$machine" ]; then 
+	machine=$(hostname)
+#    fi
 fi
 
 if [ "$2" ]; then
 	target=$2
 else
-	read -p "What directory should links be placed in; leave blank for default (~): " target
-	if [ -z "$target" ]; then
-		target="~"
-	fi
+#    read -p "What directory should links be placed in; leave blank for default (~): " target
+#    if [ -z "$target" ]; then
+	target="~"
+#    fi
 fi
 if [ ! -d "$target" ]; then
 	mkdir ${target}
 fi
+
 
 echo "--[ Cloning repo from git@github.com:smenzer/terminal.git"
 git clone git@github.com:smenzer/terminal.git terminal
@@ -36,9 +37,14 @@ git submodule update
 
 cd ..
 
+echo "--[ Configuring git"
+ln -s $(pwd)/terminal/git/gitignore_global ${target}/.gitignore_global
+ln -s $(pwd)/terminal/git/gitconfig ${target}/.gitconfig
+
+
 echo "--[ Linking bash profile to bash_profile_${machine}"
 if [ ! -f $(pwd)/terminal/bash_profile/bash_profile_${machine} ]; then
-	touch $(pwd)/terminal/bash_profile/bash_profile_${machine}
+	cp $(pwd)/terminal/bash_profile/bash_profile_template $(pwd)/terminal/bash_profile/bash_profile_${machine}
 fi
 ln -s $(pwd)/terminal/bash_profile/bash_profile_${machine} ${target}/.bash_profile
 
@@ -60,7 +66,6 @@ ln -s $(pwd)/terminal/vim/vimrc ${target}/.vimrc
 #pushd terminal/vim
 #vim +PluginInstall +qall
 #popd
-
 if [ ! -d $(pwd)/terminal/vim/.vim_backup ]; then
 	mkdir $(pwd)/terminal/vim/.vim_backup
 fi

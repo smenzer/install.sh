@@ -26,9 +26,9 @@ export PS1="$WHITE[$GREEN\h$WHITE] $TEAL\w$YELLOW\$(__git_ps1)$WHITE\$ "
 
 ##
 # include eric's API wrapper
-if [ -f ~/terminal/.api_wrapper ]; then
+if [ -f ~/terminal/bash_profile/api_wrapper ]; then
 	AUTHDIR="./auth/"
-	source ~/terminal/.api_wrapper
+	source ~/terminal/bash_profile/api_wrapper
 fi
 
 ##

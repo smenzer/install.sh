@@ -1,3 +1,4 @@
+.DS_Store
 .netrwhist
-.vim_backup/*
-.vim_swap/*
+vim/.vim_backup/*
+vim/.vim_swap/*
