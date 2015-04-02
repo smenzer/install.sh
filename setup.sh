@@ -19,43 +19,53 @@ else
 		target="~"
 	fi
 fi
+if [ ! -d "$target" ]; then
+	mkdir ${target}
+fi
 
 echo "--[ Cloning repo from git@github.com:smenzer/terminal.git"
 git clone git@github.com:smenzer/terminal.git terminal
-pushd terminal
+
+cd terminal
+#temporary til we merge to master
+git checkout improved_install
 
 echo "--[ Initialize submodules"
 git submodule init
 git submodule update
 
+cd ..
+
 echo "--[ Linking bash profile to bash_profile_${machine}"
-if [ ! -f ./bash_profile/bash_profile_${machine} ]; then
-	touch ./bash_profile/.bash_profile_${machine}
+if [ ! -f $(pwd)/terminal/bash_profile/bash_profile_${machine} ]; then
+	touch $(pwd)/terminal/bash_profile/bash_profile_${machine}
 fi
-ln -s ./bash_profile/.bash_profile_${machine} ${target}/.bash_profile
+ln -s $(pwd)/terminal/bash_profile/bash_profile_${machine} ${target}/.bash_profile
 
 echo "--[ Linking bash_common"
-ln -s ./bash_profile/.bash_common ${target}/.bash_common
+ln -s $(pwd)/terminal/bash_profile/bash_common ${target}/.bash_common
 
 echo "--[ Creating .bash_aliases"
 touch ${target}/.bash_aliases
 
-echo "--[ Linking tmux ]"
-ln -s ./misc/tmux.conf ${target}/.tmux.conf
+echo "--[ Linking tmux"
+ln -s $(pwd)/terminal/misc/tmux.conf ${target}/.tmux.conf
 
-echo "--[ Linking ack ]"
-ln -s ./misc/ackrc ${target}/.ackrc
+echo "--[ Linking ack"
+ln -s $(pwd)/terminal/misc/ackrc ${target}/.ackrc
 
-echo "--[ Installing VIM"
-ln -s ./vim ${target}/.vim
-ln -s ./vim/vimrc ${target}/.vimrc
-vim +PluginInstall +qall
+echo "--[ Installing vim"
+ln -s $(pwd)/terminal/vim ${target}/.vim
+ln -s $(pwd)/terminal/vim/vimrc ${target}/.vimrc
+#pushd terminal/vim
+#vim +PluginInstall +qall
+#popd
 
-if [ ! -d ./vim/.vim_backup ]; then
-	mkdir ./vim/.vim_backup
+if [ ! -d $(pwd)/terminal/vim/.vim_backup ]; then
+	mkdir $(pwd)/terminal/vim/.vim_backup
 fi
-if [ ! -d ./vim/.vim_swap ]; then
-	mkdir ./vim/.vim_swap
+if [ ! -d $(pwd)/terminal/vim/.vim_swap ]; then
+	mkdir $(pwd)/terminal/vim/.vim_swap
 fi
 
 
