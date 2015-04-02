@@ -102,6 +102,9 @@ map <leader>s :setlocal spell!<CR>
 map <leader>V :e ~/.vimrc<CR>
 map <leader>w :w<CR>
 map <leader>y y :PBCopy<CR>
+
+"format entire file
+nnoremap <Leader>f gg=G 
 "map <leader>/ /<C-p>
 
 
@@ -110,11 +113,16 @@ lnoremap <leader>, <ESC>
 noremap <leader>, <ESC>
 "map <leader>| <c-w>|
 
-" smarter splitting
-nmap <leader>s<left> :leftabove vnew<CR>
-nmap <leader>s<right> :rightbelow vnew<CR>
-nmap <leader>s<up> :leftabove new<CR>
-nmap <leader>s<down> :rightbelow new<CR>
+" smarter splitting - buffer
+nmap <leader>s<left>	:leftabove	vnew<CR>
+nmap <leader>s<right>	:rightbelow vnew<CR>
+nmap <leader>s<up>		:leftabove	new<CR>
+nmap <leader>s<down>	:rightbelow new<CR>
+" smarter splitting - window
+ nmap <leader>sw<left>  :topleft  vnew<CR>
+ nmap <leader>sw<right> :botright vnew<CR>
+ nmap <leader>sw<up>    :topleft  new<CR>
+ nmap <leader>sw<down>  :botright new<CR>
 
 "Easier splits navigation - Remapped Caps Lock to Control    
 nnoremap <C-h> <C-w>h

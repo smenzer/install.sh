@@ -1,5 +1,11 @@
+#!/bin/bash
+# usage: bash setup <machine_name>
+
 if [ "$1" ]; then
 	# bash profile
+	if [ ! -f $(pwd)/.bash_profile_$1 ]; then
+		touch $(pwd)/.bash_profile_$1
+	fi
 	CMD="ln -s $(pwd)/.bash_profile_$1 ~/.bash_profile"
 	echo "${CMD}"
 	eval "${CMD}"
@@ -14,6 +20,9 @@ if [ "$1" ]; then
 	echo "${CMD}"
 	eval "${CMD}"
 	CMD="ln -s $(pwd)/.vimrc ~/.vimrc"
+	echo "${CMD}"
+	eval "${CMD}"
+	CMD="vim +PluginInstall +qall"
 	echo "${CMD}"
 	eval "${CMD}"
 
