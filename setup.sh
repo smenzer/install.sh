@@ -16,7 +16,7 @@ if [ "$2" ]; then
 else
 #    read -p "What directory should links be placed in; leave blank for default (~): " target
 #    if [ -z "$target" ]; then
-	target="~"
+	target=~
 #    fi
 fi
 if [ ! -d "$target" ]; then
