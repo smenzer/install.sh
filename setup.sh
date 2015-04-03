@@ -27,6 +27,17 @@ fi
 echo "--[ Cloning repo from git@github.com:smenzer/terminal.git"
 git clone git@github.com:smenzer/terminal.git terminal
 
+echo "--[ Installing vim"
+ln -s $(pwd)/terminal/vim ${target}/.vim
+ln -s $(pwd)/terminal/vim/vimrc ${target}/.vimrc
+
+if [ ! -d $(pwd)/terminal/vim/.vim_backup ]; then
+	mkdir $(pwd)/terminal/vim/.vim_backup
+fi
+if [ ! -d $(pwd)/terminal/vim/.vim_swap ]; then
+	mkdir $(pwd)/terminal/vim/.vim_swap
+fi
+
 cd terminal
 
 echo "--[ Initialize submodules"
@@ -56,17 +67,6 @@ ln -s $(pwd)/terminal/misc/tmux.conf ${target}/.tmux.conf
 
 echo "--[ Linking ack"
 ln -s $(pwd)/terminal/misc/ackrc ${target}/.ackrc
-
-echo "--[ Installing vim"
-ln -s $(pwd)/terminal/vim ${target}/.vim
-ln -s $(pwd)/terminal/vim/vimrc ${target}/.vimrc
-
-if [ ! -d $(pwd)/terminal/vim/.vim_backup ]; then
-	mkdir $(pwd)/terminal/vim/.vim_backup
-fi
-if [ ! -d $(pwd)/terminal/vim/.vim_swap ]; then
-	mkdir $(pwd)/terminal/vim/.vim_swap
-fi
 
 echo "--[ Installing vim plugins"
 vim +PluginInstall +qall
