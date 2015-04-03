@@ -54,11 +54,12 @@ set directory=~/terminal/vim/.vim_swap/
 
 syntax on
 
-"https://github.com/cdmedia/itg_flat_vim
-colorscheme itg_flat
+" set colorscheme 
+" (silent so we don't get a warning when we initialize a new machine)
+silent! colorscheme itg_flat
 
 "set syntax highlighting for filetypes
-"au BufNewFile,BufRead *.phtml setlocal ft=php
+au BufNewFile,BufRead *.phtml setlocal ft=php
 au BufNewFile,BufRead markdown setlocal ft=markdown
 au BufNewFile,BufRead *.json setlocal ft=json
 "au BufNewFile,BufRead *.blade.php setlocal ft=html 
@@ -94,7 +95,7 @@ autocmd FileType make setlocal noexpandtab shiftwidth=8 tabstop=8 softtabstop=8
  
 
 " set general vim options
-set modelines=0
+set modelines=0 
 set autoindent  
 set smartindent  
 set incsearch  
@@ -118,13 +119,14 @@ set wildignore+=*Zend*,.git,*bundles*
 set shortmess+=I
 set wrap
 set linebreak
-set mouse=a
+set mouse=a "press option+mouse to be able to copy out of terminal
 set backspace=indent,eol,start
 set scrolloff=3
 set laststatus=2
 
 " Not supported until version 7.3
 if version >= 703
+	" highlight the 80th column
 	set colorcolumn=80
 	highlight ColorColumn ctermbg=8
 endif
