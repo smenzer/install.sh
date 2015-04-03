@@ -41,7 +41,6 @@ echo "--[ Configuring git"
 ln -s $(pwd)/terminal/git/gitignore_global ${target}/.gitignore_global
 ln -s $(pwd)/terminal/git/gitconfig ${target}/.gitconfig
 
-
 echo "--[ Linking bash profile to bash_profile_${machine}"
 if [ ! -f $(pwd)/terminal/bash_profile/bash_profile_${machine} ]; then
 	cp $(pwd)/terminal/bash_profile/bash_profile_template $(pwd)/terminal/bash_profile/bash_profile_${machine}
@@ -63,9 +62,7 @@ ln -s $(pwd)/terminal/misc/ackrc ${target}/.ackrc
 echo "--[ Installing vim"
 ln -s $(pwd)/terminal/vim ${target}/.vim
 ln -s $(pwd)/terminal/vim/vimrc ${target}/.vimrc
-#pushd terminal/vim
-#vim +PluginInstall +qall
-#popd
+
 if [ ! -d $(pwd)/terminal/vim/.vim_backup ]; then
 	mkdir $(pwd)/terminal/vim/.vim_backup
 fi
@@ -73,6 +70,8 @@ if [ ! -d $(pwd)/terminal/vim/.vim_swap ]; then
 	mkdir $(pwd)/terminal/vim/.vim_swap
 fi
 
+echo "--[ Installing vim plugins"
+vim +PluginInstall +qall
 
 
 
