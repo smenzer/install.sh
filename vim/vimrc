@@ -122,8 +122,12 @@ set mouse=a
 set backspace=indent,eol,start
 set scrolloff=3
 set laststatus=2
-set colorcolumn=80
-highlight ColorColumn ctermbg=8
+
+" Not supported until version 7.3
+if version >= 703
+	set colorcolumn=80
+	highlight ColorColumn ctermbg=8
+endif
 
 " make searches case-insensitive, unless they contain upper-case letters:
 set ignorecase
