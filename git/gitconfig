@@ -7,6 +7,7 @@
 	name = Scott Menzer
 [core]
 	excludesfile = ~/.gitignore_global
+	editor = vim
 [color]
 	ui = true
 [alias]
