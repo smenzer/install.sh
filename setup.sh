@@ -69,7 +69,7 @@ echo "--[ Linking ack"
 ln -s $(pwd)/terminal/misc/ackrc ${target}/.ackrc
 
 echo "--[ Installing vim plugins"
-vim +PluginInstall +qall
+vim +PluginInstall +qall >& /dev/null
 
 
 
