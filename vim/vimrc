@@ -17,7 +17,7 @@ Plugin 'gmarik/Vundle.vim'
 "Plugin 'Valloric/MatchTagAlways' " requires python support
 "Plugin 'Valloric/YouCompleteMe' " requires python support
 Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdcommenter'
+Plugin 'smenzer/nerdcommenter' " my version has some custom tweaks I like 
 Plugin 'scrooloose/syntastic'
 Plugin 'xsbeats/vim-blade'
 Plugin 'tpope/vim-surround'
