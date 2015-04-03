@@ -1,5 +1,5 @@
 #!/bin/bash
-# usage: curl -SsL https://raw.github.com/smenzer/terminal/master/setup.sh | bash [-s machine [target]]
+# usage: curl -SsL https://raw.githubusercontent.com/smenzer/terminal/master/setup.sh | bash [-s machine [target]]
 
 # get user inputs
 if [ "$1" ]; then
