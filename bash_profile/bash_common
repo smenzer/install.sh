@@ -35,8 +35,8 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 # include __git_ps1
-if [ -f ~/terminal/git-prompt.sh ]; then
-  source ~/terminal/git-prompt.sh
+if [ -f ~/terminal/git/git-prompt.sh ]; then
+  source ~/terminal/git/git-prompt.sh
 fi
 
 function cycle_wifi() {
