@@ -28,8 +28,6 @@ echo "--[ Cloning repo from git@github.com:smenzer/terminal.git"
 git clone git@github.com:smenzer/terminal.git terminal
 
 cd terminal
-#temporary til we merge to master
-git checkout improved_install
 
 echo "--[ Initialize submodules"
 git submodule init
