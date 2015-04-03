@@ -1,6 +1,7 @@
 configuration for terminal including vim, screen, and tmux settings
 
-to install:
-	- in this directory, create a bash profile for the server you're on, call it .bash_profile_[SERVER_NAME]
-	- from this same directory, run: bash setup [SERVER_NAME]
-
+to install, from your home directory, run the following command:
+	curl -SsL https://raw.github.com/smenzer/terminal/master/setup | bash [-s machine [target]]
+	
+	machine is the name that will be used to create a unique bash profile.  it will default to the machine hostname if not specified
+	target is the directory to install to.  it will default to ~/ if you don't specify it
