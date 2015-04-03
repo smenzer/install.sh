@@ -2,3 +2,4 @@
 .netrwhist
 vim/.vim_backup/*
 vim/.vim_swap/*
+vim/bundle/*
