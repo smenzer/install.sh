@@ -1,6 +1,7 @@
 ##
-# make sure svn uses vim
+# make sure we use vim as our editor
 export SVN_EDITOR=vim
+export EDITOR=vim
 
 # recycle bin to prevent unwanted deletes
 function re(){
