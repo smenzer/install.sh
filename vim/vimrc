@@ -14,6 +14,10 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " all plugins get declared here
+" Install plugins: Launch vim and run :PluginInstall
+" To install from command line: vim +PluginInstall +qall
+"
+"
 "Plugin 'Valloric/MatchTagAlways' " requires python support
 "Plugin 'Valloric/YouCompleteMe' " requires python support
 Plugin 'scrooloose/nerdtree'
@@ -28,6 +32,7 @@ Plugin 'vim-scripts/a.vim'
 Plugin 'rentalcustard/pbcopy.vim'
 Plugin 'cdmedia/itg_flat_vim'
 Plugin 'pangloss/vim-javascript'
+Plugin 'kien/ctrlp.vim'
 
 Plugin 'ack.vim'
 Plugin 'JSON.vim'
