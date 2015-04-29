@@ -29,7 +29,7 @@ Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'bling/vim-airline'
 Plugin 'vim-scripts/a.vim'
-Plugin 'rentalcustard/pbcopy.vim'
+Plugin 'ahw/vim-pbcopy'
 Plugin 'cdmedia/itg_flat_vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'kien/ctrlp.vim'
@@ -67,7 +67,7 @@ silent! colorscheme itg_flat
 au BufNewFile,BufRead *.phtml setlocal ft=php
 au BufNewFile,BufRead markdown setlocal ft=markdown
 au BufNewFile,BufRead *.json setlocal ft=json
-"au BufNewFile,BufRead *.blade.php setlocal ft=html 
+au BufNewFile,BufRead *.blade.php setlocal ft=html 
 au BufNewFile,BufRead *.ejs setlocal filetype=html
 au BufNewFile,BufRead *.spec.template setlocal filetype=spec
 
@@ -166,8 +166,8 @@ map <leader>s :setlocal spell!<CR>
 map <leader>V :e ~/.vimrc<CR>
 map <leader>w :w<CR>
 
-"PBCopy the selected text
-map <leader>y y :PBCopy<CR> 
+"map PBCopy from cy to <leader>y
+map <leader>y cy<CR>
 
 "format entire file
 nnoremap <Leader>f gg=G 
