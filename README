@@ -5,3 +5,5 @@ to install, from your home directory, run the following command:
 	
 	machine is the name that will be used to create a unique bash profile.  it will default to the machine hostname if not specified
 	target is the directory to install to.  it will default to ~/ if you don't specify it
+
+before installing, ensure the machine has an ssh public key already created and that key is stored in your github profile
