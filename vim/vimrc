@@ -17,25 +17,24 @@ Plugin 'gmarik/Vundle.vim'
 " Install plugins: Launch vim and run :PluginInstall
 " To install from command line: vim +PluginInstall +qall
 "
-"
 "Plugin 'Valloric/MatchTagAlways' " requires python support
-"Plugin 'Valloric/YouCompleteMe' " requires python support
-Plugin 'scrooloose/nerdtree'
-Plugin 'smenzer/nerdcommenter' " my version has some custom tweaks I like 
-Plugin 'scrooloose/syntastic'
-Plugin 'xsbeats/vim-blade'
+Plugin 'Valloric/YouCompleteMe' " requires python support
+Plugin 'scrooloose/nerdtree'			" ctrl+c to open; shows dir structure
+Plugin 'smenzer/nerdcommenter'			" my version has some custom tweaks I like 
+Plugin 'scrooloose/syntastic'			" checks syntax of current file
+Plugin 'xsbeats/vim-blade' 
 Plugin 'tpope/vim-surround'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'bling/vim-airline'
+Plugin 'bling/vim-airline'				" enhanced menu bar in the footer
 Plugin 'vim-scripts/a.vim'
-Plugin 'ahw/vim-pbcopy'
+Plugin 'ahw/vim-pbcopy'					" copy out of vim to the clipboard; set below to leader + y + y
 Plugin 'cdmedia/itg_flat_vim'
 Plugin 'pangloss/vim-javascript'
-Plugin 'kien/ctrlp.vim'
+"Plugin 'kien/ctrlp.vim'					" ctrl+p to open; search and open files
 Plugin 'terryma/vim-expand-region'
+Plugin 'wincent/Command-T'				" <Leader>+t to open; search and open files - <C-v> open split vertical, <C-s> open split, <C-c> close
 "Plugin 'tpope/vim-commentary' " duplicative of nerdcommenter; gc to comment/uncomment
-
 Plugin 'ack.vim'
 Plugin 'JSON.vim'
 "Plugin 'html.vim'
@@ -196,8 +195,6 @@ nmap <leader>s<down>	:rightbelow new<CR>
 nmap <leader>sw<left>  :topleft  vnew<CR>
 nmap <leader>sw<right> :botright vnew<CR>
 nmap <leader>sw<up>    :topleft  new<CR>
-nmap <leader>sw<down>  :botright new<CR>
-
 "Easier splits navigation - Remapped Caps Lock to Control    
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -231,7 +228,7 @@ nnoremap <BS> gg
 "Stop that stupid window from popping up:
 map q: :q
 
-"Make Ctrl-P plugin a lot faster for Git projects
+"Make CtrlP plugin a lot faster for Git projects
 let g:ctrlp_use_caching = 0
 if executable('ag')
 	set grepprg=ag\ --nogroup\ --nocolor
@@ -242,6 +239,14 @@ else
 				\ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
 				\ }
 endif
+" Give ctrlp more room
+let g:ctrlp_match_window = 'top,order:ttb,min:1,max:35,results:35'
+
+"Command-T settings
+let g:CommandTWildIgnore=&wildignore . ",**/bower_components/*" 
+let g:CommandTScanDotDirectories = 1
+let g:CommandTAlwaysShowDotFiles = 1
+let g:CommandTAcceptSelectionSplitMap = '<C-s>'
 
 """""""""""""""""""""""""""""""""""
 " nerdtree settings 
