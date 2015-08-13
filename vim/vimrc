@@ -18,7 +18,7 @@ Plugin 'gmarik/Vundle.vim'
 " To install from command line: vim +PluginInstall +qall
 "
 "Plugin 'Valloric/MatchTagAlways' " requires python support
-Plugin 'Valloric/YouCompleteMe' " requires python support
+Plugin 'Valloric/YouCompleteMe'			" requires python support
 Plugin 'scrooloose/nerdtree'			" ctrl+c to open; shows dir structure
 Plugin 'smenzer/nerdcommenter'			" my version has some custom tweaks I like 
 Plugin 'scrooloose/syntastic'			" checks syntax of current file
@@ -55,6 +55,9 @@ filetype plugin on
 ":so $MYVIMRC
 
 " move backup and swap files from working directory
+set nobackup
+set noswapfile
+
 set backupdir=~/terminal/vim/.vim_backup/
 set directory=~/terminal/vim/.vim_swap/
 
@@ -247,6 +250,13 @@ let g:CommandTWildIgnore=&wildignore . ",**/bower_components/*"
 let g:CommandTScanDotDirectories = 1
 let g:CommandTAlwaysShowDotFiles = 1
 let g:CommandTAcceptSelectionSplitMap = '<C-s>'
+
+"YouCompleteMe settings
+let g:ycm_confirm_extra_conf = 0
+
+"ctags
+map <silent> <F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+set tags+=./tags;$HOME
 
 """""""""""""""""""""""""""""""""""
 " nerdtree settings 
