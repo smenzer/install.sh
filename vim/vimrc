@@ -285,25 +285,18 @@ silent! colorscheme itg_flat
 
 
 "** Airline configuration **
-if !exists('g:airline_symbols')
-	let g:airline_symbols = {}
-endif
 
-let g:airline_left_sep='»'
-"let g:airline_left_sep='▶'
-let g:airline_right_sep='«'
-"let g:airline_right_sep='◀'
+"enable/disable automatic population of the `g:airline_symbols` dictionary with powerline symbols
+"requires patched font to be downloaded from https://github.com/powerline/fonts
+let g:airline_powerline_fonts=1
 
-"* enable/disable automatic population of the `g:airline_symbols` dictionary with powerline symbols
-let g:airline_powerline_fonts=0
-
-"* set the airline theme (https://github.com/bling/vim-airline/wiki/Screenshots)
+"set the airline theme (https://github.com/bling/vim-airline/wiki/Screenshots)
 let g:airline_theme='murmur'
 
 "enable tabline at the top
 let g:airline#extensions#tabline#enabled = 1
 
-" Optionally configure individual sections 
+"Optionally configure individual sections 
 "let g:airline_section_b = '%f %{fugitive#statusline()} %h%m%r%w' " path/filename, help flag, modified flag, readonly flag, preview flag
 "let g:airline_section_c = '%t' "filename 
 "let g:airline_section_y = ''
