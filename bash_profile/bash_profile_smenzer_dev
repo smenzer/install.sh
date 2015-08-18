@@ -11,6 +11,12 @@ if [ -f ~/.bash_common ]; then
 fi
 
 ##
+# alias ack-grep to just ack
+if [ -f "/usr/bin/ack-grep" ]; then
+  alias ack="/usr/bin/ack-grep"
+fi
+
+##
 # Set git autocompletion and PS1 integration
 GIT_PS1_SHOWDIRTYSTATE=true
 GIT_PS1_SHOWSTASHSTATE=true
