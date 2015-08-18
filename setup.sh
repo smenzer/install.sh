@@ -38,13 +38,11 @@ if [ ! -d $(pwd)/terminal/vim/.vim_swap ]; then
 	mkdir $(pwd)/terminal/vim/.vim_swap
 fi
 
-cd terminal
-
+pushd terminal
 echo "--[ Initialize submodules"
 git submodule init
 git submodule update
-
-cd ..
+popd
 
 echo "--[ Configuring git"
 ln -s $(pwd)/terminal/git/gitignore_global ${target}/.gitignore_global
@@ -71,6 +69,16 @@ ln -s $(pwd)/terminal/misc/ackrc ${target}/.ackrc
 echo "--[ Installing vim plugins"
 vim +PluginInstall +qall
 
+echo "--[ Command-T setup"
+pushd $(pwd)/terminal/vim/bundle/Command-T/ruby/command-t/
+ruby extconf.rb
+make
+popd
+
+echo "--[ YouCompleteMe setup"
+pushd $(pwd)/terminal/vim/bundle/YouCompleteMe/
+sh ./install.sh --clang-completer
+popd
 
 
 
