@@ -1,4 +1,4 @@
-"Reload vimrc file: 
+"Reload vimrc file:
 ":so %
 ":so $MYVIMRC
 
@@ -19,7 +19,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 "let Vundle manage Vundle
-"required! 
+"required!
 Plugin 'gmarik/Vundle.vim'
 
 "Install plugins: Launch vim and run :PluginInstall
@@ -27,14 +27,14 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'Valloric/MatchTagAlways'		" <Leader>+% to go to matching tag; requires python support
 Plugin 'Valloric/YouCompleteMe'			" requires python support
 Plugin 'scrooloose/nerdtree'			" ctrl+c to open; shows dir structure
-Plugin 'smenzer/nerdcommenter'			" my version has some custom tweaks I like 
+Plugin 'smenzer/nerdcommenter'			" my version has some custom tweaks I like
 Plugin 'scrooloose/syntastic'			" checks syntax of current file
-Plugin 'xsbeats/vim-blade'				" syntax highlighting for blade templates 
+Plugin 'xsbeats/vim-blade'				" syntax highlighting for blade templates
 Plugin 'tpope/vim-surround'				" easily change surroundings of a word or phrase - :help surround
 Plugin 'tpope/vim-fugitive'				" git integration - Gblame, Gstatus - :help fugitive
 Plugin 'bling/vim-airline'				" enhanced menu bar in the footer
 Plugin 'majutsushi/tagbar'				" needed to put current function in status bar; shows an outline of current files functions, classes, etc. - :Tagbar
-Plugin 'vim-scripts/a.vim'				" :A to switch. quickly switch between source and header file.  
+Plugin 'vim-scripts/a.vim'				" :A to switch. quickly switch between source and header file.
 Plugin 'ahw/vim-pbcopy'					" copy out of vim to the clipboard; set below to leader + y + y
 Plugin 'cdmedia/itg_flat_vim'			" Port of the Sublime Text theme itg.flat
 Plugin 'pangloss/vim-javascript'		" syntax and indenting for javascript
@@ -43,13 +43,13 @@ Plugin 'terryma/vim-expand-region'		" Press + to expand the visual selection and
 Plugin 'wincent/Command-T'				" <Leader>+t to open; search and open files - <C-v> open split vertical, <C-s> open split, <C-c> close
 Plugin 'JSON.vim'						" syntax highlighting for json
 Plugin 'phtml.vim'						" syntax highlight for phtml
-Plugin 'airblade/vim-gitgutter'			" shows a git diff in the 'gutter' 
+Plugin 'airblade/vim-gitgutter'			" shows a git diff in the 'gutter'
 "Plugin 'tpope/vim-commentary' " duplicative of nerdcommenter; gc to comment/uncomment
 "Plugin 'ack.vim'
 
 call vundle#end()            " required by vundle
 filetype plugin indent on    " required by vundle
-filetype plugin on  
+filetype plugin on
 """""""""""""""""""""""""""""""""""
 
 
@@ -64,7 +64,7 @@ syntax on
 au BufNewFile,BufRead *.phtml setlocal ft=php
 au BufNewFile,BufRead markdown setlocal ft=markdown
 au BufNewFile,BufRead *.json setlocal ft=json
-au BufNewFile,BufRead *.blade.php setlocal ft=html 
+au BufNewFile,BufRead *.blade.php setlocal ft=html
 au BufNewFile,BufRead *.ejs setlocal filetype=html
 au BufNewFile,BufRead *.spec.template setlocal filetype=spec
 
@@ -95,27 +95,27 @@ autocmd FileType html,css setlocal noexpandtab tabstop=4 softtabstop=4 shiftwidt
 "(despite the mappings later):
 autocmd FileType make setlocal noexpandtab shiftwidth=8 tabstop=8 softtabstop=8
 """""""""""""""""""""""""""""""""""
- 
+
 
 """""""""""""""""""""""""""""""""""
 " set general vim options
 """""""""""""""""""""""""""""""""""
-set modelines=0 
-set autoindent  
-set smartindent  
-set incsearch  
-set showmatch  
+set modelines=0
+set autoindent
+set smartindent
+set incsearch
+set showmatch
 set hlsearch
 set showcmd
 set showmode
-set number  
+set number
 set ruler
 set cursorline
-set tabstop=4  
-set softtabstop=4  
-set shiftwidth=4  
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
 set shiftround
-set noexpandtab  
+set noexpandtab
 set ttyfast
 set textwidth=0
 set wildmenu
@@ -158,14 +158,14 @@ endif
 let mapleader = ","
 
 map <leader>a :set wrap!<CR>
-map <leader>k :nohlsearch<CR>  
+map <leader>k :nohlsearch<CR>
 map <leader>n :set number!<CR>
 map <leader>p :set paste!<CR>
 map <leader>q :wqa<CR>
 map <leader>w :w<CR>
 
 "format entire file
-nnoremap <leader>f gg=G 
+nnoremap <leader>f gg=G
 
 "Type 12<Enter> to go to line 12 (12G breaks my wrist)
 "Hit Enter to go to end of file.
@@ -193,7 +193,7 @@ nmap <leader>sw<left>  :topleft  vnew<CR>
 nmap <leader>sw<right> :botright vnew<CR>
 nmap <leader>sw<up>    :topleft  new<CR>
 
-"Easier splits navigation - Remapped Caps Lock to Control    
+"Easier splits navigation - Remapped Caps Lock to Control
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -203,8 +203,8 @@ nnoremap <C-l> <C-w>l
 map <leader>= <c-w>=
 
 "easier splits sizing
-noremap <C-w><left> 10<C-w><  
-noremap <C-w><right> 10<C-w>> 
+noremap <C-w><left> 10<C-w><
+noremap <C-w><right> 10<C-w>>
 noremap <C-w><up> 10<C-w>+
 noremap <C-w><down> 10<C-w>-
 
@@ -236,7 +236,7 @@ vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
 "** Command-T **
-let g:CommandTWildIgnore=&wildignore . ",**/bower_components/*" 
+let g:CommandTWildIgnore=&wildignore . ",**/bower_components/*"
 let g:CommandTScanDotDirectories = 1
 let g:CommandTAlwaysShowDotFiles = 1
 let g:CommandTAcceptSelectionSplitMap = '<C-s>'
@@ -251,9 +251,9 @@ set tags+=./tags;$HOME
 "** Tagbar **
 map <F3> :Tagbar<cr>
 
-"** Nerdtree ** 
-let NERDTreeQuitOnOpen=1  
-map <C-c> :NERDTreeToggle<CR>  
+"** Nerdtree **
+let NERDTreeQuitOnOpen=1
+map <C-c> :NERDTreeToggle<CR>
 
 "** Syntastic **
 let g:syntastic_always_populate_loc_list = 1
@@ -279,7 +279,7 @@ map <leader>r :lclose<CR>
 " VIM Display Options **
 """""""""""""""""""""""""""""""""""
 
-"set colorscheme 
+"set colorscheme
 "(silent so we don't get a warning when we initialize a new machine)
 silent! colorscheme itg_flat
 
@@ -296,9 +296,9 @@ let g:airline_theme='murmur'
 "enable tabline at the top
 let g:airline#extensions#tabline#enabled = 1
 
-"Optionally configure individual sections 
+"Optionally configure individual sections
 "let g:airline_section_b = '%f %{fugitive#statusline()} %h%m%r%w' " path/filename, help flag, modified flag, readonly flag, preview flag
-"let g:airline_section_c = '%t' "filename 
+"let g:airline_section_c = '%t' "filename
 "let g:airline_section_y = ''
 "let g:airline_section_gutter = ''
 "let g:airline_section_warning = '%#warningmsg# %{SyntasticStatuslineFlag()} %*'
