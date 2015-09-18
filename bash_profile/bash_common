@@ -47,12 +47,15 @@ function cycle_wifi() {
 	networksetup -setairportpower $device $val
 }
 function fix_wifi() {
-	device="$(networksetup -listallnetworkservices | grep -Eo '(Wi-Fi|AirPort)')"
-	networksetup -setnetworkserviceenabled $device off
-	networksetup -setnetworkserviceenabled $device on
-}
+	wifi_device="$(networksetup -listallnetworkservices | grep -Eo '(Wi-Fi|AirPort)')"
+	ethernet_device="$(networksetup -listallnetworkservices | grep -Eo '(USB Ethernet)')"
 
-fixssh() {
+	networksetup -setnetworkserviceenabled "$wifi_device" off
+	networksetup -setnetworkserviceenabled "$ethernet_device" off
+	networksetup -setnetworkserviceenabled "$wifi_device" on
+	networksetup -setnetworkserviceenabled "$ethernet_device" on
+}
+function fix_ssh() {
   for key in SSH_AUTH_SOCK SSH_CONNECTION SSH_CLIENT; do
     if (tmux show-environment | grep "^${key}" > /dev/null); then
       value=`tmux show-environment | grep "^${key}" | sed -e "s/^[A-Z_]*=//"`

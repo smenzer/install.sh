@@ -25,7 +25,7 @@ Plugin 'gmarik/Vundle.vim'
 "Install plugins: Launch vim and run :PluginInstall
 "To install from command line: vim +PluginInstall +qall
 Plugin 'Valloric/MatchTagAlways'		" <Leader>+% to go to matching tag; requires python support
-Plugin 'Valloric/YouCompleteMe'			" requires python support
+"Plugin 'Valloric/YouCompleteMe'			" requires python support
 Plugin 'scrooloose/nerdtree'			" ctrl+c to open; shows dir structure
 Plugin 'smenzer/nerdcommenter'			" my version has some custom tweaks I like
 Plugin 'scrooloose/syntastic'			" checks syntax of current file
