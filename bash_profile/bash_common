@@ -57,7 +57,7 @@ YELLOW="\[\033[0;33m\]"
 
 #export PS1="$WHITE[$GREEN\h$WHITE] $TEAL\w$YELLOW\$(__git_ps1)$WHITE\n\D{%F %T} \$ "
 #export PS1="$WHITE[$GREEN\D{%F %T}$WHITE] $WHITE[$BLUE\h:$BTEAL\w$WHITE]$YELLOW\$(__git_ps1)\n$GREEN\$$WHITE "
-export PS1="$WHITE[$GREEN\h$WHITE:$BTEAL\w$WHITE] $BLUE\D{%F %T}$YELLOW\$(__git_ps1)\n\$$WHITE "
+export PS1="$WHITE[$GREEN\H$WHITE:$BTEAL\w$WHITE] $BLUE\D{%F %T}$YELLOW\$(__git_ps1)\n\$$WHITE "
 
 
 function cycle_wifi() {
