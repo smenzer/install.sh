@@ -65,6 +65,7 @@ au BufNewFile,BufRead *.phtml setlocal ft=php
 au BufNewFile,BufRead markdown setlocal ft=markdown
 au BufNewFile,BufRead *.json setlocal ft=json
 au BufNewFile,BufRead *.blade.php setlocal ft=html
+au BufNewFile,BufRead *.tpl.php setlocal ft=html
 au BufNewFile,BufRead *.ejs setlocal filetype=html
 au BufNewFile,BufRead *.spec.template setlocal filetype=spec
 
