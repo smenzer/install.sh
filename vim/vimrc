@@ -290,7 +290,9 @@ endif
 let g:airline_powerline_fonts=1
 
 "set the airline theme (https://github.com/bling/vim-airline/wiki/Screenshots)
-let g:airline_theme='murmur'
+"let g:airline_theme='murmur'
+let g:airline_theme='molokai'
+"hi cursorline ctermbg=16
 
 "enable tabline at the top
 let g:airline#extensions#tabline#enabled = 1
