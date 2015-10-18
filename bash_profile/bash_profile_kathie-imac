@@ -15,4 +15,5 @@ if [ -f ~/.bash_common ]; then
 fi
 
 alias ll='ls -laG'
-alias drobo='ssh -L 4200:localhost:4243 root@drobo-fs.local'
+#alias drobo='ssh -L 4200:localhost:4243 root@drobo-fs.local'
+alias drobo='ssh root@drobo-fs.local'
