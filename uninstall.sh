@@ -35,7 +35,7 @@ echo "--[ Uninstalling ack"
 rm ~/.ackrc
 
 echo "--[ Uninstalling git-prompt"
-rm ~/git-prompt.sh
+rm ~/.git-prompt.sh
 
 echo "--[ Uninstalling terminal repository from ${target}"
 rm -rf ${target}

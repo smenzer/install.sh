@@ -56,7 +56,7 @@ echo "--[ Linking ack"
 ln -s ${target}/misc/ackrc ~/.ackrc
 
 echo "--[ Linking git-prompt"
-ln -s ${target}/git/git-prompt.sh git-prompt.sh
+ln -s ${target}/git/git-prompt.sh .git-prompt.sh
 
 echo "--[ Installing vim plugins"
 vim +PluginInstall +qall
