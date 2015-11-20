@@ -134,7 +134,7 @@ set laststatus=2
 set ignorecase
 set smartcase
 
-"move backup and swap files from working directory
+"don't use backup and swapfiles, they're unecessary
 set nobackup
 set noswapfile
 
@@ -282,6 +282,9 @@ if version >= 703
 	let &colorcolumn="80,".join(range(120,999),",")
 	highlight ColorColumn ctermbg=235 guibg=#2c2d27
 endif
+
+" set the hidden characters that we would want to show
+set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
 
 "** Airline configuration **
 
