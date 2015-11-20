@@ -11,7 +11,7 @@ fi
 if [ "$2" ]; then
 	target=$2
 else
-	target="~/src/github.com/smenzer"
+	target=~/src/github.com/smenzer
 fi
 if [ ! -d "$target" ]; then
 	mkdir -p ${target}
