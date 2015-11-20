@@ -20,7 +20,7 @@ _before installing, ensure the machine has an ssh public key already created and
 ####Uninstallation
 to uninstall, run the following commans:
 ```bash
-curl -SsL https://raw.github.com/smenzer/terminal/master/setup.sh | bash [-s target]
+curl -SsL https://raw.github.com/smenzer/terminal/master/uninstall.sh | bash [-s target]
 ```
 
 **target**
