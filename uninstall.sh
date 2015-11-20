@@ -6,7 +6,7 @@
 if [ "$1" ]; then
 	target=$1
 else
-	target="~/src/github.com/smenzer"
+	target=~/src/github.com/smenzer
 fi
 target=${target}"/terminal"
 
@@ -34,8 +34,11 @@ rm ~/.tmux.conf
 echo "--[ Uninstalling ack"
 rm ~/.ackrc
 
-echo "--[ Uninstalling terminal repository"
+echo "--[ Uninstalling git-prompt"
+rm ~/git-prompt.sh
+
+echo "--[ Uninstalling terminal repository from ${target}"
 rm -rf ${target}
 
 
-echo "--[ Uninstallation complete"
+echo "--[ Uninstallation complete!"
