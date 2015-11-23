@@ -1,5 +1,5 @@
 #!/bin/bash
-# usage: curl -SsL https://raw.githubusercontent.com/smenzer/terminal/master/uninstall | bash [-s target]
+# usage: curl -SsL https://raw.github.com/smenzer/terminal/master/uninstall.sh | bash [-s target]
 # note: will not remove the .bash_aliases file because it is not stored in git
 
 # get user input
