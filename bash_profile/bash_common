@@ -36,8 +36,8 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 # include __git_ps1 in case it doesn't exist
-if [ -f ~/terminal/git/git-prompt.sh ]; then
-  source ~/terminal/git/git-prompt.sh
+if [ -f ~/.git-prompt.sh ]; then
+  source ~/.git-prompt.sh
 fi
 GIT_PS1_SHOWDIRTYSTATE=true
 GIT_PS1_SHOWSTASHSTATE=true
