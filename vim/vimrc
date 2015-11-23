@@ -9,6 +9,7 @@ filetype off                  " required
 
 set shell=/bin/bash
 set encoding=utf-8
+scriptencoding utf-8
 
 
 """""""""""""""""""""""""""""""""""
