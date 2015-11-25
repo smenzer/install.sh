@@ -29,7 +29,7 @@ alias kl='killall ssh-agent; killall ssh'
 
 # ssh
 alias gator='ssh -p 2222 smenzer@gator.menzer.org'
-alias kathie='ssh kathie@chicago.menzer.org'
+alias kathie='ssh -A kathie@chicago.menzer.org'
 
 # include .bash_aliases
 if [ -f ~/.bash_aliases ]; then
