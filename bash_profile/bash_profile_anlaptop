@@ -30,9 +30,9 @@ stty -ixon
 
 ##
 # include eric's API wrapper
-if [ -f ~/terminal/bash_profile/api_wrapper ]; then
+if [ -f ~/src/github.com/smenzer/terminal/bash_profile/api_wrapper ]; then
 	AUTHDIR="./auth/"
-	source ~/terminal/bash_profile/api_wrapper
+	source ~/src/github.com/smenzer/terminal/bash_profile/api_wrapper
 fi
 
 ##
