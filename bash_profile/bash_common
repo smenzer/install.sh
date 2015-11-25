@@ -62,15 +62,9 @@ YELLOW="\[\033[0;33m\]"
 export PS1="$WHITE[$GREEN\H$WHITE:$BTEAL\w$WHITE] [$BLUE\D{%F %T %Z}$WHITE]$YELLOW\$(__git_ps1)\n\$$WHITE "
 
 
-function cycle_wifi() {
-	device="$(networksetup -listallhardwareports | grep -E '(Wi-Fi|AirPort)' -A 1 | grep -o "en.")"
-	[[ "$(networksetup -getairportpower $device)" == *On ]] && val=off || val=on
-	networksetup -setairportpower $device $val
-}
-
-function fix_wifi() {
+function fix_network() {
 	wifi_device="$(networksetup -listallnetworkservices | grep -Eo '(Wi-Fi|AirPort)')"
-	ethernet_device="$(networksetup -listallnetworkservices | grep -Eo '(USB Ethernet)')"
+	ethernet_device="$(networksetup -listallnetworkservices | grep -Eo '(Ethernet)')"
 
 	networksetup -setnetworkserviceenabled "$wifi_device" off
 	networksetup -setnetworkserviceenabled "$ethernet_device" off
