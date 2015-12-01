@@ -1,12 +1,12 @@
 #!/bin/bash
-# usage: curl -SsL https://raw.github.com/smenzer/terminal/master/uninstall.sh | bash [-s target]
+# usage: bash <(curl -SsL https://raw.github.com/smenzer/terminal/master/uninstall.sh)
 # note: will not remove the .bash_aliases file because it is not stored in git
 
 # get user input
-if [ "$1" ]; then
-	target=$1
-else
-	target=~/src/github.com/smenzer
+target_default=~/src/github.com/smenzer
+read -r -p "Enter the location of the \"terminal\" directory (hit Enter to use the default \"${target_default}\"): " target
+if [ ! "${target}" ]; then
+	target=${target_default}
 fi
 target=${target}"/terminal"
 
