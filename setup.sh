@@ -1,5 +1,11 @@
 #!/bin/bash
 # usage: curl -SsL https://raw.github.com/smenzer/terminal/master/setup.sh | bash [-s machine [target]]
+read -r -p "please give me the machine name: " machine
+
+echo
+echo ${machine}
+echo
+exit
 
 # get user inputs
 if [ "$1" ]; then
