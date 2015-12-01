@@ -66,10 +66,15 @@ function fix_network() {
 	wifi_device="$(networksetup -listallnetworkservices | grep -Eo '(Wi-Fi|AirPort)')"
 	ethernet_device="$(networksetup -listallnetworkservices | grep -Eo '(Ethernet)')"
 
-	networksetup -setnetworkserviceenabled "$wifi_device" off
-	networksetup -setnetworkserviceenabled "$ethernet_device" off
-	networksetup -setnetworkserviceenabled "$wifi_device" on
-	networksetup -setnetworkserviceenabled "$ethernet_device" on
+	if [ ${#wifi_device} -ge 1 ]; then
+		networksetup -setnetworkserviceenabled "$wifi_device" off
+		networksetup -setnetworkserviceenabled "$wifi_device" on
+	fi
+
+	if [ ${#ethernet_device} -ge 1 ]; then
+		networksetup -setnetworkserviceenabled "$ethernet_device" off
+		networksetup -setnetworkserviceenabled "$ethernet_device" on
+	fi
 }
 
 function fix_ssh() {
