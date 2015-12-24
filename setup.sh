@@ -1,17 +1,16 @@
 #!/bin/bash
-# usage: curl -SsL https://raw.github.com/smenzer/terminal/master/setup.sh | bash [-s machine [target]]
+# usage: bash <(curl -SsL https://raw.github.com/smenzer/terminal/master/setup.sh)
 
 # get user inputs
-if [ "$1" ]; then
-	machine=$1
-else
+read -r -p "Enter the machine name (hit Enter to use the default \"$(hostname)\"): " machine
+if [ ! "${machine}" ]; then
 	machine=$(hostname)
 fi
 
-if [ "$2" ]; then
-	target=$2
-else
-	target=~/src/github.com/smenzer
+target_default=~/src/github.com/smenzer
+read -r -p "Enter the target directory to place \"terminal\" (hit Enter to use the default \"${target_default}\"): " target
+if [ ! "${target}" ]; then
+	target=${target_default}
 fi
 if [ ! -d "$target" ]; then
 	mkdir -p ${target}

@@ -64,7 +64,7 @@ export PS1="$WHITE[$GREEN\H$WHITE:$BTEAL\w$WHITE] [$BLUE\D{%F %T %Z}$WHITE]$YELL
 
 function fix_network() {
 	wifi_device="$(networksetup -listallnetworkservices | grep -Eo '(Wi-Fi|AirPort)')"
-	ethernet_device="$(networksetup -listallnetworkservices | grep -Eo '(Ethernet)')"
+	ethernet_device="$(networksetup -listallnetworkservices | grep -Eo 'USB Ethernet|~\sEthernet')"
 
 	if [ ${#wifi_device} -ge 1 ]; then
 		networksetup -setnetworkserviceenabled "$wifi_device" off
