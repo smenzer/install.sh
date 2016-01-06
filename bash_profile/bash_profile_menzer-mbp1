@@ -14,4 +14,4 @@ if [ -f ~/.bash_common ]; then
   source ~/.bash_common
 fi
 
-export PATH=$HOME/bin:/opt/local/bin:/opt/local/sbin:$HOME/.rvm/bin:/usr/bin/mongodb/bin:/usr/bin/pear:~/.composer/vendor/bin/:$PATH
+export PATH=$HOME/bin:/opt/local/bin:/opt/local/sbin:$HOME/.rvm/bin:/usr/bin/mongodb/bin:/usr/bin/pear:~/.composer/vendor/bin:/Applications/MAMP/bin/php/php5.6.10/bin:$PATH
