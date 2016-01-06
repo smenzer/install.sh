@@ -39,9 +39,9 @@ Plugin 'vim-scripts/a.vim'				" :A to switch. quickly switch between source and 
 Plugin 'ahw/vim-pbcopy'					" copy out of vim to the clipboard; set below to leader + y + y
 Plugin 'cdmedia/itg_flat_vim'			" Port of the Sublime Text theme itg.flat
 Plugin 'pangloss/vim-javascript'		" syntax and indenting for javascript
-"Plugin 'kien/ctrlp.vim'					" ctrl+p to open; search and open files
+Plugin 'kien/ctrlp.vim'					" ctrl+p to open; search and open files
 Plugin 'terryma/vim-expand-region'		" Press + to expand the visual selection and - to shrink it
-Plugin 'wincent/Command-T'				" <Leader>+t to open; search and open files - <C-v> open split vertical, <C-s> open split, <C-c> close
+"Plugin 'wincent/Command-T'				" <Leader>+t to open; search and open files - <C-v> open split vertical, <C-s> open split, <C-c> close
 Plugin 'JSON.vim'						" syntax highlighting for json
 Plugin 'phtml.vim'						" syntax highlight for phtml
 Plugin 'airblade/vim-gitgutter'			" shows a git diff in the 'gutter'
@@ -130,6 +130,7 @@ set wildignore+=*Zend*,.git,*bundles*,*.o,*.obj,*.so*
 set shortmess+=I
 set wrap
 set linebreak
+set showbreak=>\ \ \  " note trailing space at end of next line
 set mouse=a "press option+mouse to be able to copy out of terminal
 set backspace=indent,eol,start
 set scrolloff=6
@@ -210,6 +211,20 @@ noremap <C-w><down> 10<C-w>-
 "tabs
 "gt (next tab), gT (previous tab), {i}gt (tab in position i)
 nnoremap <leader>T	:tabnew<CR>
+
+"search for whitespace
+:nnoremap <silent> <F10> :let _s=@/<Bar>/\S\zs\s\+$<CR>:let @/=_s<Bar><CR>
+"automatically highlight whitespace in red
+highlight ExtraWhitespace ctermbg=red guibg=red
+:autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\S\zs\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\S\zs\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\S\zs\s\+$/
+"find spaces being used as tabs with a search: /^\t*\zs \+/
+
+"cleanup whitespace 
+:nnoremap <silent> <F11> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR> 
 """""""""""""""""""""""""""""""""""
 
 
