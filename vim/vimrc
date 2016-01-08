@@ -309,8 +309,6 @@ endif
 
 " set the hidden characters that we would want to show
 if version >= 704
-	set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
-else
 	set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,nbsp:␣
 endif
 
