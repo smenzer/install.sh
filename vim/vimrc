@@ -35,7 +35,7 @@ Plugin 'xsbeats/vim-blade'				" syntax highlighting for blade templates
 Plugin 'tpope/vim-fugitive'				" git integration - Gblame, Gstatus - :help fugitive
 Plugin 'bling/vim-airline'				" enhanced menu bar in the footer
 Plugin 'majutsushi/tagbar'				" needed to put current function in status bar; shows an outline of current files functions, classes, etc. - :Tagbar
-"Plugin 'vim-scripts/a.vim'				" :A to switch. quickly switch between source and header file.
+Plugin 'vim-scripts/a.vim'				" :A to switch. quickly switch between source and header file.
 Plugin 'ahw/vim-pbcopy'					" copy out of vim to the clipboard; set below to leader + y + y
 Plugin 'cdmedia/itg_flat_vim'			" Port of the Sublime Text theme itg.flat
 Plugin 'pangloss/vim-javascript'		" syntax and indenting for javascript
