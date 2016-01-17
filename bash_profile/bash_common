@@ -17,6 +17,9 @@ alias bp='vi ~/.bash_profile'
 alias ba='vi ~/.bash_aliases'
 alias sbp='source ~/.bash_profile'
 
+# quick access to local directories
+alias src='cd ~/src'
+
 # terminal commands
 alias ll='ls -laG --color'
 alias vi='vim'

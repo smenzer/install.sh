@@ -37,4 +37,4 @@ fi
 
 ##
 # add git dir to path
-export PATH=$PATH:/usr/libexec/git-core
+export PATH=$PATH:/usr/libexec/git-core:~/bin

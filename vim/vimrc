@@ -130,6 +130,7 @@ set wildignore+=*Zend*,.git,*bundles*,*.o,*.obj,*.so*
 set shortmess+=I
 set wrap
 set linebreak
+set showbreak=>\ \ \  " note trailing space at end of next line
 set mouse=a "press option+mouse to be able to copy out of terminal
 set backspace=indent,eol,start
 set scrolloff=6
@@ -210,6 +211,20 @@ noremap <C-w><down> 10<C-w>-
 "tabs
 "gt (next tab), gT (previous tab), {i}gt (tab in position i)
 nnoremap <leader>T	:tabnew<CR>
+
+"search for whitespace
+:nnoremap <silent> <F10> :let _s=@/<Bar>/\S\zs\s\+$<CR>:let @/=_s<Bar><CR>
+"automatically highlight whitespace in red
+highlight ExtraWhitespace ctermbg=red guibg=red
+:autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\S\zs\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\S\zs\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\S\zs\s\+$/
+"find spaces being used as tabs with a search: /^\t*\zs \+/
+
+"cleanup whitespace 
+:nnoremap <silent> <F11> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR> 
 """""""""""""""""""""""""""""""""""
 
 
@@ -244,6 +259,10 @@ let g:CommandTAcceptSelectionSplitMap = '<C-s>'
 let g:ycm_confirm_extra_conf = 0 " don't ask about loading the config
 
 "** ctags **
+"Ctrl+] to jump through to tag
+"g ] to get a list of tags to select
+"Ctrl+t to return back from tag
+"http://vim.wikia.com/wiki/Browsing_programs_with_tags
 map <silent> <F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 set tags+=./tags;$HOME
 
@@ -290,8 +309,6 @@ endif
 
 " set the hidden characters that we would want to show
 if version >= 704
-	set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
-else
 	set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,nbsp:␣
 endif
 
