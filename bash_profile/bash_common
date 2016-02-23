@@ -64,6 +64,7 @@ YELLOW="\[\033[0;33m\]"
 #export PS1="$WHITE[$GREEN\H$WHITE:$BTEAL\w$WHITE] [$BLUE\D{%F %T}$WHITE]$YELLOW\$(__git_ps1)\n\$$WHITE "
 export PS1="$WHITE[$GREEN\H$WHITE:$BTEAL\w$WHITE] [$BLUE\D{%F %T %Z}$WHITE]$YELLOW\$(__git_ps1)\n\$$WHITE "
 
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
 function fix_network() {
 	wifi_device="$(networksetup -listallnetworkservices | grep -Eo '(Wi-Fi|AirPort)')"
@@ -88,4 +89,3 @@ function fix_ssh() {
     fi
   done
 }
-
