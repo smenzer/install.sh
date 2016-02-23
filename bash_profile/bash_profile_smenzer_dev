@@ -35,4 +35,4 @@ fi
 
 ##
 # add git dir to path
-export PATH=$PATH:$HOME/bin
+export PATH=$PATH:$HOME/bin:$HOME/src/appnexus/tools_adserver/git

@@ -15,6 +15,10 @@ function re(){
 # quick access to bash files
 alias bp='vi ~/.bash_profile'
 alias ba='vi ~/.bash_aliases'
+alias sbp='source ~/.bash_profile'
+
+# quick access to local directories
+alias src='cd ~/src'
 
 # terminal commands
 alias ll='ls -laG --color'
@@ -28,7 +32,7 @@ alias kl='killall ssh-agent; killall ssh'
 
 # ssh
 alias gator='ssh -p 2222 smenzer@gator.menzer.org'
-alias kathie='ssh kathie@chicago.menzer.org'
+alias kathie='ssh -A -p 2222 kathie@chicago.menzer.org'
 
 # include .bash_aliases
 if [ -f ~/.bash_aliases ]; then
@@ -60,21 +64,21 @@ YELLOW="\[\033[0;33m\]"
 #export PS1="$WHITE[$GREEN\H$WHITE:$BTEAL\w$WHITE] [$BLUE\D{%F %T}$WHITE]$YELLOW\$(__git_ps1)\n\$$WHITE "
 export PS1="$WHITE[$GREEN\H$WHITE:$BTEAL\w$WHITE] [$BLUE\D{%F %T %Z}$WHITE]$YELLOW\$(__git_ps1)\n\$$WHITE "
 
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
-function cycle_wifi() {
-	device="$(networksetup -listallhardwareports | grep -E '(Wi-Fi|AirPort)' -A 1 | grep -o "en.")"
-	[[ "$(networksetup -getairportpower $device)" == *On ]] && val=off || val=on
-	networksetup -setairportpower $device $val
-}
-
-function fix_wifi() {
+function fix_network() {
 	wifi_device="$(networksetup -listallnetworkservices | grep -Eo '(Wi-Fi|AirPort)')"
-	ethernet_device="$(networksetup -listallnetworkservices | grep -Eo '(USB Ethernet)')"
+	ethernet_device="$(networksetup -listallnetworkservices | grep -Eo 'USB Ethernet|~\sEthernet')"
 
-	networksetup -setnetworkserviceenabled "$wifi_device" off
-	networksetup -setnetworkserviceenabled "$ethernet_device" off
-	networksetup -setnetworkserviceenabled "$wifi_device" on
-	networksetup -setnetworkserviceenabled "$ethernet_device" on
+	if [ ${#wifi_device} -ge 1 ]; then
+		networksetup -setnetworkserviceenabled "$wifi_device" off
+		networksetup -setnetworkserviceenabled "$wifi_device" on
+	fi
+
+	if [ ${#ethernet_device} -ge 1 ]; then
+		networksetup -setnetworkserviceenabled "$ethernet_device" off
+		networksetup -setnetworkserviceenabled "$ethernet_device" on
+	fi
 }
 
 function fix_ssh() {
@@ -85,4 +89,3 @@ function fix_ssh() {
     fi
   done
 }
-
