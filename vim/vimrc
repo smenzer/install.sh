@@ -25,13 +25,13 @@ Plugin 'gmarik/Vundle.vim'
 
 "Install plugins: Launch vim and run :PluginInstall
 "To install from command line: vim +PluginInstall +qall
-Plugin 'Valloric/MatchTagAlways'		" <Leader>+% to go to matching tag; requires python support
+"Plugin 'Valloric/MatchTagAlways'		" <Leader>+% to go to matching tag; requires python support
 "Plugin 'Valloric/YouCompleteMe'			" requires python support
 Plugin 'scrooloose/nerdtree'			" ctrl+c to open; shows dir structure
 Plugin 'smenzer/nerdcommenter'			" my version has some custom tweaks I like
 Plugin 'scrooloose/syntastic'			" checks syntax of current file
 Plugin 'xsbeats/vim-blade'				" syntax highlighting for blade templates
-Plugin 'tpope/vim-surround'				" easily change surroundings of a word or phrase - :help surround
+"Plugin 'tpope/vim-surround'				" easily change surroundings of a word or phrase - :help surround
 Plugin 'tpope/vim-fugitive'				" git integration - Gblame, Gstatus - :help fugitive
 Plugin 'bling/vim-airline'				" enhanced menu bar in the footer
 Plugin 'majutsushi/tagbar'				" needed to put current function in status bar; shows an outline of current files functions, classes, etc. - :Tagbar
@@ -40,7 +40,7 @@ Plugin 'ahw/vim-pbcopy'					" copy out of vim to the clipboard; set below to lea
 Plugin 'cdmedia/itg_flat_vim'			" Port of the Sublime Text theme itg.flat
 Plugin 'pangloss/vim-javascript'		" syntax and indenting for javascript
 Plugin 'kien/ctrlp.vim'					" ctrl+p to open; search and open files
-Plugin 'terryma/vim-expand-region'		" Press + to expand the visual selection and - to shrink it
+"Plugin 'terryma/vim-expand-region'		" Press + to expand the visual selection and - to shrink it
 "Plugin 'wincent/Command-T'				" <Leader>+t to open; search and open files - <C-v> open split vertical, <C-s> open split, <C-c> close
 Plugin 'JSON.vim'						" syntax highlighting for json
 Plugin 'phtml.vim'						" syntax highlight for phtml
