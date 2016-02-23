@@ -47,6 +47,7 @@ Plugin 'phtml.vim'						" syntax highlight for phtml
 Plugin 'airblade/vim-gitgutter'			" shows a git diff in the 'gutter'
 "Plugin 'tpope/vim-commentary' " duplicative of nerdcommenter; gc to comment/uncomment
 "Plugin 'ack.vim'
+Plugin 'tpope/vim-abolish'				" %S and use substituation like normal
 
 call vundle#end()            " required by vundle
 filetype plugin indent on    " required by vundle
