@@ -38,3 +38,5 @@ fi
 ##
 # add git dir to path
 export PATH=$PATH:/usr/libexec/git-core:~/bin
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
