@@ -44,6 +44,3 @@ export PATH=$HOME/bin:/opt/local/bin:/opt/local/sbin:$HOME/.rvm/bin:/usr/bin/mon
 ##
 # use latest java
 export JAVA_HOME="/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home"
-
-
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
