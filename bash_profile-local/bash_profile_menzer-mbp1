@@ -1,9 +1,0 @@
-##
-# include .bash_common
-if [ -f ~/.bash_common ]; then
-  source ~/.bash_common
-fi
-
-##
-## update path, include my git utils
-export PATH=$HOME/bin:/opt/local/bin:/opt/local/sbin:$HOME/.rvm/bin:/usr/bin/mongodb/bin:/usr/bin/pear:~/.composer/vendor/bin:/Applications/MAMP/bin/php/php5.6.10/bin:$HOME/src/github.com/smenzer/terminal/git/git-utils:$PATH
