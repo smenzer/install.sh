@@ -13,14 +13,10 @@ if [ -f /opt/local/etc/bash_completion ]; then
 fi
 
 ##
-# set prompt
-GREEN="\[\033[0;32m\]"
-TEAL="\[\033[00;36m\]"
-WHITE="\[\033[00m\]"
-RED="\[\033[0;31m\]"
-YELLOW="\[\033[0;33m\]"
-
-export PS1="$WHITE[$GREEN\H$WHITE] $TEAL\w$YELLOW\$(__git_ps1)$WHITE\$ "
+# Source global definitions
+#if [ -f /etc/bashrc ]; then
+#    . /etc/bashrc
+#fi
 
 ##
 # include .bash_common 
@@ -36,5 +32,15 @@ if [ -f ~/.api_wrapper ]; then
 fi
 
 ##
+# alias ack-grep to just ack
+if [ -f "/usr/bin/ack-grep" ]; then
+  alias ack="/usr/bin/ack-grep"
+fi
+
+##
 # add git dir to path
-export PATH=$PATH:/usr/libexec/git-core
+export PATH=$PATH:/usr/libexec/git-core:$HOME/bin:$HOME/src/github.com/smenzer/terminal/git/git-utils
+
+##
+# iterm2 shell integration
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
