@@ -45,8 +45,8 @@ ln -s ${target}/bash_profile/bash_profile_${machine} ~/.bash_profile
 echo "--[ Linking bash_common"
 ln -s ${target}/bash_profile/bash_common ~/.bash_common
 
-echo "--[ Creating .bash_aliases"
-touch ~/.bash_aliases
+echo "--[ Creating .bash_secrets"
+touch ~/.bash_secrets
 
 echo "--[ Linking tmux"
 ln -s ${target}/misc/tmux.conf ~/.tmux.conf
@@ -56,6 +56,9 @@ ln -s ${target}/misc/ackrc ~/.ackrc
 
 echo "--[ Linking git-prompt"
 ln -s ${target}/git/git-prompt.sh .git-prompt.sh
+
+echo "--[ Linking git-completion"
+ln -s ${target}/git/git-completion.bash .git-completion.bash
 
 echo "--[ Installing vim plugins"
 vim +PluginInstall +qall

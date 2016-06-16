@@ -238,7 +238,8 @@ nnoremap <leader>% :MtaJumpToOtherTag<cr>
 
 "** PBCopy **
 "map from cy to <leader>y
-map <leader>y cy<CR>
+map <leader>y cy
+let g:vim_pbcopy_host = "local"
 
 "** Vim Expand Region **
 "map expand regions
