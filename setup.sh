@@ -54,6 +54,9 @@ ln -s ${target}/misc/tmux.conf ~/.tmux.conf
 echo "--[ Linking ack"
 ln -s ${target}/misc/ackrc ~/.ackrc
 
+echo "--[ Linking vsqlrc"
+ln -s ${target}/misc/vsqlrc ~/.vsqlrc
+
 echo "--[ Linking git-prompt"
 ln -s ${target}/git/git-prompt.sh .git-prompt.sh
 
