@@ -60,6 +60,9 @@ ln -s ${target}/misc/vsqlrc ~/.vsqlrc
 echo "--[ Linking git-prompt"
 ln -s ${target}/git/git-prompt.sh .git-prompt.sh
 
+echo "--[ Linking git-completion"
+ln -s ${target}/git/git-completion.bash .git-completion.bash
+
 echo "--[ Installing vim plugins"
 vim +PluginInstall +qall
 
