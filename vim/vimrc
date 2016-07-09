@@ -33,7 +33,8 @@ Plugin 'scrooloose/syntastic'			" checks syntax of current file
 Plugin 'xsbeats/vim-blade'				" syntax highlighting for blade templates
 "Plugin 'tpope/vim-surround'				" easily change surroundings of a word or phrase - :help surround
 Plugin 'tpope/vim-fugitive'				" git integration - Gblame, Gstatus - :help fugitive
-Plugin 'bling/vim-airline'				" enhanced menu bar in the footer
+Plugin 'vim-airline/vim-airline'		" enhanced menu bar in the footer
+Plugin 'vim-airline/vim-airline-themes'	" airline themes
 Plugin 'majutsushi/tagbar'				" needed to put current function in status bar; shows an outline of current files functions, classes, etc. - :Tagbar
 Plugin 'vim-scripts/a.vim'				" :A to switch. quickly switch between source and header file.
 Plugin 'ahw/vim-pbcopy'					" copy out of vim to the clipboard; set below to leader + y + y
@@ -47,6 +48,8 @@ Plugin 'phtml.vim'						" syntax highlight for phtml
 Plugin 'airblade/vim-gitgutter'			" shows a git diff in the 'gutter'
 "Plugin 'tpope/vim-commentary' " duplicative of nerdcommenter; gc to comment/uncomment
 "Plugin 'ack.vim'
+Plugin 'tpope/vim-abolish'				" %S and use substituation like normal
+Plugin 'chrisbra/csv.vim'				" CSV file handling
 
 call vundle#end()            " required by vundle
 filetype plugin indent on    " required by vundle
@@ -167,6 +170,11 @@ map <leader>w :w<CR>
 "format entire file
 nnoremap <leader>f gg=G
 
+"commas to newlines
+map <leader>ccc :%s/,/\r/g<CR>
+"newlines to commas
+map <leader>nnn :%s/\n/,/g<CR>
+
 "Type 12<Enter> to go to line 12 (12G breaks my wrist)
 "Hit Enter to go to end of file.
 nnoremap <CR> G
@@ -199,6 +207,9 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+"easier buffer navigation
+nnoremap <leader>b :bnext<CR>
+
 "set all panes equal size
 map <leader>= <c-w>=
 
@@ -223,8 +234,8 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\S\zs\s\+$/
 "find spaces being used as tabs with a search: /^\t*\zs \+/
 
-"cleanup whitespace 
-:nnoremap <silent> <F11> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR> 
+"cleanup whitespace
+:nnoremap <silent> <F11> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 """""""""""""""""""""""""""""""""""
 
 
@@ -237,7 +248,8 @@ nnoremap <leader>% :MtaJumpToOtherTag<cr>
 
 "** PBCopy **
 "map from cy to <leader>y
-map <leader>y cy<CR>
+map <leader>y cy
+let g:vim_pbcopy_host = "local"
 
 "** Vim Expand Region **
 "map expand regions
@@ -325,6 +337,31 @@ let g:airline_theme='molokai'
 
 "enable tabline at the top
 let g:airline#extensions#tabline#enabled = 1
+
+"show the tab number next to tabs
+let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
+
+"don't check for whitespace issues by default; toggle with :AirlineToggleWhitespace
+let g:airline#extensions#whitespace#enabled = 0
+
+"remove section y because it's annoying an takes up space
+let g:airline#extensions#default#layout = [
+			\ [ 'a', 'b', 'c' ],
+			\ [ 'x', 'z', 'warning' ]
+			\ ]
+
+"control which sections get truncated and at what width.
+let g:airline#extensions#default#section_truncate_width = {
+			\ 'b': 79,
+			\ 'x': 60,
+			\ 'y': 88,
+			\ 'z': 45,
+			\ }
+
+"enable csv plugin and use the column name
+let g:airline#extensions#csv#enabled = 1
+let g:airline#extensions#csv#column_display = 'Name'
+
 
 "Optionally configure individual sections
 "let g:airline_section_b = '%f %{fugitive#statusline()} %h%m%r%w' " path/filename, help flag, modified flag, readonly flag, preview flag

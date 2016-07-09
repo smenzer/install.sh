@@ -34,6 +34,9 @@ rm ~/.tmux.conf
 echo "--[ Uninstalling ack"
 rm ~/.ackrc
 
+echo "--[ Uninstalling vsqlrc"
+rm ~/.vsqlrc
+
 echo "--[ Uninstalling git-prompt"
 rm ~/.git-prompt.sh
 
