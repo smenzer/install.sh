@@ -6,7 +6,7 @@
 	email = smenzer@gmail.com
 	name = Scott Menzer
 [core]
-	excludesfile = ~/.gitignore_global
+	excludesfile = /Users/scott/.gitignore_global
 	editor = vim
 [color]
 	ui = true
@@ -18,9 +18,11 @@
 
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+	path =
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [push]
 	default = simple
+[commit]
+	template = /Users/scott/.stCommitMsg
