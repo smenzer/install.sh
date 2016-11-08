@@ -66,16 +66,10 @@ ln -s ${target}/git/git-completion.bash .git-completion.bash
 echo "--[ Installing vim plugins"
 vim +PluginInstall +qall
 
-echo "--[ Command-T setup"
-pushd ${target}/vim/bundle/Command-T/ruby/command-t/
-ruby extconf.rb
-make
-popd
-
-echo "--[ YouCompleteMe setup"
-pushd ${target}/vim/bundle/YouCompleteMe/
-sh ./install.sh --clang-completer
-popd
+#echo "--[ YouCompleteMe setup"
+#pushd ${target}/vim/bundle/YouCompleteMe/
+#sh ./install.sh --clang-completer
+#popd
 
 echo "--[ Installing iTerm2 shell integration"
 curl -L https://iterm2.com/misc/install_shell_integration.sh | bash
