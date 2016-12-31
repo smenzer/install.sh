@@ -4,6 +4,9 @@
 --type-add=html=.haml,.html.erb,.html.haml
 --type-add=js=.js.erb,.coffee
 
+# files to ignore by default
+--ignore-file=is:tags
+
 # directories to ignore by default
 --ignore-dir=vendor
 --ignore-dir=log
