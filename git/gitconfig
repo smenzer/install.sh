@@ -25,3 +25,5 @@
 	trustExitCode = true
 [push]
 	default = simple
+[commit]
+	template = ~/.stCommitMsg
