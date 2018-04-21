@@ -1,9 +1,12 @@
-###Configuration for terminal
+### Configuration for terminal
 
 **Includes vim (with plugins), screen, ack, and tmux settings**
 
-####Installation
-to install, run the following command:
+#### Installation
+
+_Before installing, ensure the machine has an ssh public key already created and that key is stored in your **GitHub** and **BitBucket** (or wherever your bash profiles are stored) profiles_
+
+To install, run the following command:
 ```bash
 bash <(curl -SsL https://raw.github.com/smenzer/terminal/master/setup.sh)
 ```
@@ -14,11 +17,9 @@ bash <(curl -SsL https://raw.github.com/smenzer/terminal/master/setup.sh)
 **target**
 : is the directory to install the source code to (it will be placed inside a directory called `terminal` in whatever you set as the target directory).  it will default to ~/src/github.com/smenzer/ if you don't specify a target
 
-_before installing, ensure the machine has an ssh public key already created and that key is stored in your github and bitbucket (or wherever your bash profiles are stored) profiles_
 
-
-####Uninstallation
-to uninstall, run the following command:
+#### Uninstallation
+To uninstall, run the following command:
 ```bash
 bash <(curl -SsL https://raw.github.com/smenzer/terminal/master/uninstall.sh)
 ```
