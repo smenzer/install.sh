@@ -3,10 +3,10 @@
 	SizeLimit = 100m
 	threads = 1
 [user]
-	email = smenzer@gmail.com
+	email = smenzer@id5.io
 	name = Scott Menzer
 [core]
-	excludesfile = ~/.gitignore_global
+	excludesfile = /Users/scott/.gitignore_global
 	editor = vim
 [color]
 	ui = true
@@ -21,7 +21,7 @@
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
 [mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [push]
 	default = simple
