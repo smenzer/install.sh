@@ -22,7 +22,7 @@ fi
 target="${target}/terminal"
 
 echo "--[ Cloning repo from ${repo}"
-# git clone ${repo} ${target}
+git clone ${repo} ${target}
 
 cd ${target}
 bash ./setup.sh -m ${machine} -t ${target}
