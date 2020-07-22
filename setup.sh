@@ -2,7 +2,7 @@
 # usage: bash <(curl -SsL https://raw.githubusercontent.com/smenzer/terminal-setup/master/setup.sh)
 
 repo_default="git@github.com:smenzer/terminal.git"
-target_default="${HOME}/src/github.com/smenzer/terminal"
+target_default="${HOME}/src/github.com/smenzer"
 
 # get repo
 read -r -p "Enter the repo to pull from (hit Enter to use the default \"${repo_default}\"): " repo
