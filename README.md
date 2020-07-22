@@ -1,15 +1,17 @@
 ### Configuration for terminal
 
-**Includes vim (with plugins), screen, ack, and tmux settings**
+**Includes git, bash, zsh, iterm2, vim (with plugins), screen, ack, and tmux settings**
 
 #### Installation
 
-_Before installing, ensure the machine has an ssh public key already created and that key is stored in your **GitHub** and **BitBucket** (or wherever your bash profiles are stored) profiles_
+_Before installing, ensure the machine has an ssh public key already created and that key is stored in your **GitHub** / **BitBucket** (or wherever your main terminal repo is stored) _
 
 To install, run the following command:
 ```bash
 bash <(curl -SsL https://raw.github.com/smenzer/terminal/master/setup.sh)
 ```
+**repo**
+: is the location of the main terminal repo to clone. defaults to git@github.com:smenzer/dotfiles.git, but you can override
 
 **machine**
 : is the name that will be used to create a unique bash profile.  it will default to the machine hostname if not specified
