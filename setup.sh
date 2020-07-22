@@ -1,8 +1,14 @@
 #!/bin/bash
-# usage: bash <(curl -SsL https://raw.github.com/smenzer/terminal/master/setup.sh)
+# usage: bash <(curl -SsL https://raw.githubusercontent.com/smenzer/terminal-setup/master/setup.sh)
 
-repo="git@bitbucket.org:smenzer/terminal.git"
-target_default="${HOME}/src/bitbucket.org"
+repo_default="git@github.com:smenzer/terminal.git"
+target_default="${HOME}/src/github.com/smenzer/terminal"
+
+# get repo
+read -r -p "Enter the repo to pull from (hit Enter to use the default \"${repo_default}\"): " repo
+if [ ! "${repo}" ]; then
+    repo=${repo_default}
+fi
 
 # get machine name
 read -r -p "Enter the machine name (hit Enter to use the default \"$(hostname)\"): " machine
@@ -21,8 +27,10 @@ fi
 # we don't want to create the terminal directory because git clone will do that for us
 target="${target}/terminal"
 
+# clone the main repo
 echo "--[ Cloning repo from ${repo}"
 git clone ${repo} ${target}
 
+# run the setup script from the main repo
 cd ${target}
 bash ./setup.sh -m ${machine} -t ${target}

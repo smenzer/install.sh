@@ -1,7 +1,7 @@
 #!/bin/bash
-# usage: bash <(curl -SsL https://raw.github.com/smenzer/terminal/master/uninstall.sh)
+# usage: bash <(curl -SsL https://raw.githubusercontent.com/smenzer/terminal-setup/master/uninstall.sh)
 
-target_default="${HOME}/src/bitbucket.org"
+target_default="${HOME}/src/github.com/smenzer/terminal"
 
 # get target directory
 read -r -p "Enter the location of the \"terminal\" directory (hit Enter to use the default \"${target_default}\"): " target
