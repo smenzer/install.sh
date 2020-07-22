@@ -28,7 +28,7 @@ fi
 target="${target}/terminal"
 
 # clone the main repo
-echo "--[ Cloning repo from ${repo}"
+echo "--[ Cloning repo from ${repo} into ${target}"
 git clone ${repo} ${target}
 
 # run the setup script from the main repo
