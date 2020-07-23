@@ -4,7 +4,7 @@
 
 #### Installation
 
-_Before installing, ensure the machine has an ssh public key already created and that key is stored in your **GitHub** / **BitBucket** (or wherever your main terminal repo is stored) _
+_Before installing, ensure the machine has an ssh public key already created and that key is stored in your **GitHub** / **BitBucket** (or wherever your main terminal repo is stored)_
 
 To install, run the following command:
 ```bash
