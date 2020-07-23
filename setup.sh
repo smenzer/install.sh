@@ -17,7 +17,7 @@ if [ ! "${machine}" ]; then
 fi
 
 # get target directory
-read -r -p "Enter the target directory to place \"terminal\" in (hit Enter to use the default \"${target_default}\"): " target
+read -r -p "Enter the parent directory to place the \"terminal\" repository in (hit Enter to use the default \"${target_default}\"): " target
 if [ ! "${target}" ]; then
 	target=${target_default}
 fi
