@@ -1,5 +1,5 @@
 #!/bin/bash
-# usage: bash <(curl -SsL https://raw.githubusercontent.com/smenzer/terminal-setup/master/setup.sh)
+# usage: bash <(curl -SsL https://raw.githubusercontent.com/smenzer/terminal-setup/master/install.sh)
 
 repo_default="git@github.com:smenzer/terminal.git"
 target_default="${HOME}/src/github.com/smenzer"
@@ -33,4 +33,4 @@ git clone ${repo} ${target}
 
 # run the setup script from the main repo
 cd ${target}
-bash ./setup.sh -m ${machine} -t ${target}
+bash ./install.sh -m ${machine} -t ${target}
