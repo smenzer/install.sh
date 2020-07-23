@@ -17,7 +17,7 @@ bash <(curl -SsL https://raw.githubusercontent.com/smenzer/terminal-setup/master
 : is the name that will be used to create a unique bash profile.  it will default to the machine hostname if not specified
 
 **target**
-: is the directory to install the source code to (it will be placed inside a directory called `terminal` in whatever you set as the target directory).  it will default to `~/src/github.com/smenzer/`` if you don't specify a target
+: is the directory to install the source code to (it will be placed inside a directory called `terminal` in whatever you set as the target directory).  it will default to `~/src/github.com/smenzer/` if you don't specify a target
 
 
 #### Uninstallation
