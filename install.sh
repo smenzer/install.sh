@@ -686,6 +686,7 @@ if [[ is_mac ]]; then
     # gulp cli
     print_subaction 'Installing gulp...'
     if ! is_command gulp; then
+        # TODO npm isn't found if it was just installed (since we haven't sourced and set the updated PATH)
         run 'npm install --global gulp-cli'
     else
         print_skipped
@@ -714,7 +715,7 @@ if [[ is_mac ]]; then
     ## OTHER REPOS
     #####
     print_section 'OTHER REPOS'
-
+    export GIT_PATH="${GIT_PATH}"
     declare -a repos=(
         'git@github.com:smenzer/tools-and-scripts.git'
     )
