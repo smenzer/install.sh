@@ -1,30 +1,32 @@
-### Configuration for terminal
+# Install.sh
+Everything needed to set up a new machine...Mac or a server
 
-**Includes git, bash, zsh, iterm2, vim (with plugins), screen, ack, and tmux settings**
+## Usage
+_Before installing, ensure the machine has an ssh public key already created and that key is stored in **GitHub**_
 
-#### Installation
-
-_Before installing, ensure the machine has an ssh public key already created and that key is stored in your **GitHub** / **BitBucket** (or wherever your main terminal repo is stored)_
-
-To install, run the following command:
-```bash
-bash <(curl -SsL https://raw.githubusercontent.com/smenzer/terminal-setup/master/install.sh)
+Open up a terminal and execute the following line:
+```shell
+zsh <(curl -SsL https://raw.githubusercontent.com/smenzer/terminal-setup/master/install.sh)
 ```
-**repo**
-: is the location of the main terminal repo to clone. defaults to `git@github.com:smenzer/terminal.git`, but you can override during setup
+### Inputs
+It will ask you for a few inputs at the beginning of execution
+* `sudo` password: this is to avoid asking during the installation for any items that require it
+* the machine name: this will be used for zsh / bash profiles, git configuration templates, etc. that will live in the [terminal](https://github.com/smenzer/terminal) repo
+* your email: this will be used to set the default git commit email address on the machine
 
-**machine**
-: is the name that will be used to create a unique bash profile.  it will default to the machine hostname if not specified
+### Example Output
+![Example output](example.png)
 
-**target**
-: is the directory to install the source code to (it will be placed inside a directory called `terminal` in whatever you set as the target directory).  it will default to `~/src/github.com/smenzer/` if you don't specify a target
+## What does install.sh do?
 
+Allows installation of (pretty much) everything required for a new machine. Includes git, bash, zsh, iterm2, vim (with plugins), screen, ack, and tmux settings for terminal setup, and for Mac's it also installs common applications, configurations, fonts, and more.
 
-#### Uninstallation
-To uninstall, run the following command:
-```bash
-bash <(curl -SsL https://raw.githubusercontent.com/smenzer/terminal-setup/master/uninstall.sh)
-```
+Everything can be configured by editing the `install.sh` script to meet your changing needs. The core of install.sh is based on [X99's reinstall.sh](https://gitlab.com/X99/reinstall.sh), so take a look there for details on how to tweak things to your own liking.
 
-**target**
-: is the directory the source code was originally installed to.  it will default to `~/src/github.com/smenzer/terminal` if you don't specify a target
+## Credits
+Inspired by [X99's reinstall.sh](https://gitlab.com/X99/reinstall.sh) project
+
+## Licence
+![CC](https://mirrors.creativecommons.org/presskit/icons/cc.svg) ![BY](https://mirrors.creativecommons.org/presskit/icons/by.svg) ![SA](https://mirrors.creativecommons.org/presskit/icons/sa.svg)
+
+This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
