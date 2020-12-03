@@ -410,7 +410,7 @@ if [[ is_mac ]]; then
     fi
 
     ## Install Homebrew cask
-    print_action "Installing Homebrew Cask"
+    print_action "Installing Homebrew Cask..."
     run 'brew tap homebrew/cask'
 
     ## Install Homebrew cask upgrade
