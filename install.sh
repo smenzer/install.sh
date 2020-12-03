@@ -428,7 +428,6 @@ if [[ is_mac ]]; then
         "autojump" # move to directories with "j term"
         "gh" # github cli
         "python3" # python
-
         "thefuck" # correct errors in previous commands
         "dockutil" # Tool for managing dock items
         "speedtest-cli" # run speed tests from the commandline
@@ -485,11 +484,11 @@ if [[ is_mac ]]; then
     )
     for app in "${apps[@]}"; do
         print_subaction "Installing ${app}..."
-        # if [ $(brew list --cask | grep "$app" ) ]; then
-        #     print_skipped
-        # else
-        #     run 'brew cask install "$app" --force'
-        # fi
+        if [ $(brew list --cask | grep "$app" ) ]; then
+            print_skipped
+        else
+            run 'brew cask install "$app" --force'
+        fi
     done
 
     ## Install apps that need password
@@ -510,7 +509,6 @@ if [[ is_mac ]]; then
     print_action "Installing App Store apps"
     declare -a macapps=(
         "meeter"
-        # "paprika"
     )
     for macapp in "${macapps[@]}"; do
         print_subaction "Installing ${macapp}..."
@@ -547,7 +545,7 @@ if [[ is_mac ]]; then
     )
     for font in "${fonts[@]}"; do
         print_subaction "Installing ${font}..."
-        # run 'brew cask install "$font"'
+        run 'brew cask install "$font"'
     done
 
     ## Custom fonts
@@ -676,16 +674,8 @@ if [[ is_mac ]]; then
     print_action 'Installing XCode CLI...'
     run 'xcode-select --install'
 
-    ## NVM / Node.js / Gulp
-    print_action 'Installing NVM / Node.js / Gulp'
-
-    # # nvm
-    # print_subaction 'Installing nvm v0.37.2...'
-    # if ! is_command nvm; then
-    #     run 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash'
-    # else
-    #     print_skipped
-    # fi
+    ## Node.js / Gulp
+    print_action 'Installing Node.js / Gulp'
 
     # node.js
     print_subaction 'Installing node.js v12...'
@@ -754,19 +744,20 @@ if [[ is_mac ]]; then
     print_subaction "Re-enabling quarantine..."
     run 'defaults write com.apple.LaunchServices LSQuarantine -bool YES'
 
-    complete_message='Mac installation complete'
+    complete_message='Mac'
 else
     print_action 'Cleaning up Server...'
     run 'TRUE' # just to get a nice checkbox until there's something to actually do here
 
-    complete_message='Server installation complete'
+    complete_message='Server'
 fi
 
 end=$(date +%s)
 runtime=$((end-start))
 
-printf "\n\n\nDone in %s! Have fun!\n\n\n\n" "$(print_seconds ${runtime})"
-# say -v Moira "${complete_message}"
+printf "\n\nDone in %s! Have fun!\n\n" "$(print_seconds ${runtime})"
+printf -v complete_message "%s" "${complete_message}installation terminé! Bon journée"
+say -v Thomas "${complete_message}"
 
 # restart zsh to get terminal settings applied
 exec zsh
