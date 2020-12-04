@@ -519,6 +519,7 @@ if [[ is_mac ]]; then
     print_action "Opening apps"
     declare -a apps_to_open=(
         "/Applications/Alfred 4.app"
+        "/Applications/Caffeine.app"
         "/Applications/Dropbox.app"
     )
     for app in "${apps_to_open[@]}"; do
@@ -649,11 +650,11 @@ if [[ is_mac ]]; then
     sublime_path="$HOME/Library/Application Support/Sublime Text 3/Packages/User/"
     dropbox_path="$HOME/Dropbox/Apps and Dev/Sublime/User/"
     if [ -d ${dropbox_path} ]; then
-        run "rm -r \"${sublime_path}\""
+        run "rm -rf \"${sublime_path}\""
         run "ln -sf \"${dropbox_path}\" \"${sublime_path}\""
     else
         print_error
-        error_log "symlink sublime text settings" "${dropbox_path} does not exist! Manually execute the symlink to ${sublime_path}"
+        error_log "symlink sublime text settings" "${dropbox_path} does not exist! Manually run: ln -sf \"${dropbox_path}\" \"${sublime_path}\""
     fi
 
     #####
