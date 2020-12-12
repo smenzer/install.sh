@@ -487,7 +487,7 @@ if [[ is_mac ]]; then
         if [ $(brew list --cask | grep "$app" ) ]; then
             print_skipped
         else
-            run 'brew cask install "$app" --force'
+            run 'brew install --cask "$app" --force'
         fi
     done
 
@@ -501,7 +501,7 @@ if [[ is_mac ]]; then
         if [ $(brew list --cask | grep "$app" ) ]; then
             print_skipped
         else
-            run 'echo $pw | brew cask install "$app"'
+            run 'echo $pw | brew install --cask "$app"'
         fi
     done
 
@@ -546,7 +546,7 @@ if [[ is_mac ]]; then
     )
     for font in "${fonts[@]}"; do
         print_subaction "Installing ${font}..."
-        run 'brew cask install "$font"'
+        run 'brew install --cask "$font"'
     done
 
     ## Custom fonts
