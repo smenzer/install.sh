@@ -646,16 +646,12 @@ if [[ is_mac ]]; then
     ## Sublime text
     ## source: https://packagecontrol.io/docs/syncing#dropbox-osx
     print_action "Setting Sublime Text syncing..."
-
-    sublime_path="$HOME/Library/Application Support/Sublime Text 3/Packages/User/"
-    dropbox_path="$HOME/Dropbox/Apps and Dev/Sublime/User/"
-    if [ -d ${dropbox_path} ]; then
-        run "rm -rf \"${sublime_path}\""
-        run "ln -sf \"${dropbox_path}\" \"${sublime_path}\""
-    else
-        print_error
-        error_log "symlink sublime text settings" "${dropbox_path} does not exist! Manually run: ln -sf \"${dropbox_path}\" \"${sublime_path}\""
-    fi
+    sublime_path="$HOME/Library/Application Support/Sublime Text 3/Packages"
+    dropbox_path="$HOME/Dropbox/Apps and Dev/Sublime/User"
+    pushd ${sublime_path} >/dev/null
+    run "rm -r User"
+    run "ln -s ${dropbox_path}"
+    popd >/dev/null
 
     #####
     ## DEV ENVIRONMENT
