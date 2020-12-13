@@ -437,6 +437,7 @@ if [[ is_mac ]]; then
         "switchaudio-osx" # change macOS audio source from the command-line
         "duti" # select default apps for documents and URL schemes
         "svn" # required for some fonts, and probably other things
+        "docker" # docker for mac
     )
     for tool in "${tools[@]}"; do
         print_subaction "Installing $tool..."
@@ -472,6 +473,7 @@ if [[ is_mac ]]; then
         "vlc" # play all videos
         "gpg-suite" # encryption
         "dbeaver-community" # ui for db
+        "adoptopenjdk8" # jdk required for dbeaver
         "osxfuse" # mount remote drives
         "nordvpn" # vpn
         "whatsapp" # whatsapp for desktop
@@ -521,6 +523,7 @@ if [[ is_mac ]]; then
         "/Applications/Alfred 4.app"
         "/Applications/Caffeine.app"
         "/Applications/Dropbox.app"
+        "/Applications/Divvy.app"
     )
     for app in "${apps_to_open[@]}"; do
         print_subaction "Opening ${app}..."
