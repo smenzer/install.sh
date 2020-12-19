@@ -440,7 +440,7 @@ if [[ is_mac ]]; then
         "docker" # docker for mac
     )
     for tool in "${tools[@]}"; do
-        print_subaction "Installing $tool..."
+        print_subaction "$tool..."
         if ! is_command "$tool"; then
             run 'brew install "$tool"'
         else
@@ -485,7 +485,7 @@ if [[ is_mac ]]; then
         "runjs" # javascript playground
     )
     for app in "${apps[@]}"; do
-        print_subaction "Installing ${app}..."
+        print_subaction "${app}..."
         if [ $(brew list --cask | grep "$app" ) ]; then
             print_skipped
         else
@@ -499,7 +499,7 @@ if [[ is_mac ]]; then
         "microsoft-teams"
     )
     for app in "${apps[@]}"; do
-        print_subaction "Installing ${app}..."
+        print_subaction "${app}..."
         if [ $(brew list --cask | grep "$app" ) ]; then
             print_skipped
         else
@@ -513,7 +513,7 @@ if [[ is_mac ]]; then
         "meeter"
     )
     for macapp in "${macapps[@]}"; do
-        print_subaction "Installing ${macapp}..."
+        print_subaction "${macapp}..."
         run 'mas lucky "$macapp"'
     done
 
@@ -526,7 +526,7 @@ if [[ is_mac ]]; then
         "/Applications/Divvy.app"
     )
     for app in "${apps_to_open[@]}"; do
-        print_subaction "Opening ${app}..."
+        print_subaction "${app}..."
         run 'open "$app"'
     done
 
@@ -548,7 +548,7 @@ if [[ is_mac ]]; then
         "font-montserrat"
     )
     for font in "${fonts[@]}"; do
-        print_subaction "Installing ${font}..."
+        print_subaction "${font}..."
         run 'brew install --cask "$font"'
     done
 
@@ -649,8 +649,8 @@ if [[ is_mac ]]; then
     ## Sublime text
     ## source: https://packagecontrol.io/docs/syncing#dropbox-osx
     print_action "Setting Sublime Text syncing..."
-    sublime_path="$HOME/Library/Application Support/Sublime Text 3/Packages"
-    dropbox_path="$HOME/Dropbox/Apps and Dev/Sublime/User"
+    sublime_path="$HOME/Library/Application Support/Sublime\ Text\ 3/Packages"
+    dropbox_path="$HOME/Dropbox/Apps\ and\ Dev/Sublime/User"
     pushd ${sublime_path} >/dev/null
     run "rm -r User"
     run "ln -s ${dropbox_path}"
@@ -720,7 +720,7 @@ if [[ is_mac ]]; then
         'git@github.com:smenzer/tools-and-scripts.git'
     )
     for repo in "${repos[@]}"; do
-        print_action "Installing ${repo}..."
+        print_action "${repo}..."
         run "git-get ${repo}"
     done
 
