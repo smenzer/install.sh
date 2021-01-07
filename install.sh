@@ -134,7 +134,6 @@ ask_for_machine_name() {
         default=$(hostname)
     fi
     printf "2) What should we call this machine?\n   This will be used for dotfile configuration file names.\n\nHit Enter to use the default: ${green}${default}${reset}\n"
-    # printf '\n\nMachine name\n'
     read 'input_machine?> '
     if [ ! "${input_machine}" ]; then
         machine_name=${default}
@@ -169,6 +168,20 @@ ask_for_machine_email() {
     printf '\n'
 }
 
+# sets a flag for whether this is a work computer or not
+# work laptops get extra software installed
+#
+# stores value in ${is_work}
+ask_for_is_work() {
+    printf '4) Is this Mac used for work? [y/n]'
+    printf "\n\nHit Enter to use the default: ${green}no${reset}\n"
+    if confirm '>'; then
+        is_work=true
+    else
+        is_work=false
+    fi
+}
+
 # whether the machine is a Mac or not
 # needed to segregate mac-specific actions
 is_mac() {
@@ -200,10 +213,6 @@ else
 fi
 echo "${reset}"
 
-# Asks for user confirmation
-confirm "This script will install all of your stuff. Continue? [y/n]" || exit
-printf '\n\n'
-
 if is_command caffeinate; then
   # prevent system from sleeping on macs
   caffeinate -s -w $$ &
@@ -216,6 +225,12 @@ fi
 ask_for_sudo_password
 ask_for_machine_name
 ask_for_machine_email
+ask_for_is_work
+
+# Asks for user confirmation
+printf '\n----------------------------------------------------------------------------\n\n'
+confirm "This script will install all of your stuff. Are you ready to continue? [y/n]" || exit
+printf '\n\n'
 
 printf "OK, now sit back and relax, this is going to take a while ☕️\n"
 printf "\n%s%s%s" "${bold}${orange_bg}${black}" " BEGINNING INSTALL OF ${machine_name} " "${reset}"
@@ -409,13 +424,26 @@ if [[ is_mac ]]; then
         print_skipped
     fi
 
-    ## Install Homebrew cask
-    print_action "Installing Homebrew Cask..."
-    run 'brew tap homebrew/cask'
+    ## store installed brew info so we don't have to repeated ask for it
+    brew_taps=$(brew tap)
+    brew_formulae=$(brew list --formula -1)
+    brew_casks=$(brew list --cask -1)
 
-    ## Install Homebrew cask upgrade
-    print_action "Installing Homebrew Cask Upgrade..."
-    run 'brew tap buo/cask-upgrade'
+    ## Brew Tap
+    print_action "Tapping Brews..."
+    declare -a taps=(
+        'homebrew/cask' # homebrew cask
+        'buo/cask-upgrade' # update casks easier (brew cu)
+        'homebrew/cask-fonts' # fonts
+    )
+    for tap in "${taps[@]}"; do
+        print_subaction "${tap}..."
+        if [ $(echo $brew_taps | grep -x "$tap" ) ]; then
+            print_skipped
+        else
+            run 'brew tap "$tap"'
+        fi
+    done
 
     ## CLI Tools
     print_action "Installing CLI tools"
@@ -437,16 +465,40 @@ if [[ is_mac ]]; then
         "switchaudio-osx" # change macOS audio source from the command-line
         "duti" # select default apps for documents and URL schemes
         "svn" # required for some fonts, and probably other things
-        "docker" # docker for mac
+        "docker" # docker containers
     )
     for tool in "${tools[@]}"; do
         print_subaction "$tool..."
         if ! is_command "$tool"; then
-            run 'brew install "$tool"'
+            if [ $(echo $brew_formulae | grep -x "$tool" ) ]; then
+                print_skipped
+            else
+                run 'brew install "$tool" --no-quarantine'
+            fi
         else
             print_skipped
         fi
     done
+
+    if [ ${is_work} = true ]; then
+        ## Work-specific CLI Tools
+        print_action "Installing Work-specific CLI tools"
+        declare -a tools=(
+
+        )
+        for tool in "${tools[@]}"; do
+            print_subaction "$tool..."
+            if ! is_command "$tool"; then
+                if [ $(echo $brew_formulae | grep -x "$tool" ) ]; then
+                    print_skipped
+                else
+                    run 'brew install "$tool" --no-quarantine'
+                fi
+            else
+                print_skipped
+            fi
+        done
+    fi
 
     ## Python3
     print_action "Installing Python packages..."
@@ -455,57 +507,98 @@ if [[ is_mac ]]; then
     ## Install apps via brew...
     print_action "Installing brew apps..."
     declare -a apps=(
-        "iterm2" # terminal
-        "alfred" # command / app launcher
-        "visual-studio-code" # ide
-        "sourcetree" # source control ui
-        "postman" # http request ui for api dev
-        "slack" # messaging platform
-        "google-chrome" # primary browser
-        "dropbox" # cloud files
         "1password" # password manager
+        "adobe-creative-cloud" # adobe apps
+        "adoptopenjdk8" # jdk required for dbeaver
+        "alfred" # command / app launcher
+        "angry-ip-scanner" # network scanner
+        "appcleaner" # delete all extra files from an app
+        "caffeine" # prevent sleep
+        "cheatsheet" # hold ⌘ in an app to see all shortcuts
+        "dbeaver-community" # ui for db
         "divvy" # window management
-        "sublime-text" # text editor
+        "docker" # mac ui for docker containers
+        "dropbox" # cloud files
+        "google-chrome" # primary browser
+        "gpg-suite" # encryption
+        "hiddenbar" # hide some menu bar items
+        "intel-power-gadget" # detailed analytics for intel processor; needed for istat menus
+        "istat-menus" # menu bar stats
+        "iterm2" # terminal
+        "macdown" # markdown editor
+        "ngrok" # share dev site externally and (optionally) with https
+        "nordvpn" # vpn
+        "osxfuse" # mount remote drives
+        "postman" # http request ui for api dev
+        "runjs" # javascript playground
+        "slack" # messaging platform
+        "sourcetree" # source control ui
         "spotify" # music
         "spotmenu" # spotify menu bar
-        "adobe-creative-cloud" # adobe apps
-        "caffeine" # prevent sleep
-        "vlc" # play all videos
-        "gpg-suite" # encryption
-        "dbeaver-community" # ui for db
-        "adoptopenjdk8" # jdk required for dbeaver
-        "osxfuse" # mount remote drives
-        "nordvpn" # vpn
-        "whatsapp" # whatsapp for desktop
-        "virtualbox" # virtual machines
+        "sublime-text" # text editor
         "vagrant" # dev environment for laravel
-        "cheatsheet" # hold ⌘ in an app to see all shortcuts
-        "appcleaner" # delete all extra files from an app
-        "angry-ip-scanner" # network scanner
-        "runjs" # javascript playground
+        "virtualbox" # virtual machines
+        "visual-studio-code" # ide
+        "vlc" # play all videos
+        "whatsapp" # whatsapp for desktop
     )
     for app in "${apps[@]}"; do
         print_subaction "${app}..."
-        if [ $(brew list --cask | grep "$app" ) ]; then
+        if [ $(echo $brew_casks | grep -x "$app" ) ]; then
             print_skipped
         else
-            run 'brew install --cask "$app" --force'
+            run 'brew install --cask "$app" --force --no-quarantine'
         fi
     done
 
     ## Install apps that need password
     print_action "Installing apps with password..."
     declare -a apps=(
-        "microsoft-teams"
+
     )
     for app in "${apps[@]}"; do
         print_subaction "${app}..."
-        if [ $(brew list --cask | grep "$app" ) ]; then
+        if [ $(echo $brew_casks | grep -x "$app" ) ]; then
             print_skipped
         else
-            run 'echo $pw | brew install --cask "$app"'
+            run 'echo $pw | brew install --cask "$app" --no-quarantine'
         fi
     done
+
+    if [ ${is_work} = true ]; then
+        ## Install Work-specific apps via brew...
+        print_action "Installing Work-specific brew apps..."
+        declare -a apps=(
+            "adoptopenjdk" # latest jdk
+            "cyberduck" # ftp gui
+            "drawio" # ui for diagrams.net tool
+            "firefox" # alternate browser
+            "intellij-idea" # ide for java
+        )
+        for app in "${apps[@]}"; do
+            print_subaction "${app}..."
+            if [ $(echo $brew_casks | grep -x "$app" ) ]; then
+                print_skipped
+            else
+                run 'brew install --cask "$app" --force --no-quarantine'
+            fi
+        done
+
+        ## Install Work-specific apps that need password
+        print_action "Installing Work-specific apps with password..."
+        declare -a apps=(
+            "microsoft-teams"
+            "zoom"
+        )
+        for app in "${apps[@]}"; do
+            print_subaction "${app}..."
+            if [ $(echo $brew_casks | grep -x "$app" ) ]; then
+                print_skipped
+            else
+                run 'echo $pw | brew install --cask "$app" --no-quarantine'
+            fi
+        done
+    fi
 
     ## App Store apps
     print_action "Installing App Store apps"
@@ -537,7 +630,6 @@ if [[ is_mac ]]; then
 
     ## Brew fonts
     print_action 'Installing brew fonts...'
-    run 'brew tap homebrew/cask-fonts'
     declare -a fonts=(
         "font-meslo-lg-nerd-font"
         "font-meslo-for-powerline"
@@ -549,7 +641,11 @@ if [[ is_mac ]]; then
     )
     for font in "${fonts[@]}"; do
         print_subaction "${font}..."
-        run 'brew install --cask "$font"'
+        if [ $(echo $brew_casks | grep -x "$font" ) ]; then
+            print_skipped
+        else
+            run 'brew install --cask "$font" --no-quarantine'
+        fi
     done
 
     ## Custom fonts
@@ -573,7 +669,6 @@ if [[ is_mac ]]; then
     print_subaction "Apps..."
     declare -a dockapps=(
         # declare from bottom to top of dock
-        "Activity Monitor"
         "1Password 7"
         "Sublime Text"
         "Visual Studio Code"
@@ -649,12 +744,10 @@ if [[ is_mac ]]; then
     ## Sublime text
     ## source: https://packagecontrol.io/docs/syncing#dropbox-osx
     print_action "Setting Sublime Text syncing..."
-    sublime_path="$HOME/Library/Application Support/Sublime\ Text\ 3/Packages"
+    sublime_path="$HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages"
     dropbox_path="$HOME/Dropbox/Apps\ and\ Dev/Sublime/User"
-    pushd ${sublime_path} >/dev/null
-    run "rm -r User"
-    run "ln -s ${dropbox_path}"
-    popd >/dev/null
+    run "rm -f ${sublime_path}/User"
+    run "ln -s ${dropbox_path} ${sublime_path}"
 
     #####
     ## DEV ENVIRONMENT
@@ -686,7 +779,7 @@ if [[ is_mac ]]; then
     # gulp cli
     print_subaction 'Installing gulp...'
     if ! is_command gulp; then
-        # TODO npm isn't found if it was just installed (since we haven't sourced and set the updated PATH)
+        # FIXME npm isn't found if it was just installed (since we haven't sourced and set the updated PATH)
         run 'npm install --global gulp-cli'
     else
         print_skipped
