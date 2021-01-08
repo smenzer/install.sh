@@ -531,6 +531,7 @@ if [[ is_mac ]]; then
         "osxfuse" # mount remote drives
         "postman" # http request ui for api dev
         "runjs" # javascript playground
+		"signal" # messaging platform
         "slack" # messaging platform
         "sourcetree" # source control ui
         "spotify" # music
