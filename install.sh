@@ -504,8 +504,8 @@ if [[ is_mac ]]; then
     print_action "Installing Python packages..."
     run 'echo $pw | sudo -S pip3 install --upgrade pip setuptools wheel'
 
-    ## Install apps via brew...
-    print_action "Installing brew apps..."
+    ## Install cask apps via brew...
+    print_action "Installing brew cask apps..."
     declare -a apps=(
         "1password" # password manager
         "adobe-creative-cloud" # adobe apps
@@ -513,16 +513,17 @@ if [[ is_mac ]]; then
         "alfred" # command / app launcher
         "angry-ip-scanner" # network scanner
         "appcleaner" # delete all extra files from an app
+        "bartender" # manages menu bar
         "caffeine" # prevent sleep
         "cheatsheet" # hold ⌘ in an app to see all shortcuts
         "dbeaver-community" # ui for db
         "divvy" # window management
         "docker" # mac ui for docker containers
         "dropbox" # cloud files
+        "flotato" # converts websites into native apps
         "google-chrome" # primary browser
         "gpg-suite" # encryption
-        "hiddenbar" # hide some menu bar items
-        "intel-power-gadget" # detailed analytics for intel processor; needed for istat menus
+        # "intel-power-gadget" # detailed analytics for intel processor; needed for istat menus (causes issues with Vagrant/Virtualbox)
         "istat-menus" # menu bar stats
         "iterm2" # terminal
         "macdown" # markdown editor
@@ -552,8 +553,8 @@ if [[ is_mac ]]; then
         fi
     done
 
-    ## Install apps that need password
-    print_action "Installing apps with password..."
+    ## Install cask apps that need password
+    print_action "Installing cask apps with password..."
     declare -a apps=(
 
     )
@@ -567,14 +568,15 @@ if [[ is_mac ]]; then
     done
 
     if [ ${is_work} = true ]; then
-        ## Install Work-specific apps via brew...
-        print_action "Installing Work-specific brew apps..."
+        ## Install Work-specific cask apps via brew...
+        print_action "Installing Work-specific brew cask apps..."
         declare -a apps=(
             "adoptopenjdk" # latest jdk
             "cyberduck" # ftp gui
             "drawio" # ui for diagrams.net tool
             "firefox" # alternate browser
             "intellij-idea" # ide for java
+            "google-cloud-sdk" # suite of tools for google cloud storage
         )
         for app in "${apps[@]}"; do
             print_subaction "${app}..."
@@ -604,7 +606,8 @@ if [[ is_mac ]]; then
     ## App Store apps
     print_action "Installing App Store apps"
     declare -a macapps=(
-        "meeter"
+        "meeter",
+        "speedtest"
     )
     for macapp in "${macapps[@]}"; do
         print_subaction "${macapp}..."
@@ -705,6 +708,7 @@ if [[ is_mac ]]; then
     print_subaction "Configuration..."
     run 'm dock position RIGHT'
 
+
     ## Finder
     print_action "Configuring Finder..."
     run 'm finder showpath NO'
@@ -714,6 +718,8 @@ if [[ is_mac ]]; then
     run 'defaults write -g NSDocumentSaveNewDocumentsToCloud -bool false'
     run 'defaults write com.apple.finder QLEnableTextSelection -bool TRUE' # allow text selection in quicklook
     run 'echo $pw | sudo -S defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText "Found this computer? Contact me at $machine_email."'
+    # show app switcher on all screens
+    run 'defaults write com.apple.Dock appswitcher-all-displays -bool true'
 
     ## File associations
     print_action "Setting up file associations..."
