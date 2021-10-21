@@ -117,7 +117,7 @@ print_subaction() {
 #
 # stores value in ${pw}
 ask_for_sudo_password() {
-  printf '1) I will ask once for all your sudo password.\n   Most packages do no need it, but a few will.\n   Asking it now prevents the script from being paused.\n\nSudo password:\n'
+  printf '1) I will ask once for all your sudo password.\n   Most packages do no need it, but a few will.\n   Asking forit now prevents the script from being paused.\n\nSudo password:\n'
   read -s 'pw?> '
   printf '\n\n'
 }
@@ -276,12 +276,14 @@ check_for_git
 check_for_ssh_keys
 
 # get user input up front so the script doesn't need to pause
+printf "\nAlright we're ready to go! Just a few pieces of information first...\n\n"
 ask_for_sudo_password
 ask_for_machine_name
 ask_for_machine_email
 if is_mac; then
     ask_for_is_work
 fi
+exit
 
 # Asks for user confirmation
 printf '\n----------------------------------------------------------------------------\n\n'
