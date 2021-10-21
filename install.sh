@@ -270,6 +270,11 @@ fi
 # truncate log to zero
 :> ${INSTALL_LOG}
 
+# make sure git and ssh keys are properly installed/set up before doing anything
+printf '\nBefore we start, we need to make sure your machine has all the pre-requisites\n'
+check_for_git
+check_for_ssh_keys
+
 # get user input up front so the script doesn't need to pause
 ask_for_sudo_password
 ask_for_machine_name
@@ -277,12 +282,6 @@ ask_for_machine_email
 if is_mac; then
     ask_for_is_work
 fi
-
-# make sure git and ssh keys are properly installed/set up
-printf '\nBefore we start, we need to make sure your machine has all the pre-requisites\n'
-check_for_git
-check_for_ssh_keys
-
 
 # Asks for user confirmation
 printf '\n----------------------------------------------------------------------------\n\n'
