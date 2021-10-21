@@ -15,19 +15,20 @@ MACHINE_NAME_FILE="${CONFIG_VAR_DIR}/machine_name" # should match machines in te
 INSTALL_LOG='./install_log.log'
 
 # colors
-reset="$(tput sgr 0)"
-red="$(tput setaf 1)"
-green="$(tput setaf 2)"
-orange="$(tput setaf 208)"
-blue="$(tput setaf 45)"
-aqua_bg=$(tput setab 45)
+reset=$(tput sgr 0)
+red=$(tput setaf 1)
+green=$(tput setaf 2)
+orange=$(tput setaf 208)
+blue=$(tput setaf 45)
+red_bg=$(tput setab 1)
 green_bg=$(tput setab 2)
 orange_bg=$(tput setab 208)
+aqua_bg=$(tput setab 45)
 black=$(tput setaf 16)
-bold="$(tput bold)"
+bold=$(tput bold)
 ul=$(tput smul)
 rul=$(tput rmul)
-clear="$(tput clear)"
+clear=$(tput clear)
 
 ###############################################################################
 # Useful functions
@@ -192,11 +193,59 @@ is_mac() {
     fi
 }
 
+# looks for git on the machine, if not, requests for it to be installed
+# if on a mac, we can force this with xcode tools
+check_for_git() {
+    print_action 'Check that git is installed...'
+    if is_command git; then
+        run TRUE
+        return 1 # git is good to go
+    else
+        run FALSE
+        printf "\n%s%s%s" "${bold}" "It looks like git is not installed!" "${reset} "
+        if is_mac; then
+            # we can kick off xcode cli tool install
+            printf "\n\nWe will kick off an xcode cli install. Check the dialog box that should pop up to finish the installation. Once it completes, come back here to continue this script.\n\n"
+            xcode-select --install
+        else
+            # just tell the user to install git
+            printf '\n\nPlease install git and then return to continue this script.'
+        fi
+        printf '\n'
+        confirm "Has git been installed? [y/n]" || exit
+    fi
+}
+
+# confirms that the user has ssh keys and has set them up in github so
+# we can read/write to the repo
+check_for_ssh_keys() {
+    print_action 'Check that ssh key is generated...'
+    FILE=~/.ssh/id_rsa.pub
+    if [[ -f "$FILE" ]]; then
+        run TRUE
+    else
+        run FALSE
+        printf "\n%s%s%s\n\n%s\n\n" "${bold}" "It looks like you don't have ssh keys yet!" "${reset}" "Please run ${green}${bold}ssh-keygen${reset} and then re-run this script"
+        exit 1
+    fi
+
+    printf '\n'
+    if $(confirm '--[ Have you uploaded your public key to github? [y/n]') ; then
+        printf '\n'
+        return 1;
+    else
+        printf '\n\nPlease upload your public key (see below) to github (https://github.com/settings/keys) and then re-run this script\n\n'
+        cat $FILE
+        printf '\n'
+        exit 1;
+    fi
+}
+
 ###############################################################################
 # Beginning of the install script
 ###############################################################################
 echo "${clear}${orange}"
-if [[ is_mac ]]; then
+if is_mac; then
     echo "███╗   ███╗ █████╗  ██████╗    ██╗███╗   ██╗███████╗████████╗ █████╗ ██╗     ██╗     ";
     echo "████╗ ████║██╔══██╗██╔════╝    ██║████╗  ██║██╔════╝╚══██╔══╝██╔══██╗██║     ██║     ";
     echo "██╔████╔██║███████║██║         ██║██╔██╗ ██║███████╗   ██║   ███████║██║     ██║     ";
@@ -225,9 +274,15 @@ fi
 ask_for_sudo_password
 ask_for_machine_name
 ask_for_machine_email
-if [[ is_mac ]]; then
+if is_mac; then
     ask_for_is_work
 fi
+
+# make sure git and ssh keys are properly installed/set up
+printf '\nBefore we start, we need to make sure your machine has all the pre-requisites\n'
+check_for_git
+check_for_ssh_keys
+
 
 # Asks for user confirmation
 printf '\n----------------------------------------------------------------------------\n\n'
@@ -244,7 +299,7 @@ start=$(date +%s)
 print_section 'PREPARING INSTALL'
 
 ## temporarily turn off things that will make installs annoying on a mac
-if [[ is_mac ]]; then
+if is_mac; then
   print_action 'Disabling Gatekeeper temporarily...'
   run 'echo $pw | sudo -S spctl --master-disable'
 
@@ -410,7 +465,7 @@ else
     print_skipped
 fi
 
-if [[ is_mac ]]; then
+if is_mac; then
 
     #####
     ## MAC APPS AND TOOLS
@@ -833,7 +888,7 @@ fi # end of mac-install
 #####
 print_section "CLEAN UP"
 
-if [[ is_mac ]]; then
+if is_mac; then
     print_action 'Cleaning up Mac'
 
     # clean up homebrew
