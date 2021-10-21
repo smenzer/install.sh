@@ -225,7 +225,9 @@ fi
 ask_for_sudo_password
 ask_for_machine_name
 ask_for_machine_email
-ask_for_is_work
+if [[ is_mac ]]; then
+    ask_for_is_work
+fi
 
 # Asks for user confirmation
 printf '\n----------------------------------------------------------------------------\n\n'
@@ -453,10 +455,9 @@ if [[ is_mac ]]; then
         "coreutils" # requird for lots of stuff
         "jq" # json processor
         "wget" # retrieve remote files
-        "autojump" # move to directories with "j term"
+        "autojump" # move to directories with "j <dir>"
         "gh" # github cli
         "python3" # python
-        "thefuck" # correct errors in previous commands
         "dockutil" # Tool for managing dock items
         "speedtest-cli" # run speed tests from the commandline
         "shellcheck" # linter for bash shell scripts
@@ -782,6 +783,7 @@ if [[ is_mac ]]; then
     run "source ${terminal_dir}/zdotdir/plugins/zsh-nvm/zsh-nvm.plugin.zsh && nvm install 12"
     run "echo $pw | sudo mkdir -p /usr/local/lib/node_modules"
     run "echo $pw | sudo -S chown -R $USER /usr/local/lib/node_modules"
+    run 'bash ~/.nvm/nvm.sh'
 
     # gulp cli
     print_subaction 'Installing gulp...'
