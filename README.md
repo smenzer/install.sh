@@ -2,11 +2,11 @@
 Everything needed to set up a new machine...Mac or a server
 
 ## Usage
-_Before installing, ensure the machine has an ssh public key already created and that key is stored in **GitHub**_
+_Before installing, ensure the machine has an ssh public key already created and that key is stored in **GitHub** and that git is installed on the machine_
 
 Open up a terminal and execute the following line:
 ```shell
-zsh <(curl -SsL https://raw.githubusercontent.com/smenzer/install.sh/master/install.sh)
+zsh <(curl -SsL https://raw.githubusercontent.com/smenzer/install.sh/master/install.sh?$RANDOM)
 ```
 ### Inputs
 It will ask you for a few inputs at the beginning of execution
