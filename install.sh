@@ -181,6 +181,8 @@ ask_for_is_work() {
     else
         is_work=false
     fi
+
+    printf '\n'
 }
 
 # sets a flag for whether this is a mac server or not
@@ -195,6 +197,7 @@ ask_for_is_mac_server() {
     else
         is_mac_server=false
     fi
+    printf '\n'
 }
 
 # whether the machine is a Mac or not
@@ -298,7 +301,6 @@ if is_mac; then
     ask_for_is_work
     ask_for_is_mac_server
 fi
-exit
 
 # Asks for user confirmation
 printf '\n----------------------------------------------------------------------------\n\n'
