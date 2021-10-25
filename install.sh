@@ -1,5 +1,5 @@
 #!/bin/zsh
-# usage: zsh <(curl -SsL https://raw.githubusercontent.com/smenzer/install.sh/master/install.sh)
+# usage: zsh <(curl -SsL https://raw.githubusercontent.com/smenzer/install.sh/master/install.sh?$RANDOM)
 #
 # Inspired by https://gitlab.com/X99/reinstall.sh
 
@@ -340,7 +340,7 @@ terminal_dir="${GIT_PATH}/github.com/smenzer/terminal"
 print_action "Cloning terminal repo to ${terminal_dir}..."
 if [ ! -d "${terminal_dir}" ]; then
     run "mkdir -p \"${terminal_dir}\""
-    run "git clone ${TERMINAL_REPO} ${terminal_dir}"
+    run "echo yes | git clone ${TERMINAL_REPO} ${terminal_dir}"
 else
     print_skipped
 fi
@@ -478,7 +478,7 @@ export SHELL=${original_shell}
 ## Set shell to zsh, if not already
 print_action 'Setting ZSH as default shell...'
 if [ $SHELL != "/bin/zsh" ]; then
-    run 'chsh -s /bin/zsh'
+    run 'echo $pw | chsh -s /bin/zsh'
 else
     print_skipped
 fi
@@ -944,21 +944,15 @@ if is_mac; then
 
     print_subaction "Re-enabling quarantine..."
     run 'defaults write com.apple.LaunchServices LSQuarantine -bool YES'
-
-    complete_message='Mac'
 else
     print_action 'Cleaning up Server...'
     run 'TRUE' # just to get a nice checkbox until there's something to actually do here
-
-    complete_message='Server'
 fi
 
 end=$(date +%s)
 runtime=$((end-start))
 
 printf "\n\nDone in %s! Have fun!\n\n" "$(print_seconds ${runtime})"
-printf -v complete_message "%s" "${complete_message}installation terminé! Bon journée"
-say -v Thomas "${complete_message}"
 
 # restart zsh to get terminal settings applied
 exec zsh
