@@ -183,6 +183,20 @@ ask_for_is_work() {
     fi
 }
 
+# sets a flag for whether this is a mac server or not
+# mac servers get less software installed
+#
+# stores value in ${is_mac_server}
+ask_for_is_mac_server() {
+    printf '5) Is this Mac used as a server? [y/n]'
+    printf "\n\nHit Enter to use the default: ${green}no${reset}\n"
+    if confirm '>'; then
+        is_mac_server=true
+    else
+        is_mac_server=false
+    fi
+}
+
 # whether the machine is a Mac or not
 # needed to segregate mac-specific actions
 is_mac() {
@@ -282,6 +296,7 @@ ask_for_machine_name
 ask_for_machine_email
 if is_mac; then
     ask_for_is_work
+    ask_for_is_mac_server
 fi
 exit
 
@@ -504,22 +519,17 @@ if is_mac; then
     done
 
     ## CLI Tools
-    print_action "Installing CLI tools"
+    print_action "Installing General CLI tools"
     declare -a tools=(
-        "exiftool" # read and edit exif information
         "ack" # search, like grep but better
         "coreutils" # requird for lots of stuff
         "jq" # json processor
-        "wget" # retrieve remote files
         "autojump" # move to directories with "j <dir>"
-        "gh" # github cli
         "python3" # python
         "dockutil" # Tool for managing dock items
         "speedtest-cli" # run speed tests from the commandline
-        "shellcheck" # linter for bash shell scripts
         "mas" # mac app store CLI
         "m-cli" # mac CLI
-        "switchaudio-osx" # change macOS audio source from the command-line
         "duti" # select default apps for documents and URL schemes
         "svn" # required for some fonts, and probably other things
         "docker" # docker containers
@@ -536,6 +546,31 @@ if is_mac; then
             print_skipped
         fi
     done
+
+    if [ ${is_mac_server} = true ]; then
+        # skip some CLI tools that we don't need on Mac servers
+        print_action "Skipping non-essential CLI tools"
+    else
+        # CLI Tools that we don't need on Mac servers
+        declare -a tools=(
+            "exiftool" # read and edit exif information
+            "wget" # retrieve remote files
+            "gh" # github cli
+            "switchaudio-osx" # change macOS audio source from the command-line
+        )
+        for tool in "${tools[@]}"; do
+            print_subaction "$tool..."
+            if ! is_command "$tool"; then
+                if [ $(echo $brew_formulae | grep -x "$tool" ) ]; then
+                    print_skipped
+                else
+                    run 'brew install "$tool" --no-quarantine'
+                fi
+            else
+                print_skipped
+            fi
+        done
+    fi
 
     if [ ${is_work} = true ]; then
         ## Work-specific CLI Tools
@@ -565,64 +600,67 @@ if is_mac; then
     print_action "Installing brew cask apps..."
     declare -a apps=(
         "1password" # password manager
-        "adobe-creative-cloud" # adobe apps
-        "adoptopenjdk8" # jdk required for dbeaver
         "alfred" # command / app launcher
         "angry-ip-scanner" # network scanner
         "appcleaner" # delete all extra files from an app
-        "bartender" # manages menu bar
         "caffeine" # prevent sleep
-        "cheatsheet" # hold ⌘ in an app to see all shortcuts
-        "dbeaver-community" # ui for db
-        "divvy" # window management
         "docker" # mac ui for docker containers
         "dropbox" # cloud files
-        "flotato" # converts websites into native apps
         "google-chrome" # primary browser
-        "gpg-suite" # encryption
-        # "intel-power-gadget" # detailed analytics for intel processor; needed for istat menus (causes issues with Vagrant/Virtualbox)
-        "istat-menus" # menu bar stats
         "iterm2" # terminal
-        "macdown" # markdown editor
-        "ngrok" # share dev site externally and (optionally) with https
         "nordvpn" # vpn
         "osxfuse" # mount remote drives
-        "postman" # http request ui for api dev
-        "runjs" # javascript playground
-		"signal" # messaging platform
-        "slack" # messaging platform
-        "sourcetree" # source control ui
-        "spotify" # music
-        "spotmenu" # spotify menu bar
         "sublime-text" # text editor
-        "vagrant" # dev environment for laravel
         "virtualbox" # virtual machines
         "visual-studio-code" # ide
-        "vlc" # play all videos
-        "whatsapp" # whatsapp for desktop
     )
     for app in "${apps[@]}"; do
         print_subaction "${app}..."
         if [ $(echo $brew_casks | grep -x "$app" ) ]; then
             print_skipped
         else
-            run 'brew install --cask "$app" --force --no-quarantine'
+            run 'echo $pw | brew install --cask "$app" --force --no-quarantine'
         fi
     done
 
-    ## Install cask apps that need password
-    print_action "Installing cask apps with password..."
-    declare -a apps=(
-
-    )
-    for app in "${apps[@]}"; do
-        print_subaction "${app}..."
-        if [ $(echo $brew_casks | grep -x "$app" ) ]; then
-            print_skipped
-        else
-            run 'echo $pw | brew install --cask "$app" --no-quarantine'
-        fi
-    done
+    if [ ${is_mac_server} = true ]; then
+        # skip some cask apps that we don't need on Mac servers
+        print_action "Skipping non-essential cask apps"
+    else
+        # cask apps that we don't need on Mac servers
+        declare -a apps=(
+            "adobe-creative-cloud" # adobe apps
+            "adoptopenjdk8" # jdk required for dbeaver
+            "bartender" # manages menu bar
+            "cheatsheet" # hold ⌘ in an app to see all shortcuts
+            "dbeaver-community" # ui for db
+            "divvy" # window management
+            "flotato" # converts websites into native apps
+            "gpg-suite" # encryption
+            # "intel-power-gadget" # detailed analytics for intel processor; needed for istat menus (causes issues with Vagrant/Virtualbox)
+            "istat-menus" # menu bar stats
+            "macdown" # markdown editor
+            "ngrok" # share dev site externally and (optionally) with https
+            "postman" # http request ui for api dev
+            "runjs" # javascript playground
+            "signal" # messaging platform
+            "slack" # messaging platform
+            "sourcetree" # source control ui
+            "spotify" # music
+            "spotmenu" # spotify menu bar
+            "vagrant" # dev environment for laravel
+            "vlc" # play all videos
+            "whatsapp" # whatsapp for desktop
+        )
+        for app in "${apps[@]}"; do
+            print_subaction "${app}..."
+            if [ $(echo $brew_casks | grep -x "$app" ) ]; then
+                print_skipped
+            else
+                run 'echo $pw | brew install --cask "$app" --force --no-quarantine'
+            fi
+        done
+    fi
 
     if [ ${is_work} = true ]; then
         ## Install Work-specific cask apps via brew...
@@ -634,28 +672,15 @@ if is_mac; then
             "firefox" # alternate browser
             "intellij-idea" # ide for java
             "google-cloud-sdk" # suite of tools for google cloud storage
+            "microsoft-teams" # video conferencing
+            "zoom" # video conferencing
         )
         for app in "${apps[@]}"; do
             print_subaction "${app}..."
             if [ $(echo $brew_casks | grep -x "$app" ) ]; then
                 print_skipped
             else
-                run 'brew install --cask "$app" --force --no-quarantine'
-            fi
-        done
-
-        ## Install Work-specific apps that need password
-        print_action "Installing Work-specific apps with password..."
-        declare -a apps=(
-            "microsoft-teams"
-            "zoom"
-        )
-        for app in "${apps[@]}"; do
-            print_subaction "${app}..."
-            if [ $(echo $brew_casks | grep -x "$app" ) ]; then
-                print_skipped
-            else
-                run 'echo $pw | brew install --cask "$app" --no-quarantine'
+                run 'echo $pw | brew install --cask "$app" --force --no-quarantine'
             fi
         done
     fi
@@ -663,13 +688,26 @@ if is_mac; then
     ## App Store apps
     print_action "Installing App Store apps"
     declare -a macapps=(
-        "meeter",
         "speedtest"
     )
     for macapp in "${macapps[@]}"; do
         print_subaction "${macapp}..."
         run 'mas lucky "$macapp"'
     done
+
+    if [ ${is_mac_server} = true ]; then
+        # skip some app store apps that we don't need on Mac servers
+        print_action "Skipping non-essential App Store apps"
+    else
+        # cask apps that we don't need on Mac servers
+        declare -a macapps=(
+            "meeter",
+        )
+        for macapp in "${macapps[@]}"; do
+            print_subaction "${macapp}..."
+            run 'mas lucky "$macapp"'
+        done
+    fi
 
     ## Open apps that need to be running
     print_action "Opening apps"
@@ -816,58 +854,60 @@ if is_mac; then
     #####
     ## DEV ENVIRONMENT
     #####
-    print_section 'DEV ENVIRONMENT'
+    if [ ${is_mac_server} = false ]; then
+        print_section 'DEV ENVIRONMENT'
 
-    ## PHP
-    print_action 'Creating php.ini and making it writeable...'
-    if [ ! -f /etc/php.ini ]; then
-        run 'echo $pw | sudo -S cp /etc/php.ini.default /etc/php.ini'
-    else
-        print_skipped
+        ## PHP
+        print_action 'Creating php.ini and making it writeable...'
+        if [ ! -f /etc/php.ini ]; then
+            run 'echo $pw | sudo -S cp /etc/php.ini.default /etc/php.ini'
+        else
+            print_skipped
+        fi
+        run 'echo $pw | sudo chmod 644 /etc/php.ini'
+
+        ## Xcode CLI
+        print_action 'Installing XCode CLI...'
+        run 'xcode-select --install'
+
+        ## Node.js / Gulp
+        print_action 'Installing Node.js / Gulp'
+
+        # node.js
+        print_subaction 'Installing node.js v12...'
+        run "source ${terminal_dir}/zdotdir/plugins/zsh-nvm/zsh-nvm.plugin.zsh && nvm install 12"
+        run "echo $pw | sudo mkdir -p /usr/local/lib/node_modules"
+        run "echo $pw | sudo -S chown -R $USER /usr/local/lib/node_modules"
+        run 'bash ~/.nvm/nvm.sh'
+
+        # gulp cli
+        print_subaction 'Installing gulp...'
+        if ! is_command gulp; then
+            # FIXME npm isn't found if it was just installed (since we haven't sourced and set the updated PATH)
+            run 'npm install --global gulp-cli'
+        else
+            print_skipped
+        fi
+
+        ## Laravel / Homestead
+        print_action 'Installing Laravel / Homestead'
+
+        # envoy
+        print_subaction 'Installing envoy...'
+        if ! is_command envoy; then
+            run 'composer global require laravel/envoy'
+        else
+            print_skipped
+        fi
+
+        # homestead box
+        print_subaction 'Installing Homestead Vagrant box...'
+        run 'vagrant box add laravel/homestead --provider virtualbox'
+
+        # vagrant /etc/hosts updater
+        print_subaction 'Install /etc/hosts updater plugin...'
+        run 'vagrant plugin install vagrant-hostsupdater'
     fi
-    run 'echo $pw | sudo chmod 644 /etc/php.ini'
-
-    ## Xcode CLI
-    print_action 'Installing XCode CLI...'
-    run 'xcode-select --install'
-
-    ## Node.js / Gulp
-    print_action 'Installing Node.js / Gulp'
-
-    # node.js
-    print_subaction 'Installing node.js v12...'
-    run "source ${terminal_dir}/zdotdir/plugins/zsh-nvm/zsh-nvm.plugin.zsh && nvm install 12"
-    run "echo $pw | sudo mkdir -p /usr/local/lib/node_modules"
-    run "echo $pw | sudo -S chown -R $USER /usr/local/lib/node_modules"
-    run 'bash ~/.nvm/nvm.sh'
-
-    # gulp cli
-    print_subaction 'Installing gulp...'
-    if ! is_command gulp; then
-        # FIXME npm isn't found if it was just installed (since we haven't sourced and set the updated PATH)
-        run 'npm install --global gulp-cli'
-    else
-        print_skipped
-    fi
-
-    ## Laravel / Homestead
-    print_action 'Installing Laravel / Homestead'
-
-    # envoy
-    print_subaction 'Installing envoy...'
-    if ! is_command envoy; then
-        run 'composer global require laravel/envoy'
-    else
-        print_skipped
-    fi
-
-    # homestead box
-    print_subaction 'Installing Homestead Vagrant box...'
-    run 'vagrant box add laravel/homestead --provider virtualbox'
-
-    # vagrant /etc/hosts updater
-    print_subaction 'Install /etc/hosts updater plugin...'
-    run 'vagrant plugin install vagrant-hostsupdater'
 
     #####
     ## OTHER REPOS
