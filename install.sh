@@ -510,6 +510,7 @@ if is_mac; then
         'homebrew/cask' # homebrew cask
         'buo/cask-upgrade' # update casks easier (brew cu)
         'homebrew/cask-fonts' # fonts
+        'shivammathur/php' # php (deprecated in MacOs 12.0 - https://wpbeaches.com/updating-to-php-versions-7-4-and-8-on-macos-12-monterey/)
     )
     for tap in "${taps[@]}"; do
         print_subaction "${tap}..."
@@ -535,6 +536,7 @@ if is_mac; then
         "duti" # select default apps for documents and URL schemes
         "svn" # required for some fonts, and probably other things
         "docker" # docker containers
+        'shivammathur/php/php@7.4' # php versions we want
     )
     for tool in "${tools[@]}"; do
         print_subaction "$tool..."
@@ -548,6 +550,11 @@ if is_mac; then
             print_skipped
         fi
     done
+
+    # configure php
+    print_action "configure php..."
+    run 'brew link --overwrite --force php@7.4'
+    # to change versions: brew unlink php && brew link --overwrite --force php@8.1
 
     if [ ${is_mac_server} = true ]; then
         # skip some CLI tools that we don't need on Mac servers
@@ -676,6 +683,7 @@ if is_mac; then
             "google-cloud-sdk" # suite of tools for google cloud storage
             "microsoft-teams" # video conferencing
             "zoom" # video conferencing
+            "miro" # ui for miro tool
         )
         for app in "${apps[@]}"; do
             print_subaction "${app}..."
