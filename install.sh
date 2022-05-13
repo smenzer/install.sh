@@ -14,6 +14,120 @@ CONFIG_VAR_DIR="${HOME}/.config"
 MACHINE_NAME_FILE="${CONFIG_VAR_DIR}/machine_name" # should match machines in terminal repo
 INSTALL_LOG='./install_log.log'
 
+# brew tools that get installed on all macs
+declare -a mac_tools=(
+    "ack" # search, like grep but better
+    "coreutils" # requird for lots of stuff
+    "jq" # json processor
+    "autojump" # move to directories with "j <dir>"
+    "python3" # python
+    "dockutil" # Tool for managing dock items
+    "speedtest-cli" # run speed tests from the commandline
+    "mas" # mac app store CLI
+    "m-cli" # mac CLI
+    "duti" # select default apps for documents and URL schemes
+    "svn" # required for some fonts, and probably other things
+    "docker" # docker containers
+    'shivammathur/php/php@7.4' # php versions we want
+)
+# brew tools that only go on laptops/computers we use (i.e. not servers)
+declare -a mac_tools_clients_only=(
+    "exiftool" # read and edit exif information
+    "wget" # retrieve remote files
+    "gh" # github cli
+    "switchaudio-osx" # change macOS audio source from the command-line
+)
+# brew tools that only go on work laptops
+declare -a tools_work_only=(
+
+)
+# cask apps that go on all macs
+declare -a cask_apps=(
+    "1password" # password manager
+    "alfred" # command / app launcher
+    "angry-ip-scanner" # network scanner
+    "appcleaner" # delete all extra files from an app
+    "caffeine" # prevent sleep
+    "docker" # mac ui for docker containers
+    "dropbox" # cloud files
+    "google-chrome" # primary browser
+    "iterm2" # terminal
+    "nordvpn" # vpn
+    "osxfuse" # mount remote drives
+    "sublime-text" # text editor
+    "virtualbox" # virtual machines
+    "visual-studio-code" # ide
+)
+# cask apps that only go on laptops/computers we use (i.e. not servers)
+declare -a cask_apps_clients_only=(
+    "adobe-creative-cloud" # adobe apps
+    "adoptopenjdk8" # jdk required for dbeaver
+    "asana" # stand-alone asana app
+    "bartender" # manages menu bar
+    "cheatsheet" # hold ⌘ in an app to see all shortcuts
+    "dbeaver-community" # ui for db
+    "divvy" # window management
+    "flotato" # converts websites into native apps
+    "gpg-suite" # encryption
+    # "intel-power-gadget" # detailed analytics for intel processor; needed for istat menus (causes issues with Vagrant/Virtualbox)
+    "istat-menus" # menu bar stats
+    "macdown" # markdown editor
+    "ngrok" # share dev site externally and (optionally) with https
+    "postman" # http request ui for api dev
+    "runjs" # javascript playground
+    "signal" # messaging platform
+    "slack" # messaging platform
+    "sourcetree" # source control ui
+    "spotify" # music
+    "spotmenu" # spotify menu bar
+    "vagrant" # dev environment for laravel
+    "vlc" # play all videos
+    "whatsapp" # whatsapp for desktop
+)
+# cask apps that only go on work laptops
+declare -a cask_apps_work_only=(
+    "adoptopenjdk" # latest jdk
+    "cyberduck" # ftp gui
+    "drawio" # ui for diagrams.net tool
+    "eqmac" # equaliser for mac, useful for zoom meetings to reduce bass
+    "firefox" # alternate browser
+    "google-cloud-sdk" # suite of tools for google cloud storage
+    "microsoft-teams" # video conferencing
+    "miro" # ui for miro tool
+    "zoom" # video conferencing
+)
+# mac store apps for all macs
+declare -a mac_app_store_apps=(
+    "speedtest"
+)
+# mac store apps that only go on laptops/computers we use (i.e. not servers)
+declare -a mac_app_store_apps_clients_only=(
+    "meeter",
+)
+# brew taps required
+declare -a taps=(
+    'homebrew/cask' # homebrew cask
+    'buo/cask-upgrade' # update casks easier (brew cu)
+    'homebrew/cask-fonts' # fonts
+    'shivammathur/php' # php (deprecated in MacOs 12.0 - https://wpbeaches.com/updating-to-php-versions-7-4-and-8-on-macos-12-monterey/)
+)
+
+# fonts to install
+declare -a fonts=(
+    "font-meslo-lg-nerd-font"
+    "font-meslo-for-powerline"
+    "font-open-sans"
+    "font-droid-sans-mono-for-powerline"
+    "font-droid-sans-mono-nerd-font"
+    "font-josefin-sans-std-light"
+    "font-montserrat"
+)
+
+# other repos to download locally
+declare -a repos=(
+    'git@github.com:smenzer/tools-and-scripts.git'
+)
+
 # colors
 reset=$(tput sgr 0)
 red=$(tput setaf 1)
@@ -506,12 +620,6 @@ if is_mac; then
 
     ## Brew Tap
     print_action "Tapping Brews..."
-    declare -a taps=(
-        'homebrew/cask' # homebrew cask
-        'buo/cask-upgrade' # update casks easier (brew cu)
-        'homebrew/cask-fonts' # fonts
-        'shivammathur/php' # php (deprecated in MacOs 12.0 - https://wpbeaches.com/updating-to-php-versions-7-4-and-8-on-macos-12-monterey/)
-    )
     for tap in "${taps[@]}"; do
         print_subaction "${tap}..."
         if [ $(echo $brew_taps | grep -x "$tap" ) ]; then
@@ -523,22 +631,7 @@ if is_mac; then
 
     ## CLI Tools
     print_action "Installing General CLI tools"
-    declare -a tools=(
-        "ack" # search, like grep but better
-        "coreutils" # requird for lots of stuff
-        "jq" # json processor
-        "autojump" # move to directories with "j <dir>"
-        "python3" # python
-        "dockutil" # Tool for managing dock items
-        "speedtest-cli" # run speed tests from the commandline
-        "mas" # mac app store CLI
-        "m-cli" # mac CLI
-        "duti" # select default apps for documents and URL schemes
-        "svn" # required for some fonts, and probably other things
-        "docker" # docker containers
-        'shivammathur/php/php@7.4' # php versions we want
-    )
-    for tool in "${tools[@]}"; do
+    for tool in "${mac_tools[@]}"; do
         print_subaction "$tool..."
         if ! is_command "$tool"; then
             if [ $(echo $brew_formulae | grep -x "$tool" ) ]; then
@@ -561,13 +654,7 @@ if is_mac; then
         print_action "Skipping non-essential CLI tools"
     else
         # CLI Tools that we don't need on Mac servers
-        declare -a tools=(
-            "exiftool" # read and edit exif information
-            "wget" # retrieve remote files
-            "gh" # github cli
-            "switchaudio-osx" # change macOS audio source from the command-line
-        )
-        for tool in "${tools[@]}"; do
+        for tool in "${mac_tools_clients_only[@]}"; do
             print_subaction "$tool..."
             if ! is_command "$tool"; then
                 if [ $(echo $brew_formulae | grep -x "$tool" ) ]; then
@@ -584,10 +671,7 @@ if is_mac; then
     if [ ${is_work} = true ]; then
         ## Work-specific CLI Tools
         print_action "Installing Work-specific CLI tools"
-        declare -a tools=(
-
-        )
-        for tool in "${tools[@]}"; do
+        for tool in "${tools_work_only[@]}"; do
             print_subaction "$tool..."
             if ! is_command "$tool"; then
                 if [ $(echo $brew_formulae | grep -x "$tool" ) ]; then
@@ -607,23 +691,7 @@ if is_mac; then
 
     ## Install cask apps via brew...
     print_action "Installing brew cask apps..."
-    declare -a apps=(
-        "1password" # password manager
-        "alfred" # command / app launcher
-        "angry-ip-scanner" # network scanner
-        "appcleaner" # delete all extra files from an app
-        "caffeine" # prevent sleep
-        "docker" # mac ui for docker containers
-        "dropbox" # cloud files
-        "google-chrome" # primary browser
-        "iterm2" # terminal
-        "nordvpn" # vpn
-        "osxfuse" # mount remote drives
-        "sublime-text" # text editor
-        "virtualbox" # virtual machines
-        "visual-studio-code" # ide
-    )
-    for app in "${apps[@]}"; do
+    for app in "${cask_apps[@]}"; do
         print_subaction "${app}..."
         if [ $(echo $brew_casks | grep -x "$app" ) ]; then
             print_skipped
@@ -637,32 +705,7 @@ if is_mac; then
         print_action "Skipping non-essential cask apps"
     else
         # cask apps that we don't need on Mac servers
-        declare -a apps=(
-            "adobe-creative-cloud" # adobe apps
-            "adoptopenjdk8" # jdk required for dbeaver
-            "asana" # stand-alone asana app
-            "bartender" # manages menu bar
-            "cheatsheet" # hold ⌘ in an app to see all shortcuts
-            "dbeaver-community" # ui for db
-            "divvy" # window management
-            "flotato" # converts websites into native apps
-            "gpg-suite" # encryption
-            # "intel-power-gadget" # detailed analytics for intel processor; needed for istat menus (causes issues with Vagrant/Virtualbox)
-            "istat-menus" # menu bar stats
-            "macdown" # markdown editor
-            "ngrok" # share dev site externally and (optionally) with https
-            "postman" # http request ui for api dev
-            "runjs" # javascript playground
-            "signal" # messaging platform
-            "slack" # messaging platform
-            "sourcetree" # source control ui
-            "spotify" # music
-            "spotmenu" # spotify menu bar
-            "vagrant" # dev environment for laravel
-            "vlc" # play all videos
-            "whatsapp" # whatsapp for desktop
-        )
-        for app in "${apps[@]}"; do
+        for app in "${cask_apps_clients_only[@]}"; do
             print_subaction "${app}..."
             if [ $(echo $brew_casks | grep -x "$app" ) ]; then
                 print_skipped
@@ -675,18 +718,7 @@ if is_mac; then
     if [ ${is_work} = true ]; then
         ## Install Work-specific cask apps via brew...
         print_action "Installing Work-specific brew cask apps..."
-        declare -a apps=(
-            "adoptopenjdk" # latest jdk
-            "cyberduck" # ftp gui
-            "drawio" # ui for diagrams.net tool
-            "eqmac" # equaliser for mac, useful for zoom meetings to reduce bass
-            "firefox" # alternate browser
-            "google-cloud-sdk" # suite of tools for google cloud storage
-            "microsoft-teams" # video conferencing
-            "miro" # ui for miro tool
-            "zoom" # video conferencing
-        )
-        for app in "${apps[@]}"; do
+        for app in "${cask_apps_work_only[@]}"; do
             print_subaction "${app}..."
             if [ $(echo $brew_casks | grep -x "$app" ) ]; then
                 print_skipped
@@ -698,10 +730,7 @@ if is_mac; then
 
     ## App Store apps
     print_action "Installing App Store apps"
-    declare -a macapps=(
-        "speedtest"
-    )
-    for macapp in "${macapps[@]}"; do
+    for macapp in "${mac_app_store_apps[@]}"; do
         print_subaction "${macapp}..."
         run 'mas lucky "$macapp"'
     done
@@ -711,10 +740,7 @@ if is_mac; then
         print_action "Skipping non-essential App Store apps"
     else
         # cask apps that we don't need on Mac servers
-        declare -a macapps=(
-            "meeter",
-        )
-        for macapp in "${macapps[@]}"; do
+        for macapp in "${mac_app_store_apps_clients_only[@]}"; do
             print_subaction "${macapp}..."
             run 'mas lucky "$macapp"'
         done
@@ -740,15 +766,6 @@ if is_mac; then
 
     ## Brew fonts
     print_action 'Installing brew fonts...'
-    declare -a fonts=(
-        "font-meslo-lg-nerd-font"
-        "font-meslo-for-powerline"
-        "font-open-sans"
-        "font-droid-sans-mono-for-powerline"
-        "font-droid-sans-mono-nerd-font"
-        "font-josefin-sans-std-light"
-        "font-montserrat"
-    )
     for font in "${fonts[@]}"; do
         print_subaction "${font}..."
         if [ $(echo $brew_casks | grep -x "$font" ) ]; then
@@ -925,9 +942,6 @@ if is_mac; then
     #####
     print_section 'OTHER REPOS'
     export GIT_PATH="${GIT_PATH}"
-    declare -a repos=(
-        'git@github.com:smenzer/tools-and-scripts.git'
-    )
     for repo in "${repos[@]}"; do
         print_action "${repo}..."
         run "git-get ${repo}"
