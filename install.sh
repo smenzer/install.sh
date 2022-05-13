@@ -102,7 +102,7 @@ declare -a mac_app_store_apps=(
 )
 # mac store apps that only go on laptops/computers we use (i.e. not servers)
 declare -a mac_app_store_apps_clients_only=(
-    "meeter",
+    "meeter"
 )
 # brew taps required
 declare -a taps=(
@@ -517,9 +517,9 @@ run "ln -sf ${terminal_dir}/git/git-prompt.sh ~/.git-prompt.sh"
 # git get
 print_subaction "Installing git-get..."
 if ! is_command git-get; then
-    pushd ${terminal_dir}/git/git-utils/git-get >/dev/null
+    pushd ${terminal_dir}/git/git-utils/git-get >/dev/null || return
     run "export INSTALL_DIR=/usr/local/bin && ${terminal_dir}/git/git-utils/git-get/install >/dev/null"
-    popd >/dev/null
+    popd >/dev/null || return
 else
     print_skipped
 fi
@@ -562,7 +562,7 @@ if ! is_command composer; then
     EXPECTED_CHECKSUM="$(wget -q -O - https://composer.github.io/installer.sig)"
     ACTUAL_CHECKSUM="$(php -r "echo hash_file('sha384', 'composer-setup.php');")"
     if [ "$EXPECTED_CHECKSUM" != "$ACTUAL_CHECKSUM" ]; then
-        print_error()
+        print_error
         error_log "composer install" "ERROR installing composer: Invalid installer checksum"
     else
         run 'php composer-setup.php --quiet --install-dir=/usr/local/bin --filename=composer'
@@ -911,7 +911,7 @@ if is_mac; then
         # gulp cli
         print_subaction 'Installing gulp...'
         if ! is_command gulp; then
-            # FIXME npm isn't found if it was just installed (since we haven't sourced and set the updated PATH)
+            # TODO npm isn't found if it was just installed (since we haven't sourced and set the updated PATH)
             run 'npm install --global gulp-cli'
         else
             print_skipped
