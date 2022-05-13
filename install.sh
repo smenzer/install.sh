@@ -640,6 +640,7 @@ if is_mac; then
         declare -a apps=(
             "adobe-creative-cloud" # adobe apps
             "adoptopenjdk8" # jdk required for dbeaver
+            "asana" # stand-alone asana app
             "bartender" # manages menu bar
             "cheatsheet" # hold ⌘ in an app to see all shortcuts
             "dbeaver-community" # ui for db
@@ -678,12 +679,12 @@ if is_mac; then
             "adoptopenjdk" # latest jdk
             "cyberduck" # ftp gui
             "drawio" # ui for diagrams.net tool
+            "eqmac" # equaliser for mac, useful for zoom meetings to reduce bass
             "firefox" # alternate browser
-            "intellij-idea" # ide for java
             "google-cloud-sdk" # suite of tools for google cloud storage
             "microsoft-teams" # video conferencing
-            "zoom" # video conferencing
             "miro" # ui for miro tool
+            "zoom" # video conferencing
         )
         for app in "${apps[@]}"; do
             print_subaction "${app}..."
