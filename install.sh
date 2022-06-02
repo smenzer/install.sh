@@ -28,7 +28,8 @@ declare -a mac_tools=(
     "duti" # select default apps for documents and URL schemes
     "svn" # required for some fonts, and probably other things
     "docker" # docker containers
-    'shivammathur/php/php@7.4' # php versions we want
+    'shivammathur/php/php@8.0' # php since it's not included with macs anymore
+    'shivammathur/php/php@7.4' # other specific php versions we want
 )
 # brew tools that only go on laptops/computers we use (i.e. not servers)
 declare -a mac_tools_clients_only=(
@@ -186,7 +187,7 @@ run() {
     fi
 }
 
-# confirm function
+# ask for a confirmation
 confirm () {
     # call with a prompt string or use a default
     read -q "response?${1:-Are you sure? [y/N]} "
@@ -231,7 +232,7 @@ print_subaction() {
 #
 # stores value in ${pw}
 ask_for_sudo_password() {
-  printf '1) I will ask once for all your sudo password.\n   Most packages do no need it, but a few will.\n   Asking forit now prevents the script from being paused.\n\nSudo password:\n'
+  printf '%s) I will ask once for all your sudo password.\n   Most packages do no need it, but a few will.\n   Asking forit now prevents the script from being paused.\n\nSudo password:\n' "$1"
   read -s 'pw?> '
   printf '\n\n'
 }
@@ -248,7 +249,7 @@ ask_for_machine_name() {
     else
         default=$(hostname)
     fi
-    printf "2) What should we call this machine?\n   This will be used for dotfile configuration file names.\n\nHit Enter to use the default: ${green}${default}${reset}\n"
+    printf "%s) What should we call this machine?\n   This will be used for dotfile configuration file names.\n\nHit Enter to use the default: ${green}${default}${reset}\n" "$1"
     read 'input_machine?> '
     if [ ! "${input_machine}" ]; then
         machine_name=${default}
@@ -267,7 +268,7 @@ ask_for_machine_email() {
     # grab existing email from git;
     machine_email=$(git config --global user.email)
 
-    printf '3) What email address should be associated with this machine, mostly for git commits?'
+    printf '%s) What email address should be associated with this machine, mostly for git commits?' "$1"
     if [ ${machine_email} ]; then
         printf "\n\nHit Enter to use the default: ${green}${machine_email}${reset}\n"
     else
@@ -288,7 +289,7 @@ ask_for_machine_email() {
 #
 # stores value in ${is_work}
 ask_for_is_work() {
-    printf '4) Is this Mac used for work? [y/n]'
+    printf '%s) Is this Mac used for work? [y/n]' "$1"
     printf "\n\nHit Enter to use the default: ${green}no${reset}\n"
     if confirm '>'; then
         is_work=true
@@ -304,7 +305,7 @@ ask_for_is_work() {
 #
 # stores value in ${is_mac_server}
 ask_for_is_mac_server() {
-    printf '5) Is this Mac used as a server? [y/n]'
+    printf '%s) Is this Mac used as a server? [y/n]' "$1"
     printf "\n\nHit Enter to use the default: ${green}no${reset}\n"
     if confirm '>'; then
         is_mac_server=true
@@ -408,12 +409,12 @@ check_for_ssh_keys
 
 # get user input up front so the script doesn't need to pause
 printf "\nAlright we're ready to go! Just a few pieces of information first...\n\n"
-ask_for_sudo_password
-ask_for_machine_name
-ask_for_machine_email
+ask_for_sudo_password '1'
+ask_for_machine_name '2'
+ask_for_machine_email '3'
 if is_mac; then
-    ask_for_is_work
-    ask_for_is_mac_server
+    ask_for_is_work '4'
+    ask_for_is_mac_server '5'
 fi
 
 # Asks for user confirmation
