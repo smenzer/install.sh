@@ -556,23 +556,6 @@ run "ln -sf ${terminal_dir}/vim/vimrc ~/.vimrc"
 print_subaction "Installing vim plugins..."
 run 'vim +PluginInstall +qall'
 
-## Composer
-print_action "Installing Composer..."
-if ! is_command composer; then
-    run "php -r \"copy('https://getcomposer.org/installer', 'composer-setup.php');\""
-    EXPECTED_CHECKSUM="$(wget -q -O - https://composer.github.io/installer.sig)"
-    ACTUAL_CHECKSUM="$(php -r "echo hash_file('sha384', 'composer-setup.php');")"
-    if [ "$EXPECTED_CHECKSUM" != "$ACTUAL_CHECKSUM" ]; then
-        print_error
-        error_log "composer install" "ERROR installing composer: Invalid installer checksum"
-    else
-        run 'php composer-setup.php --quiet --install-dir=/usr/local/bin --filename=composer'
-    fi
-    run 'rm composer-setup.php'
-else
-    print_skipped
-fi
-
 ## Iterm Shell
 print_action "Installing iTerm2 shell integrations"
 original_shell=${SHELL}
@@ -949,6 +932,23 @@ if is_mac; then
     done
 
 fi # end of mac-install
+
+## Composer
+print_action "Installing Composer..."
+if ! is_command composer; then
+    run "php -r \"copy('https://getcomposer.org/installer', 'composer-setup.php');\""
+    EXPECTED_CHECKSUM="$(wget -q -O - https://composer.github.io/installer.sig)"
+    ACTUAL_CHECKSUM="$(php -r "echo hash_file('sha384', 'composer-setup.php');")"
+    if [ "$EXPECTED_CHECKSUM" != "$ACTUAL_CHECKSUM" ]; then
+        print_error
+        error_log "composer install" "ERROR installing composer: Invalid installer checksum"
+    else
+        run 'php composer-setup.php --quiet --install-dir=/usr/local/bin --filename=composer'
+    fi
+    run 'rm composer-setup.php'
+else
+    print_skipped
+fi
 
 #####
 ## Clean up
