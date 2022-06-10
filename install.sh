@@ -16,8 +16,6 @@ INSTALL_LOG='./install_log.log'
 
 # brew tools that get installed on all macs
 declare -a mac_tools=(
-    'shivammathur/php/php@7.4' # other specific php versions we want
-    'shivammathur/php/php@8.0' # php since it's not included with macs anymore
     "ack" # search, like grep but better
     "autojump" # move to directories with "j <dir>"
     "coreutils" # requird for lots of stuff
@@ -28,6 +26,8 @@ declare -a mac_tools=(
     "m-cli" # mac CLI
     "mas" # mac app store CLI
     "python3" # python
+    "shivammathur/php/php@7.4" # other specific php versions we want
+    "shivammathur/php/php@8.0" # php since it's not included with macs anymore
     "speedtest-cli" # run speed tests from the commandline
     "svn" # required for some fonts, and probably other things
 )
