@@ -16,27 +16,28 @@ INSTALL_LOG='./install_log.log'
 
 # brew tools that get installed on all macs
 declare -a mac_tools=(
-    "ack" # search, like grep but better
-    "coreutils" # requird for lots of stuff
-    "jq" # json processor
-    "autojump" # move to directories with "j <dir>"
-    "python3" # python
-    "dockutil" # Tool for managing dock items
-    "speedtest-cli" # run speed tests from the commandline
-    "mas" # mac app store CLI
-    "m-cli" # mac CLI
-    "duti" # select default apps for documents and URL schemes
-    "svn" # required for some fonts, and probably other things
-    "docker" # docker containers
-    'shivammathur/php/php@8.0' # php since it's not included with macs anymore
     'shivammathur/php/php@7.4' # other specific php versions we want
+    'shivammathur/php/php@8.0' # php since it's not included with macs anymore
+    "ack" # search, like grep but better
+    "autojump" # move to directories with "j <dir>"
+    "coreutils" # requird for lots of stuff
+    "docker" # docker containers
+    "dockutil" # Tool for managing dock items
+    "duti" # select default apps for documents and URL schemes
+    "jq" # json processor
+    "m-cli" # mac CLI
+    "mas" # mac app store CLI
+    "python3" # python
+    "speedtest-cli" # run speed tests from the commandline
+    "svn" # required for some fonts, and probably other things
 )
 # brew tools that only go on laptops/computers we use (i.e. not servers)
 declare -a mac_tools_clients_only=(
     "exiftool" # read and edit exif information
-    "wget" # retrieve remote files
     "gh" # github cli
+    "openjdk@11" # jdk for dbeaver and work dev environment
     "switchaudio-osx" # change macOS audio source from the command-line
+    "wget" # retrieve remote files
 )
 # brew tools that only go on work laptops
 declare -a tools_work_only=(
@@ -62,7 +63,7 @@ declare -a cask_apps=(
 # cask apps that only go on laptops/computers we use (i.e. not servers)
 declare -a cask_apps_clients_only=(
     "adobe-creative-cloud" # adobe apps
-    "adoptopenjdk8" # jdk required for dbeaver
+    # "adoptopenjdk8" # jdk required for dbeaver (using jdk11 instead)
     "asana" # stand-alone asana app
     "bartender" # manages menu bar
     "cheatsheet" # hold ⌘ in an app to see all shortcuts
@@ -87,9 +88,7 @@ declare -a cask_apps_clients_only=(
 )
 # cask apps that only go on work laptops
 declare -a cask_apps_work_only=(
-    "adoptopenjdk" # latest jdk
     "cyberduck" # ftp gui
-    "drawio" # ui for diagrams.net tool
     "eqmac" # equaliser for mac, useful for zoom meetings to reduce bass
     "firefox" # alternate browser
     "google-cloud-sdk" # suite of tools for google cloud storage
@@ -107,10 +106,10 @@ declare -a mac_app_store_apps_clients_only=(
 )
 # brew taps required
 declare -a taps=(
-    'homebrew/cask' # homebrew cask
-    'buo/cask-upgrade' # update casks easier (brew cu)
-    'homebrew/cask-fonts' # fonts
-    'shivammathur/php' # php (deprecated in MacOs 12.0 - https://wpbeaches.com/updating-to-php-versions-7-4-and-8-on-macos-12-monterey/)
+    "homebrew/cask" # homebrew cask
+    "buo/cask-upgrade" # update casks easier (brew cu)
+    "homebrew/cask-fonts" # fonts
+    "shivammathur/php" # php (php was deprecated in MacOs 12.0 - https://wpbeaches.com/updating-to-php-versions-7-4-and-8-on-macos-12-monterey/)
 )
 
 # fonts to install
