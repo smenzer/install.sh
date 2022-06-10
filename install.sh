@@ -15,13 +15,15 @@ MACHINE_NAME_FILE="${CONFIG_VAR_DIR}/machine_name" # should match machines in te
 INSTALL_LOG='./install_log.log'
 
 # brew tools that get installed on all macs
+# tip: brew leaves --installed-on-request to see what is currently installed
 declare -a mac_tools=(
     "ack" # search, like grep but better
     "autojump" # move to directories with "j <dir>"
     "coreutils" # requird for lots of stuff
     "docker" # docker containers
-    "dockutil" # Tool for managing dock items
+    "dockutil" # tool for managing dock items
     "duti" # select default apps for documents and URL schemes
+    "iperf3" # network bandwidth analytics tool
     "jq" # json processor
     "m-cli" # mac CLI
     "mas" # mac app store CLI
@@ -29,20 +31,21 @@ declare -a mac_tools=(
     "shivammathur/php/php@7.4" # other specific php versions we want
     "shivammathur/php/php@8.0" # php since it's not included with macs anymore
     "speedtest-cli" # run speed tests from the commandline
-    "svn" # required for some fonts, and probably other things
+    "subversion" # required for some fonts, and probably other things
 )
 # brew tools that only go on laptops/computers we use (i.e. not servers)
 declare -a mac_tools_clients_only=(
     "exiftool" # read and edit exif information
     "gh" # github cli
     "openjdk@11" # jdk for dbeaver and work dev environment
-    "switchaudio-osx" # change macOS audio source from the command-line
+    "switchaudio-osx" # change macOS audio source from the command-line (SwitchAudioSource)
     "wget" # retrieve remote files
 )
 # brew tools that only go on work laptops
 declare -a tools_work_only=(
-
+    "awscli" # amazon command line
 )
+
 # cask apps that go on all macs
 declare -a cask_apps=(
     "1password" # password manager
@@ -96,6 +99,7 @@ declare -a cask_apps_work_only=(
     "miro" # ui for miro tool
     "zoom" # video conferencing
 )
+
 # mac store apps for all macs
 declare -a mac_app_store_apps=(
     "speedtest"
@@ -121,6 +125,7 @@ declare -a fonts=(
     "font-droid-sans-mono-nerd-font"
     "font-josefin-sans-std-light"
     "font-montserrat"
+    "font-hack-nerd-font"
 )
 
 # other repos to download locally
