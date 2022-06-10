@@ -836,7 +836,7 @@ if is_mac; then
 
     # dock configure settings
     print_subaction "Configuration..."
-    run 'm dock position RIGHT'
+    run 'm dock position LEFT'
 
 
     ## Finder
