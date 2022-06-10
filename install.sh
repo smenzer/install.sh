@@ -320,7 +320,7 @@ ask_for_is_work() {
         is_work=false
     fi
 
-    printf '\n'
+    printf '\n\n'
 }
 
 # sets a flag for whether this is a mac server or not
