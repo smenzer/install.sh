@@ -96,6 +96,7 @@ declare -a cask_apps_work_only=(
     "eqmac" # equaliser for mac, useful for zoom meetings to reduce bass
     "firefox" # alternate browser
     "google-cloud-sdk" # suite of tools for google cloud storage
+    "google-drive" # google drive client
     "microsoft-teams" # video conferencing
     "miro" # ui for miro tool
     "zoom" # video conferencing
@@ -842,11 +843,9 @@ if is_mac; then
     run 'dockutil --no-restart --remove Messages'
     run 'dockutil --no-restart --remove Notes'
 
-
     # dock configure settings
     print_subaction "Configuration..."
     run 'm dock position LEFT'
-
 
     ## Finder
     print_action "Configuring Finder..."
@@ -855,8 +854,19 @@ if is_mac; then
     run 'defaults write com.apple.finder ShowPathbar -bool true'
     run 'defaults write com.apple.finder ShowStatusBar -bool true'
     run 'defaults write -g NSDocumentSaveNewDocumentsToCloud -bool false'
-    run 'defaults write com.apple.finder QLEnableTextSelection -bool TRUE' # allow text selection in quicklook
+    run 'defaults write com.apple.Finder FXPreferredViewStyle -string Nlsv' # list view by default
+    run 'defaults write com.apple.finder QLEnableTextSelection -bool true' # allow text selection in quicklook
+    run 'defaults write -g AppleInterfaceStyleSwitchesAutomatically -bool true' # automatic dark mode
+    run 'defaults write com.apple.finder FXDefaultSearchScope -string SCcf' # search current folder by default
+    run 'defaults write com.apple.finder NewWindowTarget -string PfDe' # new windows in home directory
     run 'echo $pw | sudo -S defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText "Found this computer? Contact me at $machine_email."'
+
+    # hot corners
+    run 'defaults write com.apple.dock wvous-bl-corner -int 4' # bottom left: show desktop
+    run 'defaults write com.apple.dock wvous-tl-corner -int 10' # top left: sleep displays
+    run 'defaults write com.apple.dock wvous-br-corner -int 1' # bottom right: nothing
+    run 'defaults write com.apple.dock wvous-tr-corner -int 1' # top right: nothing
+
     # show app switcher on all screens
     run 'defaults write com.apple.Dock appswitcher-all-displays -bool true'
 
