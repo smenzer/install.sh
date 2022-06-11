@@ -59,7 +59,7 @@ declare -a cask_apps=(
     "google-chrome" # primary browser
     "iterm2" # terminal
     "nordvpn" # vpn
-    # "osxfuse" # mount remote drives (deprecated)
+    # "osxfuse" # mount remote drives (deprecated, should test macfuse instead)
     "sublime-text" # text editor
     "virtualbox" # virtual machines
     "visual-studio-code" # ide
