@@ -21,13 +21,14 @@ declare -a mac_tools=(
     "autojump" # move to directories with "j <dir>"
     "coreutils" # requird for lots of stuff
     "docker" # docker containers
-    "dockutil" # tool for managing dock items
+    # "dockutil" # tool for managing dock items (need to install manually for now until homebrew supports v3)
     "duti" # select default apps for documents and URL schemes
     "iperf3" # network bandwidth analytics tool
     "jq" # json processor
     "m-cli" # mac CLI
     "mas" # mac app store CLI
     "python3" # python
+    "rbenv" # for command prompt (although not sure why)
     "shivammathur/php/php@7.4" # other specific php versions we want
     "shivammathur/php/php@8.0" # php since it's not included with macs anymore
     "speedtest-cli" # run speed tests from the commandline
@@ -123,7 +124,7 @@ declare -a fonts=(
     "font-open-sans"
     "font-droid-sans-mono-for-powerline"
     "font-droid-sans-mono-nerd-font"
-    "font-josefin-sans-std-light"
+    "font-josefin-sans"
     "font-montserrat"
     "font-hack-nerd-font"
 )
@@ -803,7 +804,7 @@ if is_mac; then
     print_subaction "Apps..."
     declare -a dockapps=(
         # declare from bottom to top of dock
-        "1Password 7"
+        "1Password"
         "Sublime Text"
         "Visual Studio Code"
         "Sourcetree"
@@ -833,6 +834,14 @@ if is_mac; then
     run 'dockutil --no-restart --remove Photos'
     run 'dockutil --no-restart --remove FaceTime'
     run 'dockutil --no-restart --remove iBooks'
+    run 'dockutil --no-restart --remove News'
+    run 'dockutil --no-restart --remove Music'
+    run 'dockutil --no-restart --remove Mail'
+    run 'dockutil --no-restart --remove Launchpad'
+    run 'dockutil --no-restart --remove "App Store"'
+    run 'dockutil --no-restart --remove Messages'
+    run 'dockutil --no-restart --remove Notes'
+
 
     # dock configure settings
     print_subaction "Configuration..."
@@ -892,14 +901,14 @@ if is_mac; then
     if [ ${is_mac_server} = false ]; then
         print_section 'DEV ENVIRONMENT'
 
-        ## PHP
-        print_action 'Creating php.ini and making it writeable...'
-        if [ ! -f /etc/php.ini ]; then
-            run 'echo $pw | sudo -S cp /etc/php.ini.default /etc/php.ini'
-        else
-            print_skipped
-        fi
-        run 'echo $pw | sudo chmod 644 /etc/php.ini'
+        ## PHP (don't think we need to do this anymore since we install php manually now)
+        # print_action 'Creating php.ini and making it writeable...'
+        # if [ ! -f /etc/php.ini ]; then
+        #     run 'echo $pw | sudo -S cp /etc/php.ini.default /etc/php.ini'
+        # else
+        #     print_skipped
+        # fi
+        # run 'echo $pw | sudo chmod 644 /etc/php.ini'
 
         ## Xcode CLI
         print_action 'Installing XCode CLI...'
