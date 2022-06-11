@@ -6,7 +6,7 @@ _Before installing, ensure the machine has an ssh public key already created and
 
 Open up a terminal and execute the following line:
 ```shell
-zsh <(curl -SsL https://raw.githubusercontent.com/smenzer/install.sh/master/install.sh?$RANDOM)
+zsh <(curl -SsL https://raw.githubusercontent.com/smenzer/install.sh/master/install.sh)
 ```
 ### Inputs
 It will ask you for a few inputs at the beginning of execution

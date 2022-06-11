@@ -1,5 +1,5 @@
 #!/bin/zsh
-# usage: zsh <(curl -SsL https://raw.githubusercontent.com/smenzer/install.sh/master/install.sh?$RANDOM)
+# usage: zsh <(curl -SsL https://raw.githubusercontent.com/smenzer/install.sh/master/install.sh)
 #
 # Inspired by https://gitlab.com/X99/reinstall.sh
 
