@@ -138,15 +138,15 @@ declare -a repos=(
 
 # other repos to download locally only for work
 declare -a repos_work_only=(
-    "git@github.com:smenzer/prebid.github.io.git" # github-id5: git@github.com:id5io/prebid.github.io.git | upstream: https://github.com/prebid/prebid.github.io.git
+    "git@github.com:smenzer/prebid.github.io.git" # git remote add github-id5 git@github.com:id5io/prebid.github.io.git && git remote add upstream https://github.com/prebid/prebid.github.io.git
     "git@gitlab.com:id5-sync/advertising-identity-guide.git"
     "git@gitlab.com:id5-sync/id-corp-website.git"
     "git@gitlab.com:id5-sync/id5_hosting.git"
-    "git@gitlab.com:id5-sync/id5-api.js.git" # upstream: git@github.com:id5io/id5-api.js.git
+    "git@gitlab.com:id5-sync/id5-api.js.git" # git remote add upstream git@github.com:id5io/id5-api.js.git
     "git@gitlab.com:id5-sync/id5.git"
-    "git@gitlab.com:id5-sync/ops-apps.git" # clever: git+ssh://git@push-n2-par-clevercloud-customers.services.clever-cloud.com/app_20e8e805-3d17-463b-bccc-a96e0be7c0ee.git
-    "git@gitlab.com:id5-sync/Prebid.js.git" # github-id5: git@github.com:id5io/Prebid.js.git | upstream: git@github.com:prebid/Prebid.js.git
-    "git@gitlab.com:id5-sync/samples.git" # web: ssh://smenzer@s00.id5-sync.com/home/smenzer/src/gitlab.com/id5/samples
+    "git@gitlab.com:id5-sync/ops-apps.git" # git remote add clever git+ssh://git@push-n2-par-clevercloud-customers.services.clever-cloud.com/app_20e8e805-3d17-463b-bccc-a96e0be7c0ee.git
+    "git@gitlab.com:id5-sync/Prebid.js.git" # git remote add github-id5 git@github.com:id5io/Prebid.js.git && git remote add upstream git@github.com:prebid/Prebid.js.git
+    "git@gitlab.com:id5-sync/samples.git" # git remote add web ssh://smenzer@s00.id5-sync.com/home/smenzer/src/gitlab.com/id5/samples
     "git@gitlab.com:id5-sync/tools-ui.git"
     "git@gitlab.com:id5-sync/universal-id-decryption-java.git"
     "git@gitlab.com:id5-sync/www.git"
