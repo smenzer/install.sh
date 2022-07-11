@@ -20,7 +20,6 @@ declare -a mac_tools=(
     "ack" # search, like grep but better
     "autojump" # move to directories with "j <dir>"
     "coreutils" # requird for lots of stuff
-    "docker" # docker containers
     # "dockutil" # tool for managing dock items (need to install manually for now until homebrew supports v3)
     "duti" # select default apps for documents and URL schemes
     "iperf3" # network bandwidth analytics tool
@@ -30,7 +29,7 @@ declare -a mac_tools=(
     "python3" # python
     "rbenv" # for command prompt (although not sure why)
     "shivammathur/php/php@7.4" # other specific php versions we want
-    "shivammathur/php/php@8.0" # php since it's not included with macs anymore
+    "shivammathur/php/php@8.1" # php since it's not included with macs anymore
     "speedtest-cli" # run speed tests from the commandline
     "subversion" # required for some fonts, and probably other things
 )
