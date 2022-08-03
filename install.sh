@@ -57,6 +57,7 @@ declare -a cask_apps=(
     "dropbox" # cloud files
     "google-chrome" # primary browser
     "iterm2" # terminal
+    "netspot" # wifi / network analyzer
     "nordvpn" # vpn
     # "osxfuse" # mount remote drives (deprecated, should test macfuse instead)
     "sublime-text" # text editor
