@@ -28,8 +28,8 @@ declare -a mac_tools=(
     "mas" # mac app store CLI
     "python3" # python
     "rbenv" # for command prompt (although not sure why)
-    "shivammathur/php/php@7.4" # other specific php versions we want
     "shivammathur/php/php@8.1" # php since it's not included with macs anymore
+    "shivammathur/php/php@7.4" # other specific php versions we want
     "speedtest-cli" # run speed tests from the commandline
     "subversion" # required for some fonts, and probably other things
 )
@@ -655,7 +655,7 @@ if is_mac; then
 
     # configure php
     print_action "configure php..."
-    run 'brew link --overwrite --force php@7.4'
+    run 'brew link --overwrite --force php@8.1'
     # to change versions: brew unlink php && brew link --overwrite --force php@8.1
 
     if [ ${is_mac_server} = true ]; then
