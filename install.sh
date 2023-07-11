@@ -28,6 +28,7 @@ declare -a mac_tools=(
     "mas" # mac app store CLI
     "python3" # python
     "rbenv" # for command prompt (although not sure why)
+    "shivammathur/php/php@8.2" # php since it's not included with macs anymore
     "shivammathur/php/php@8.1" # php since it's not included with macs anymore
     "shivammathur/php/php@7.4" # other specific php versions we want
     "speedtest-cli" # run speed tests from the commandline
