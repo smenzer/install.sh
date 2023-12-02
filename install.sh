@@ -19,6 +19,7 @@ INSTALL_LOG='./install_log.log'
 declare -a mac_tools=(
     "ack" # search, like grep but better
     "autojump" # move to directories with "j <dir>"
+    "certbot" # letsencrypt
     "coreutils" # requird for lots of stuff
     # "dockutil" # tool for managing dock items (need to install manually for now until homebrew supports v3)
     "duti" # select default apps for documents and URL schemes
@@ -26,6 +27,7 @@ declare -a mac_tools=(
     "jq" # json processor
     "m-cli" # mac CLI
     "mas" # mac app store CLI
+    "mkcert" # tool to make locally trusted development certificates
     "python3" # python
     "rbenv" # for command prompt (although not sure why)
     "shivammathur/php/php@8.2" # php since it's not included with macs anymore
