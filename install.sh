@@ -71,22 +71,22 @@ declare -a cask_apps_clients_only=(
     # "adoptopenjdk8" # jdk required for dbeaver (using jdk11 instead)
     "asana" # stand-alone asana app
     "bartender" # manages menu bar
-    "cheatsheet" # hold ⌘ in an app to see all shortcuts
+    # "cheatsheet" # hold ⌘ in an app to see all shortcuts
     "dbeaver-community" # ui for db
     "divvy" # window management
     "flotato" # converts websites into native apps
-    "gpg-suite" # encryption
+    # "gpg-suite" # encryption
     # "intel-power-gadget" # detailed analytics for intel processor; needed for istat menus (causes issues with Vagrant/Virtualbox)
     "istat-menus" # menu bar stats
     "macdown" # markdown editor
-    "ngrok" # share dev site externally and (optionally) with https
+    # "ngrok" # share dev site externally and (optionally) with https
     "postman" # http request ui for api dev
     "runjs" # javascript playground
     "signal" # messaging platform
     "slack" # messaging platform
     "sourcetree" # source control ui
     "spotify" # music
-    "spotmenu" # spotify menu bar
+    # "spotmenu" # spotify menu bar
     "vagrant" # dev environment for laravel
     "vlc" # play all videos
     "whatsapp" # whatsapp for desktop
@@ -98,7 +98,7 @@ declare -a cask_apps_work_only=(
     "firefox" # alternate browser
     "google-cloud-sdk" # suite of tools for google cloud storage
     "google-drive" # google drive client
-    "microsoft-teams" # video conferencing
+    # "microsoft-teams" # video conferencing
     "miro" # ui for miro tool
     "zoom" # video conferencing
 )
