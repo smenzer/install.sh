@@ -45,6 +45,7 @@ declare -a mac_tools_clients_only=(
 # brew tools that only go on work laptops
 declare -a tools_work_only=(
     "awscli" # amazon command line
+    "clevercloud/tap/clever-tools" # clevercloud hosting command line tools
 )
 
 # cask apps that go on all macs
