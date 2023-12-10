@@ -619,8 +619,10 @@ if is_mac; then
     ## Install and update homebrew
     print_action "Installing Homebrew..."
     if ! is_command brew; then
-        yes "" | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" >/dev/null 2>&1
+        run 'curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh -o install.sh'
+        run 'yes "" | /bin/bash -c install.sh'
         run 'brew doctor'
+        run 'rm -f install.sh'
     else
         print_skipped
     fi
