@@ -431,6 +431,9 @@ fi
 # truncate log to zero
 :> ${INSTALL_LOG}
 
+# get username
+user_name=$(whoami)
+
 # make sure git and ssh keys are properly installed/set up before doing anything
 printf '\nBefore we start, we need to make sure your machine has all the pre-requisites\n'
 check_for_git
@@ -549,7 +552,7 @@ print_subaction "Installing git-get..."
 if ! is_command git-get; then
     pushd ${terminal_dir}/git/git-utils/git-get >/dev/null || return
     run 'echo $pw | sudo -S mkdir -p /opt/git-get/'
-    run 'echo $pw | sudo -S chown -R `whoami` /usr/local'
+    run 'echo $pw | sudo -S chown -R $user_name /usr/local'
     run "export INSTALL_DIR=/opt/git-get/ && ${terminal_dir}/git/git-utils/git-get/install >/dev/null"
     popd >/dev/null || return
 else
