@@ -631,6 +631,7 @@ if is_mac; then
         run 'brew doctor'
         run 'rm -f install.sh'
         export PATH="/opt/homebrew/bin/:$PATH"
+        echo $PATH
     else
         print_skipped
     fi
