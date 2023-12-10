@@ -552,7 +552,7 @@ print_subaction "Installing git-get..."
 if ! is_command git-get; then
     pushd ${terminal_dir}/git/git-utils/git-get >/dev/null || return
     run 'echo $pw | sudo -S mkdir -p /opt/git-get/'
-    run 'echo $pw | sudo -S chown -R $user_name /usr/local'
+    run 'echo $pw | sudo -S chown -R $user_name /opt/git-get'
     run "export INSTALL_DIR=/opt/git-get/ && ${terminal_dir}/git/git-utils/git-get/install >/dev/null"
     popd >/dev/null || return
 else
