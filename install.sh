@@ -628,9 +628,9 @@ if is_mac; then
         run 'curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh -o install.sh'
         run 'chmod +x install.sh'
         run 'yes "" | /bin/bash -c ./install.sh'
+        export PATH="/opt/homebrew/bin/:$PATH"
         run 'brew doctor'
         run 'rm -f install.sh'
-        export PATH="/opt/homebrew/bin/:$PATH"
         echo $PATH
     else
         print_skipped
