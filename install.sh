@@ -548,8 +548,7 @@ run "ln -sf ${terminal_dir}/git/git-prompt.sh ~/.git-prompt.sh"
 print_subaction "Installing git-get..."
 if ! is_command git-get; then
     pushd ${terminal_dir}/git/git-utils/git-get >/dev/null || return
-    run 'export INSTALL_DIR=/usr/local/bin'
-    run 'echo $pw | sudo -S ${terminal_dir}/git/git-utils/git-get/install >/dev/null'
+    run "export INSTALL_DIR=/opt/git-get/ && ${terminal_dir}/git/git-utils/git-get/install >/dev/null"
     popd >/dev/null || return
 else
     print_skipped
