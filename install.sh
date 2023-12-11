@@ -47,7 +47,7 @@ declare -a mac_tools_clients_only=(
 # brew tools that only go on work laptops
 declare -a tools_work_only=(
     "awscli" # amazon command line
-    "clevercloud/tap/clever-tools" # clevercloud hosting command line tools
+    "clevercloud/homebrew-tap/clever-tools" # clevercloud hosting command line tools
 )
 
 # cask apps that go on all macs
@@ -351,6 +351,15 @@ is_mac() {
         return 0 # a mac
     else
         return 1 # not a mac
+    fi
+}
+
+# whether the machine is an apple silicon Mac or not
+is_apple_silicon() {
+    if [[ `arch` == 'arm64' ]]; then
+        return 0 # apple silicon
+    else
+        return 1 # other silicon
     fi
 }
 
@@ -759,10 +768,15 @@ if is_mac; then
         done
     fi
 
+    if is_apple_silicon; then
+        # run rosetta for backwards compatibility with intel-based apps
+        run 'softwareupdate --install-rosetta --agree-to-license'
+    fi
+
     ## Open apps that need to be running
     print_action "Opening apps"
     declare -a apps_to_open=(
-        "/Applications/Alfred 4.app"
+        "/Applications/Alfred 5.app"
         "/Applications/Caffeine.app"
         "/Applications/Dropbox.app"
         "/Applications/Divvy.app"
@@ -797,55 +811,57 @@ if is_mac; then
     #####
     print_section 'MAC CONFIGURATION'
 
-    ## Dock
-    print_action "Setting up the dock"
+    if is_command dockutil; then
+        ## Dock
+        print_action "Setting up the dock"
 
-    # dock folders
-    print_subaction "Folders..."
-    run 'dockutil --add "/Applications" --view auto --display folder --replacing "Applications" --position 1 --no-restart'
-    run 'dockutil --add "$HOME/Downloads" --view list --display folder --replacing "Downloads" --position 2 --no-restart'
+        # dock folders
+        print_subaction "Folders..."
+        run 'dockutil --add "/Applications" --view auto --display folder --replacing "Applications" --position 1 --no-restart'
+        run 'dockutil --add "$HOME/Downloads" --view list --display folder --replacing "Downloads" --position 2 --no-restart'
 
-    # dock apps
-    print_subaction "Apps..."
-    declare -a dockapps=(
-        # declare from bottom to top of dock
-        "1Password"
-        "Sublime Text"
-        "Visual Studio Code"
-        "Sourcetree"
-        "iTerm"
-        "WhatsApp"
-        "Slack"
-        "Google Chrome"
-    )
-    existing_dock_apps=$(dockutil --list)
-    for dockapp in "${dockapps[@]}"; do
-        if [[ $(echo "${existing_dock_apps}" | grep $dockapp) ]]; then
-            run "dockutil --move \"$dockapp\" --position 1 --no-restart"
-        else
-            run "dockutil --add \"/Applications/$dockapp.app\" --position 1 --no-restart"
-        fi
-    done
+        # dock apps
+        print_subaction "Apps..."
+        declare -a dockapps=(
+            # declare from bottom to top of dock
+            "1Password"
+            "Sublime Text"
+            "Visual Studio Code"
+            "Sourcetree"
+            "iTerm"
+            "WhatsApp"
+            "Slack"
+            "Google Chrome"
+        )
+        existing_dock_apps=$(dockutil --list)
+        for dockapp in "${dockapps[@]}"; do
+            if [[ $(echo "${existing_dock_apps}" | grep $dockapp) ]]; then
+                run "dockutil --move \"$dockapp\" --position 1 --no-restart"
+            else
+                run "dockutil --add \"/Applications/$dockapp.app\" --position 1 --no-restart"
+            fi
+        done
 
-    # dock remove apple stuff
-    print_subaction "Remove Apple apps..."
-    run 'dockutil --no-restart --remove Safari'
-    run 'dockutil --no-restart --remove TV'
-    run 'dockutil --no-restart --remove Podcasts'
-    run 'dockutil --no-restart --remove Contacts'
-    run 'dockutil --no-restart --remove Calendar'
-    run 'dockutil --no-restart --remove Reminders'
-    run 'dockutil --no-restart --remove Maps'
-    run 'dockutil --no-restart --remove Photos'
-    run 'dockutil --no-restart --remove FaceTime'
-    run 'dockutil --no-restart --remove iBooks'
-    run 'dockutil --no-restart --remove News'
-    run 'dockutil --no-restart --remove Music'
-    run 'dockutil --no-restart --remove Mail'
-    run 'dockutil --no-restart --remove Launchpad'
-    run 'dockutil --no-restart --remove "App Store"'
-    run 'dockutil --no-restart --remove Messages'
-    run 'dockutil --no-restart --remove Notes'
+        # dock remove apple stuff
+        print_subaction "Remove Apple apps..."
+        run 'dockutil --no-restart --remove Safari'
+        run 'dockutil --no-restart --remove TV'
+        run 'dockutil --no-restart --remove Podcasts'
+        run 'dockutil --no-restart --remove Contacts'
+        run 'dockutil --no-restart --remove Calendar'
+        run 'dockutil --no-restart --remove Reminders'
+        run 'dockutil --no-restart --remove Maps'
+        run 'dockutil --no-restart --remove Photos'
+        run 'dockutil --no-restart --remove FaceTime'
+        run 'dockutil --no-restart --remove iBooks'
+        run 'dockutil --no-restart --remove News'
+        run 'dockutil --no-restart --remove Music'
+        run 'dockutil --no-restart --remove Mail'
+        run 'dockutil --no-restart --remove Launchpad'
+        run 'dockutil --no-restart --remove "App Store"'
+        run 'dockutil --no-restart --remove Messages'
+        run 'dockutil --no-restart --remove Notes'
+    fi
 
     # dock configure settings
     print_subaction "Configuration..."
