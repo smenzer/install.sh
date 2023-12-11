@@ -440,6 +440,9 @@ fi
 # truncate log to zero
 :> ${INSTALL_LOG}
 
+# get username
+user_name=$(whoami)
+
 # make sure git and ssh keys are properly installed/set up before doing anything
 printf '\nBefore we start, we need to make sure your machine has all the pre-requisites\n'
 check_for_git
@@ -557,7 +560,9 @@ run "ln -sf ${terminal_dir}/git/git-prompt.sh ~/.git-prompt.sh"
 print_subaction "Installing git-get..."
 if ! is_command git-get; then
     pushd ${terminal_dir}/git/git-utils/git-get >/dev/null || return
-    run "export INSTALL_DIR=/usr/local/bin && ${terminal_dir}/git/git-utils/git-get/install >/dev/null"
+    run 'echo $pw | sudo -S mkdir -p /opt/git-get/'
+    run 'echo $pw | sudo -S chown -R $user_name /opt/git-get'
+    run "export INSTALL_DIR=/opt/git-get/ && ${terminal_dir}/git/git-utils/git-get/install >/dev/null"
     popd >/dev/null || return
 else
     print_skipped
@@ -629,8 +634,13 @@ if is_mac; then
     ## Install and update homebrew
     print_action "Installing Homebrew..."
     if ! is_command brew; then
-        yes "" | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" >/dev/null 2>&1
+        run 'curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh -o install.sh'
+        run 'chmod +x install.sh'
+        run 'yes "" | /bin/bash -c ./install.sh'
+        export PATH="/opt/homebrew/bin/:$PATH"
         run 'brew doctor'
+        run 'rm -f install.sh'
+        echo $PATH
     else
         print_skipped
     fi
