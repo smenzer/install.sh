@@ -144,7 +144,7 @@ declare -a repos=(
 declare -a repos_work_only=(
     "git@github.com:smenzer/prebid.github.io.git" # git remote add github-id5 git@github.com:id5io/prebid.github.io.git && git remote add upstream https://github.com/prebid/prebid.github.io.git
     "git@gitlab.com:id5-sync/advertising-identity-guide.git"
-    "git@gitlab.com:id5-sync/id-corp-website.git"
+    "git@gitlab.com:id5-sync/id5-corp-website.git"
     "git@gitlab.com:id5-sync/id5_hosting.git"
     "git@gitlab.com:id5-sync/id5-api.js.git" # git remote add upstream git@github.com:id5io/id5-api.js.git
     "git@gitlab.com:id5-sync/id5.git"
