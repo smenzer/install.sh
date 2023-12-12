@@ -83,6 +83,7 @@ declare -a cask_apps_clients_only=(
     "istat-menus" # menu bar stats
     "macdown" # markdown editor
     # "ngrok" # share dev site externally and (optionally) with https
+    "notion" # wiki / documentation tool
     "postman" # http request ui for api dev
     "runjs" # javascript playground
     "signal" # messaging platform
@@ -834,11 +835,13 @@ if is_mac; then
         declare -a dockapps=(
             # declare from bottom to top of dock
             "1Password"
-            "Sublime Text"
-            "Visual Studio Code"
             "Sourcetree"
+            "Visual Studio Code"
             "iTerm"
+            "Asana"
+            "Notion"
             "WhatsApp"
+            "Zoom"
             "Slack"
             "Google Chrome"
         )
@@ -870,6 +873,7 @@ if is_mac; then
         run 'dockutil --no-restart --remove "App Store"'
         run 'dockutil --no-restart --remove Messages'
         run 'dockutil --no-restart --remove Notes'
+        run 'dockutil --no-restart --remove Freeform'
     fi
 
     # dock configure settings
