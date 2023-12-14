@@ -103,7 +103,7 @@ declare -a cask_apps_work_only=(
     "google-cloud-sdk" # suite of tools for google cloud storage
     "google-drive" # google drive client
     # "microsoft-teams" # video conferencing
-    "miro" # ui for miro tool
+    # "miro" # ui for miro tool
     "zoom" # video conferencing
 )
 
