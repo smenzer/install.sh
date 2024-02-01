@@ -933,6 +933,7 @@ if is_mac; then
     ## Sublime text
     ## source: https://packagecontrol.io/docs/syncing#dropbox-osx
     print_action "Setting Sublime Text syncing..."
+    # todo this directory doesn't exist until sublime is opened for the first time!!
     sublime_path="$HOME/Library/Application\ Support/Sublime\ Text/Packages"
     dropbox_path="$HOME/Dropbox/Apps\ and\ Dev/Sublime/User"
     run "rm -f ${sublime_path}/User"
