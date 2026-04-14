@@ -600,6 +600,17 @@ run "ln -sf ${terminal_dir}/vim/vimrc ~/.vimrc"
 print_subaction "Installing vim plugins..."
 run 'vim +PluginInstall +qall'
 
+## Claude Code
+print_action "Setting up Claude Code"
+
+print_subaction "Creating ~/.claude directory if needed..."
+run "mkdir -p ~/.claude"
+
+print_subaction "Symlinking Claude settings..."
+run "ln -sf ${terminal_dir}/claude/settings.work.json ~/.claude/settings.work.json"
+run "ln -sf ${terminal_dir}/claude/settings.personal.json ~/.claude/settings.personal.json"
+run "ln -sf ${terminal_dir}/claude/statusline.sh ~/.claude/statusline.sh"
+
 ## Iterm Shell
 print_action "Installing iTerm2 shell integrations"
 original_shell=${SHELL}
