@@ -63,6 +63,7 @@ declare -a cask_apps=(
     "iterm2" # terminal
     "netspot" # wifi / network analyzer
     "nordvpn" # vpn
+    "openvpn-connect" # menzernet vpn client
     # "osxfuse" # mount remote drives (deprecated, should test macfuse instead)
     "sublime-text" # text editor
     "virtualbox" # virtual machines
