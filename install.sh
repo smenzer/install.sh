@@ -56,7 +56,7 @@ declare -a cask_apps=(
     "alfred" # command / app launcher
     "angry-ip-scanner" # network scanner
     "appcleaner" # delete all extra files from an app
-    "caffeine" # prevent sleep
+    "keepingyouawake" # prevent sleep
     "docker" # mac ui for docker containers
     "dropbox" # cloud files
     "google-chrome" # primary browser
@@ -799,7 +799,7 @@ if is_mac; then
     print_action "Opening apps"
     declare -a apps_to_open=(
         "/Applications/Alfred 5.app"
-        "/Applications/Caffeine.app"
+        "/Applications/KeepingYouAwake.app"
         "/Applications/Dropbox.app"
         "/Applications/Divvy.app"
     )
