@@ -934,12 +934,17 @@ if is_mac; then
     print_action "Enabling locate database..."
     run 'echo $pw | sudo -S launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist'
 
-    ## Add keychain item for fix network app
-    print_action "Adding keychain item for fix-network..."
-    if [[ $(security find-generic-password -l "fix-network" 2>&1) ]]; then
+    ## Passwordless sudo for the commands run by terminal/bin/fix-network
+    print_action "Allowing fix-network to run without a sudo password..."
+    if [ -f /etc/sudoers.d/fix-network ]; then
         print_skipped
     else
-        run 'security add-generic-password -s "fix-network" -a $LOGNAME -w "$pw"'
+        fix_network_sudoers="$(mktemp)"
+        cat > "$fix_network_sudoers" <<SUDOERS
+$USER ALL=(root) NOPASSWD: /usr/sbin/networksetup -setnetworkserviceenabled *, /usr/bin/dscacheutil -flushcache, /usr/bin/killall -HUP mDNSResponder
+SUDOERS
+        run 'echo $pw | sudo -S visudo -cf "$fix_network_sudoers" && echo $pw | sudo -S install -m 0440 -o root -g wheel "$fix_network_sudoers" /etc/sudoers.d/fix-network'
+        rm -f "$fix_network_sudoers"
     fi
 
     ## Sublime text
