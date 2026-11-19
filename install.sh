@@ -20,52 +20,56 @@ declare -a mac_tools=(
     "ack" # search, like grep but better
     "autojump" # move to directories with "j <dir>"
     "certbot" # letsencrypt
+    "composer" # php dependency manager
     "coreutils" # requird for lots of stuff
-    # "dockutil" # tool for managing dock items (need to install manually for now until homebrew supports v3)
+    "dockutil" # tool for managing dock items
     "duti" # select default apps for documents and URL schemes
     "iperf3" # network bandwidth analytics tool
     "jq" # json processor
     "m-cli" # mac CLI
     "mas" # mac app store CLI
     "mkcert" # tool to make locally trusted development certificates
-    "python3" # python
+    "node" # node.js
+    "php" # php (current) since it's not included with macs anymore
+    "php@8.3" # other specific php version we want
+    "pyenv" # manage python versions
     "rbenv" # for command prompt (although not sure why)
-    "shivammathur/php/php@8.2" # php since it's not included with macs anymore
-    "shivammathur/php/php@8.1" # php since it's not included with macs anymore
-    "shivammathur/php/php@7.4" # other specific php versions we want
-    "speedtest-cli" # run speed tests from the commandline
     "subversion" # required for some fonts, and probably other things
 )
 # brew tools that only go on laptops/computers we use (i.e. not servers)
 declare -a mac_tools_clients_only=(
     "exiftool" # read and edit exif information
     "gh" # github cli
-    "openjdk@11" # jdk for dbeaver and work dev environment
+    "git-lfs" # large file support for git
+    "gitleaks" # scan repos for secrets
+    "googleworkspace-cli" # google workspace from the terminal
+    "imagemagick" # image conversion
+    "ios-deploy" # install iOS apps from the command line
+    "mosquitto" # MQTT broker and clients
     "switchaudio-osx" # change macOS audio source from the command-line (SwitchAudioSource)
+    "tesseract" # OCR
     "wget" # retrieve remote files
 )
 # brew tools that only go on work laptops
 declare -a tools_work_only=(
     "awscli" # amazon command line
-    "clevercloud/homebrew-tap/clever-tools" # clevercloud hosting command line tools
 )
 
 # cask apps that go on all macs
 declare -a cask_apps=(
     "1password" # password manager
+    "1password-cli" # 1password command line (op)
     "alfred" # command / app launcher
-    "angry-ip-scanner" # network scanner
     "appcleaner" # delete all extra files from an app
-    "keepingyouawake" # prevent sleep
-    "docker" # mac ui for docker containers
+    "docker-desktop" # mac ui for docker containers
     "dropbox" # cloud files
     "google-chrome" # primary browser
     "iterm2" # terminal
+    "keepingyouawake" # prevent sleep
+    "macfuse" # mount remote drives
     "netspot" # wifi / network analyzer
     "nordvpn" # vpn
     "openvpn-connect" # menzernet vpn client
-    # "osxfuse" # mount remote drives (deprecated, should test macfuse instead)
-    "sublime-text" # text editor
     "virtualbox" # virtual machines
     "visual-studio-code" # ide
 )
@@ -76,16 +80,19 @@ declare -a cask_apps_clients_only=(
     "asana" # stand-alone asana app
     "bartender" # manages menu bar
     # "cheatsheet" # hold ⌘ in an app to see all shortcuts
+    "claude" # claude desktop app
     "dbeaver-community" # ui for db
-    "divvy" # window management
     "flotato" # converts websites into native apps
     # "gpg-suite" # encryption
+    "granola" # meeting notes
     # "intel-power-gadget" # detailed analytics for intel processor; needed for istat menus (causes issues with Vagrant/Virtualbox)
     "istat-menus" # menu bar stats
-    "macdown" # markdown editor
+    "mqtt-explorer" # MQTT debugging UI
     # "ngrok" # share dev site externally and (optionally) with https
     "notion" # wiki / documentation tool
+    "openmtp" # android file transfer
     "postman" # http request ui for api dev
+    "rectangle" # window management
     "runjs" # javascript playground
     "signal" # messaging platform
     "slack" # messaging platform
@@ -101,7 +108,7 @@ declare -a cask_apps_work_only=(
     "cyberduck" # ftp gui
     "eqmac" # equaliser for mac, useful for zoom meetings to reduce bass
     "firefox" # alternate browser
-    "google-cloud-sdk" # suite of tools for google cloud storage
+    "gcloud-cli" # suite of tools for google cloud storage
     "google-drive" # google drive client
     # "microsoft-teams" # video conferencing
     # "miro" # ui for miro tool
@@ -118,22 +125,19 @@ declare -a mac_app_store_apps_clients_only=(
 )
 # brew taps required
 declare -a taps=(
-    "homebrew/cask" # homebrew cask
     "buo/cask-upgrade" # update casks easier (brew cu)
-    "homebrew/cask-fonts" # fonts
-    "shivammathur/php" # php (php was deprecated in MacOs 12.0 - https://wpbeaches.com/updating-to-php-versions-7-4-and-8-on-macos-12-monterey/)
 )
 
 # fonts to install
 declare -a fonts=(
-    "font-meslo-lg-nerd-font"
-    "font-meslo-for-powerline"
-    "font-open-sans"
     "font-droid-sans-mono-for-powerline"
     "font-droid-sans-mono-nerd-font"
-    "font-josefin-sans"
-    "font-montserrat"
     "font-hack-nerd-font"
+    "font-josefin-sans"
+    "font-meslo-for-powerline"
+    "font-meslo-lg-nerd-font"
+    "font-montserrat"
+    "font-open-sans"
 )
 
 # other repos to download locally
@@ -144,20 +148,7 @@ declare -a repos=(
 
 # other repos to download locally only for work
 declare -a repos_work_only=(
-    "git@github.com:smenzer/prebid.github.io.git" # git remote add github-id5 git@github.com:id5io/prebid.github.io.git && git remote add upstream https://github.com/prebid/prebid.github.io.git
-    "git@gitlab.com:id5-sync/advertising-identity-guide.git"
-    "git@gitlab.com:id5-sync/id5-corp-website.git"
-    "git@gitlab.com:id5-sync/id5_hosting.git"
-    "git@gitlab.com:id5-sync/id5-api.js.git" # git remote add upstream git@github.com:id5io/id5-api.js.git
-    "git@gitlab.com:id5-sync/id5.git"
-    "git@gitlab.com:id5-sync/ops-apps.git" # git remote add clever git+ssh://git@push-n2-par-clevercloud-customers.services.clever-cloud.com/app_20e8e805-3d17-463b-bccc-a96e0be7c0ee.git
-    "git@gitlab.com:id5-sync/Prebid.js.git" # git remote add github-id5 git@github.com:id5io/Prebid.js.git && git remote add upstream git@github.com:prebid/Prebid.js.git
-    "git@gitlab.com:id5-sync/samples.git" # git remote add web ssh://smenzer@s00.id5-sync.com/home/smenzer/src/gitlab.com/id5/samples
-    "git@gitlab.com:id5-sync/tools-ui.git"
-    "git@gitlab.com:id5-sync/universal-id-decryption-java.git"
-    "git@gitlab.com:id5-sync/www.git"
-    "git@gitlab.com:id5-sync/zoho-crm-functions.git"
-    "git@gitlab.com:id5-sync/zoho-crm-functions.git"
+    "git@github.com:smenzer-forks/prebid.github.io.git" # git remote add upstream https://github.com/prebid/prebid.github.io.git
 )
 
 # colors
@@ -604,13 +595,41 @@ run 'vim +PluginInstall +qall'
 ## Claude Code
 print_action "Setting up Claude Code"
 
-print_subaction "Creating ~/.claude directory if needed..."
-run "mkdir -p ~/.claude"
+# native installer: puts the launcher at ~/.local/bin/claude
+print_subaction "Installing Claude Code..."
+if is_command claude || [ -x "${HOME}/.local/bin/claude" ]; then
+    print_skipped
+else
+    run 'curl -fsSL https://claude.ai/install.sh | bash'
+fi
+
+# three config dirs, one per surface (see terminal/claude/README.md):
+#   ~/.claude          Claude Desktop app (work account)
+#   ~/.claude-work     terminal, via claudew (work account)
+#   ~/.claude-personal terminal, via claudep (personal account)
+# Shared files are symlinked from the terminal repo. settings.local.json and
+# skills/ are deliberately per-profile, so they are not linked.
+claude_repo="${terminal_dir}/claude"
+
+print_subaction "Symlinking shared Claude files..."
+for claude_dir in "${HOME}/.claude" "${HOME}/.claude-work" "${HOME}/.claude-personal"; do
+    run "mkdir -p ${claude_dir}"
+    run "ln -sfn ${claude_repo}/CLAUDE.md ${claude_dir}/CLAUDE.md"
+    run "ln -sfn ${claude_repo}/commands ${claude_dir}/commands"
+    run "ln -sfn ${claude_repo}/scheduled-tasks ${claude_dir}/scheduled-tasks"
+done
+
+# the statusline is only linked for the terminal profiles; the settings.json
+# for each profile points at its own copy (~/.claude uses the work one)
+print_subaction "Symlinking Claude statusline..."
+for claude_dir in "${HOME}/.claude-work" "${HOME}/.claude-personal"; do
+    run "ln -sfn ${claude_repo}/statusline.sh ${claude_dir}/statusline.sh"
+done
 
 print_subaction "Symlinking Claude settings..."
-run "ln -sf ${terminal_dir}/claude/settings.work.json ~/.claude/settings.work.json"
-run "ln -sf ${terminal_dir}/claude/settings.personal.json ~/.claude/settings.personal.json"
-run "ln -sf ${terminal_dir}/claude/statusline.sh ~/.claude/statusline.sh"
+run "ln -sfn ${claude_repo}/settings.work.json ${HOME}/.claude/settings.json"
+run "ln -sfn ${claude_repo}/settings.work.json ${HOME}/.claude-work/settings.json"
+run "ln -sfn ${claude_repo}/settings.personal.json ${HOME}/.claude-personal/settings.json"
 
 ## Iterm Shell
 print_action "Installing iTerm2 shell integrations"
@@ -681,7 +700,7 @@ if is_mac; then
             if [ $(echo $brew_formulae | grep -x "$tool" ) ]; then
                 print_skipped
             else
-                run 'brew install "$tool" --no-quarantine'
+                run 'brew install "$tool"'
             fi
         else
             print_skipped
@@ -690,8 +709,8 @@ if is_mac; then
 
     # configure php
     print_action "configure php..."
-    run 'brew link --overwrite --force php@8.1'
-    # to change versions: brew unlink php && brew link --overwrite --force php@8.1
+    run 'brew link --overwrite --force php'
+    # to change versions: brew unlink php && brew link --overwrite --force php@8.3
 
     if [ ${is_mac_server} = true ]; then
         # skip some CLI tools that we don't need on Mac servers
@@ -704,7 +723,7 @@ if is_mac; then
                 if [ $(echo $brew_formulae | grep -x "$tool" ) ]; then
                     print_skipped
                 else
-                    run 'brew install "$tool" --no-quarantine'
+                    run 'brew install "$tool"'
                 fi
             else
                 print_skipped
@@ -721,17 +740,13 @@ if is_mac; then
                 if [ $(echo $brew_formulae | grep -x "$tool" ) ]; then
                     print_skipped
                 else
-                    run 'brew install "$tool" --no-quarantine'
+                    run 'brew install "$tool"'
                 fi
             else
                 print_skipped
             fi
         done
     fi
-
-    ## Python3
-    print_action "Installing Python packages..."
-    run 'echo $pw | sudo -S pip3 install --upgrade pip setuptools wheel'
 
     ## Install cask apps via brew...
     print_action "Installing brew cask apps..."
@@ -740,7 +755,7 @@ if is_mac; then
         if [ $(echo $brew_casks | grep -x "$app" ) ]; then
             print_skipped
         else
-            run 'echo $pw | brew install --cask "$app" --force --no-quarantine'
+            run 'echo $pw | brew install --cask "$app" --force'
         fi
     done
 
@@ -754,7 +769,7 @@ if is_mac; then
             if [ $(echo $brew_casks | grep -x "$app" ) ]; then
                 print_skipped
             else
-                run 'echo $pw | brew install --cask "$app" --force --no-quarantine'
+                run 'echo $pw | brew install --cask "$app" --force'
             fi
         done
     fi
@@ -767,7 +782,7 @@ if is_mac; then
             if [ $(echo $brew_casks | grep -x "$app" ) ]; then
                 print_skipped
             else
-                run 'echo $pw | brew install --cask "$app" --force --no-quarantine'
+                run 'echo $pw | brew install --cask "$app" --force'
             fi
         done
     fi
@@ -799,9 +814,8 @@ if is_mac; then
     print_action "Opening apps"
     declare -a apps_to_open=(
         "/Applications/Alfred 5.app"
-        "/Applications/KeepingYouAwake.app"
         "/Applications/Dropbox.app"
-        "/Applications/Divvy.app"
+        "/Applications/KeepingYouAwake.app"
     )
     for app in "${apps_to_open[@]}"; do
         print_subaction "${app}..."
@@ -820,7 +834,7 @@ if is_mac; then
         if [ $(echo $brew_casks | grep -x "$font" ) ]; then
             print_skipped
         else
-            run 'brew install --cask "$font" --no-quarantine'
+            run 'brew install --cask "$font"'
         fi
     done
 
@@ -921,10 +935,10 @@ if is_mac; then
     run 'duti -s com.microsoft.VSCode .php all'
     run 'duti -s com.microsoft.VSCode .js all'
     run 'duti -s com.microsoft.VSCode .sh all'
-    run 'duti -s com.sublimetext.3 .ini all'
-    run 'duti -s com.sublimetext.3 .py all'
-    run 'duti -s com.sublimetext.3 .txt all'
-    run 'duti -s com.sublimetext.3 .json all'
+    run 'duti -s com.microsoft.VSCode .ini all'
+    run 'duti -s com.microsoft.VSCode .py all'
+    run 'duti -s com.microsoft.VSCode .txt all'
+    run 'duti -s com.microsoft.VSCode .json all'
 
     ## Remove guest account
     print_action "Deactivating guest account..."
@@ -947,15 +961,6 @@ SUDOERS
         rm -f "$fix_network_sudoers"
     fi
 
-    ## Sublime text
-    ## source: https://packagecontrol.io/docs/syncing#dropbox-osx
-    print_action "Setting Sublime Text syncing..."
-    # todo this directory doesn't exist until sublime is opened for the first time!!
-    sublime_path="$HOME/Library/Application\ Support/Sublime\ Text/Packages"
-    dropbox_path="$HOME/Dropbox/Apps\ and\ Dev/Sublime/User"
-    run "rm -f ${sublime_path}/User"
-    run "ln -s ${dropbox_path} ${sublime_path}"
-
     #####
     ## DEV ENVIRONMENT
     #####
@@ -974,25 +979,6 @@ SUDOERS
         ## Xcode CLI
         print_action 'Installing XCode CLI...'
         run 'xcode-select --install'
-
-        ## Node.js / Gulp
-        print_action 'Installing Node.js / Gulp'
-
-        # node.js
-        print_subaction 'Installing node.js v12...'
-        run "source ${terminal_dir}/zdotdir/plugins/zsh-nvm/zsh-nvm.plugin.zsh && nvm install 12"
-        run "echo $pw | sudo mkdir -p /usr/local/lib/node_modules"
-        run "echo $pw | sudo -S chown -R $USER /usr/local/lib/node_modules"
-        run 'bash ~/.nvm/nvm.sh'
-
-        # gulp cli
-        print_subaction 'Installing gulp...'
-        if ! is_command gulp; then
-            # TODO npm isn't found if it was just installed (since we haven't sourced and set the updated PATH)
-            run 'npm install --global gulp-cli'
-        else
-            print_skipped
-        fi
 
         ## Laravel / Homestead
         print_action 'Installing Laravel / Homestead'
@@ -1034,23 +1020,6 @@ SUDOERS
     fi
 
 fi # end of mac-install
-
-## Composer
-print_action "Installing Composer..."
-if ! is_command composer; then
-    run "php -r \"copy('https://getcomposer.org/installer', 'composer-setup.php');\""
-    EXPECTED_CHECKSUM="$(wget -q -O - https://composer.github.io/installer.sig)"
-    ACTUAL_CHECKSUM="$(php -r "echo hash_file('sha384', 'composer-setup.php');")"
-    if [ "$EXPECTED_CHECKSUM" != "$ACTUAL_CHECKSUM" ]; then
-        print_error
-        error_log "composer install" "ERROR installing composer: Invalid installer checksum"
-    else
-        run 'php composer-setup.php --quiet --install-dir=/usr/local/bin --filename=composer'
-    fi
-    run 'rm composer-setup.php'
-else
-    print_skipped
-fi
 
 #####
 ## Clean up
